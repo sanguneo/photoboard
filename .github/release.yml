@@ -1,0 +1,28 @@
+# .github/release.yml
+
+changelog:
+  exclude:
+    authors:
+      - octocat
+  categories:
+    - title: 🆕 새로운 기능이 추가되었어요!
+      labels:
+        - ✨ feature
+    - title: 🐞 자잘한 버그를 수정했습니다.
+      labels:
+        - 🐞 fix
+    - title: 🎨 UI/UX가 변경되었어요.
+      labels:
+        - 💄 style
+        - 🎨 ui
+    - title: 🛠️ 더 나은 코드를 위해 노력하고 있습니다.
+      labels:
+        - 🔨 refactor
+        - 📄 document
+    - title: 🛠️ 사용성 개선에 힘썼습니다.
+      labels:
+        - ⚙️ setting
+        - 📄 chore
+    - title: Others
+      labels:
+        - "*"

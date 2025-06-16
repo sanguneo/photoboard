@@ -1,0 +1,81 @@
+// scss 변수 정의
+$text-primary: #242424;
+$text-secondary: #616161;
+$text-disabled: #acacaf;
+$mono0: #fff;
+$mono1: #f2f3f5;
+$mono2: #e3e3e3;
+$mono3: #cacbcd;
+$surface-white: #fff;
+$surface-hover: #f5fafe;
+$surface-light: #fafafa;
+$icon-normal: #747e87;
+$icon-disabled: #c6ccce;
+$border-light: #eef1f2;
+$border-default: #e5e5e5;
+$border-emphasis: #bcc0c9;
+$primary-normal: #388df7;
+$state-negative: #ff4a55;
+$state-positive: #0db252;
+$color-darkblue: #272832;
+$color-purple: #6971ff;
+$color-lightpurple: #b8c6ff;
+
+// 사이즈 변수화
+$base-size: 16px;  // 기본 크기 (16px 기준)
+
+// 간격 변수들 (base-size 기준으로 나눔)
+$spacing-4: $base-size * 0.25;  // 4px 간격
+$spacing-8: $base-size * 0.5;   // 8px 간격
+$spacing-12: $base-size * 0.75; // 12px 간격
+$spacing-16: $base-size * 1;    // 16px 간격
+$spacing-24: $base-size * 1.5;  // 24px 간격
+$spacing-32: $base-size * 2;    // 32px 간격
+$spacing-40: $base-size * 2.5;  // 40px 간격
+$spacing-48: $base-size * 3;    // 48px 간격
+
+
+// css :root 변수에 scss 변수를 삽입
+:root {
+  --text-primary: #{$text-primary};
+  --text-secondary: #{$text-secondary};
+  --text-disabled: #{$text-disabled};
+  --mono0: #{$mono0};
+  --mono1: #{$mono1};
+  --mono2: #{$mono2};
+  --mono3: #{$mono3};
+  --surface-white: #{$surface-white};
+  --surface-hover: #{$surface-hover};
+  --surface-light: #{$surface-light};
+  --icon-normal: #{$icon-normal};
+  --icon-disabled: #{$icon-disabled};
+  --border-light: #{$border-light};
+  --border-default: #{$border-default};
+  --border-emphasis: #{$border-emphasis};
+  --primary-normal: #{$primary-normal};
+  --state-negative: #{$state-negative};
+  --state-positive: #{$state-positive};
+  --color-darkblue: #{$color-darkblue};
+  --color-purple: #{$color-purple};
+  --color-lightpurple: #{$color-lightpurple};
+
+  // 사이즈 변수를 CSS 전역 변수로 변환
+  --base-size: #{$base-size};  // 16px
+  --spacing-4: #{$spacing-4};  // 4px 간격
+  --spacing-8: #{$spacing-8};  // 8px 간격
+  --spacing-12: #{$spacing-12}; // 12px 간격
+  --spacing-16: #{$spacing-16}; // 16px 간격
+  --spacing-24: #{$spacing-24}; // 24px 간격
+  --spacing-32: #{$spacing-32}; // 32px 간격
+  --spacing-40: #{$spacing-40}; // 40px 간격
+  --spacing-48: #{$spacing-48}; // 48px 간격
+  
+}
+
+
+
+
+// breakpoints
+$mobile: 720px;
+$tablet: 1100px;
+$desktop: 1101px;
