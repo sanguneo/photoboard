@@ -9,7 +9,9 @@ export default defineNuxtConfig({
       meta: [],
       link: [],
       style: [],
-      script: [],
+      script: [
+        // { src: '/modules/filer.min.js' },
+      ],
       title: 'Xp사진보드판',
     },
   },
