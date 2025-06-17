@@ -10,7 +10,7 @@ export const useIDB = () => {
   };
 
   const readFile = async (filename: string) => {
-    return await $idb.get('tmp', filename);
+    return await $idb.get('aegis-dx', filename);
   };
 
   const readFileAsURL = async (filename: string) => {
@@ -28,21 +28,21 @@ export const useIDB = () => {
     let copyname = 0;
     let newPath = file.name;
 
-    while ((await $idb.get('tmp', newPath))) {
+    while ((await $idb.get('aegis-dx', newPath))) {
       copyname += 1;
       newPath = fileName + ` (${copyname})` + extension;
     }
-    return $idb.put('tmp', file, newPath);
+    return $idb.put('aegis-dx', file, newPath);
   };
 
-  const readdir = async () => await $idb.getAllKeys('tmp') as string[];
+  const readdir = async () => await $idb.getAllKeys('aegis-dx') as string[];
 
   const unlink = async (filename: string) => {
     if (urls.has(filename)) {
       URL.revokeObjectURL(filename);
       urls.delete(filename);
     }
-    return await $idb.delete('tmp', filename);
+    return await $idb.delete('aegis-dx', filename);
   };
 
   const _clearURL = (url: string) => {

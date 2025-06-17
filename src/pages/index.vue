@@ -2,9 +2,7 @@
 </script>
 <template>
   <main>
-    <NuxtLink to="/idb">IDB(순서보장x, 대신 객체 그대로 저장, JSON 객체(스트링아님) 도 넣을 수 있음</NuxtLink>
-    <br><br>vs<br><br>
-    <NuxtLink to="/idb">IDBFS(순서보장, POSIX-FS 그대로 사용가능, 메타정보 저장불가)</NuxtLink>
+    <NuxtLink to="/idb">IDB</NuxtLink>
   </main>
 </template>
 <style lang="scss" scoped>

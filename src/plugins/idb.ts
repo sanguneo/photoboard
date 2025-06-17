@@ -1,9 +1,9 @@
 import { openDB } from 'idb';
 
 export default defineNuxtPlugin(async () => {
-  const idb = await openDB('ifs', 1, {
+  const idb = await openDB('aegis-dx', 1, {
     upgrade(db) {
-      db.createObjectStore('tmp');
+      db.createObjectStore('aegis-dx');
     },
   });
   return {

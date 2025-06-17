@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useIDB } from '@/composables/useIDB.ts';
-
 const idb = useIDB();
 
 const PAGE_SIZE:number = 5;
@@ -33,7 +31,7 @@ const handleFileUpload = async (e: Event) => {
     candidates.push(file.name);
   }
   filenames.value = [...candidates, ...filenames.value];
-  loadPage();
+  await loadPage();
 };
 
 watch(currentPage, loadPage);
@@ -62,6 +60,7 @@ onMounted(async () => {
         width="300"
         height="300"
         class="image-item"
+        @click="console.log(image)"
       >
     </div>
 
