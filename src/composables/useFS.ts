@@ -1,6 +1,6 @@
 import mime from 'mime/lite';
 
-export const useFS = () => {
+export const useIDBFS = () => {
   const { $fs } = useNuxtApp();
 
   const urls = new Set<string>();
@@ -50,7 +50,9 @@ export const useFS = () => {
     return await $fs.promises.writeFile(newPath, new Uint8Array(arrayBuffer));
   };
 
-  const readdir = $fs.promises.readdir;
+  const readdir = async (path: string) => {
+    return await $fs.promises.readdir(path);
+  };
 
   const unlink = async (path: string) => {
     if (urls.has(path)) {

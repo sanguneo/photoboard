@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useIDBFS } from '@/composables/useFS.ts';
+import { useIDB } from '@/composables/useIDB.ts';
 
-const fs = useIDBFS();
+const idb = useIDB();
 
 const PAGE_SIZE:number = 5;
 
@@ -17,10 +17,10 @@ const paginatedFilenames = computed(() => {
 async function loadPage() {
   const oldImages = [...images.value];
   const newImages = [];
-  fs.clearURL(oldImages);
+  idb.clearURL(oldImages);
 
   for (const fname of paginatedFilenames.value) {
-    const url = await fs.readFileAsURL(fname);
+    const url = await idb.readFileAsURL(fname);
     newImages.push(url);
   }
   images.value = newImages;
@@ -29,7 +29,7 @@ async function loadPage() {
 const handleFileUpload = async (e: Event) => {
   const candidates:string[] = [];
   for (const file of ((e.target as HTMLInputElement)?.files || [])) {
-    await fs.writeFile(`./${file.name}`, file);
+    await idb.writeFile(file.name, file);
     candidates.push(file.name);
   }
   filenames.value = [...candidates, ...filenames.value];
@@ -39,7 +39,7 @@ const handleFileUpload = async (e: Event) => {
 watch(currentPage, loadPage);
 
 onMounted(async () => {
-  filenames.value = (await fs.readdir('./')).reverse();
+  filenames.value = (await idb.readdir()).reverse();
   await loadPage();
 });
 
@@ -47,7 +47,7 @@ onMounted(async () => {
 
 <template>
   <div class="gallery">
-    <h1>IDBFS</h1>
+    <h1>IDB</h1>
 
     <!-- File Upload -->
     <input class="file-input" type="file" @change="handleFileUpload" >
