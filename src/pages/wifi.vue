@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
-const { log, isOnline, networkType } = usePageVisibility();
+const { log, isOnline, networkType, data } = usePageVisibility();
+
 
 onMounted(() => {
   console.log('isConnect', isOnline.value);
@@ -14,6 +15,7 @@ onMounted(() => {
     <h1>네트워그 연결 여부 : {{ isOnline  }}</h1>
     <h1>백그라운드 벗어났는지 로그 : {{ log }}</h1>
     <h1>networkType : {{ networkType }}</h1>
+    <h1>sample data : {{ data }}</h1>
   </main>
 </template>
 <style lang="scss" scoped>

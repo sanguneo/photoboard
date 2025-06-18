@@ -34,7 +34,8 @@ export default defineNuxtConfig({
   ],
   msw: {
     folderPath: '@/mocks',
-    enable: JSON.parse(process.env.USE_MOCK || 'true'),
+    // enable: JSON.parse(process.env.USE_MOCK || 'true'),
+    enable: true,
   },
   imports: {
     dirs: [
