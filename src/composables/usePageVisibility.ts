@@ -1,8 +1,10 @@
 export function usePageVisibility() {
   const isHidden = ref(false);
   const log = ref([""]);
-  const data = ref();
   const networkType = ref();
+
+  const data = ref();
+  const data2 = ref();
 
   const isOnline = computed(() => window.navigator.onLine);
 
@@ -11,7 +13,8 @@ export function usePageVisibility() {
     let hereLog = "";
     if (isHidden.value) {
       hereLog = "탭에서 벗어남";
-      await getSampleApi();
+      data.value = await getSampleApi();
+      data2.value = await getSampleApi();
     } else {
       hereLog = "탭으로 돌아옴";
     }
@@ -21,7 +24,7 @@ export function usePageVisibility() {
 
   const getSampleApi = async () => {
     const res = await $fetch("https://test.com/test");
-    data.value = res;
+    return res;
   };
 
   const handleNetwork = () => {
@@ -56,6 +59,7 @@ export function usePageVisibility() {
     log,
     isOnline,
     networkType,
-    data
+    data,
+    data2
   };
 }

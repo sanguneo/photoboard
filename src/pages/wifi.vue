@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-const { log, isOnline, networkType, data } = usePageVisibility();
+const { log, isOnline, networkType, data, data2 } = usePageVisibility();
 
 
 onMounted(() => {
@@ -16,6 +16,7 @@ onMounted(() => {
     <h1>백그라운드 벗어났는지 로그 : {{ log }}</h1>
     <h1>networkType : {{ networkType }}</h1>
     <h1>sample data : {{ data }}</h1>
+    <h1>sample data2222222222222 : {{ data2 }}</h1>
   </main>
 </template>
 <style lang="scss" scoped>
