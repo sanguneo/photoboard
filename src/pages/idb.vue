@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const idb = useIDB();
+import dayjs from 'dayjs';
+
+const idb = useIDB<{created: Date, filename: string;type: string}>();
 
 const PAGE_SIZE:number = 5;
 
@@ -16,7 +18,6 @@ async function loadPage() {
   const oldImages = [...images.value];
   const newImages = [];
   idb.clearURL(oldImages);
-
   for (const fname of paginatedFilenames.value) {
     const url = await idb.readFileAsURL(fname);
     newImages.push(url);
@@ -26,11 +27,25 @@ async function loadPage() {
 
 const handleFileUpload = async (e: Event) => {
   const candidates:string[] = [];
+  const prefix = dayjs().format('YYMMDD');
   for (const file of ((e.target as HTMLInputElement)?.files || [])) {
-    await idb.writeFile(file.name, file);
-    candidates.push(file.name);
+    const now = new Date();
+    const name = `[${prefix}]${now.getTime()}`;
+    await idb.writeFile(name, file, {
+      created: now,
+      filename: file.name,
+      type: file.type,
+    });
+    candidates.push(name);
   }
   filenames.value = [...candidates, ...filenames.value];
+  await loadPage();
+};
+
+const handleDeleteFile = async (index: number) => {
+  const targetKey = paginatedFilenames.value[index];
+  filenames.value = filenames.value.filter(key => key !== targetKey);
+  await idb.unlink(targetKey);
   await loadPage();
 };
 
@@ -60,7 +75,7 @@ onMounted(async () => {
         width="300"
         height="300"
         class="image-item"
-        @click="console.log(image)"
+        @click="handleDeleteFile(index)"
       >
     </div>
 
