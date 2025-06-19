@@ -1,8 +1,11 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 <template>
   <main>
     <NuxtLink to="/idb">IDB</NuxtLink>
+    <br />
+    <NuxtLink to="/canvas">Canvas</NuxtLink>
+    <br />
+    <NuxtLink to="/konva">KonvaCanvas</NuxtLink>
   </main>
 </template>
 <style lang="scss" scoped>
@@ -14,4 +17,3 @@ a {
   font-size: 40px;
 }
 </style>
-
