@@ -1,4 +1,4 @@
-import { http, HttpResponse } from 'msw';
+import { http, HttpResponse, delay } from 'msw';
 import type { THandlersFactory } from '@/mocks/worker.ts';
 import { docmentList, aptList } from '../datas/dashboard';
 
@@ -20,7 +20,8 @@ const DashboardHandlers: THandlersFactory = (config) => [
       return HttpResponse.json(changeResponseType<object>(data));
     }
   }),
-  http.get(`${config.API_BASE}/user/home/documents/viewed-apartments`, async () => {
+  http.get('https://test.com/test', async () => {
+    await delay(4000);
     const success = true;
     if (success) {
       const data = aptList;

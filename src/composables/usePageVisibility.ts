@@ -3,18 +3,28 @@ export function usePageVisibility() {
   const log = ref([""]);
   const networkType = ref();
 
+  const data = ref();
+  const data2 = ref();
+
   const isOnline = computed(() => window.navigator.onLine);
 
-  const handleVisibilityChange = () => {
+  const handleVisibilityChange = async () => {
     isHidden.value = document.hidden;
     let hereLog = "";
     if (isHidden.value) {
       hereLog = "탭에서 벗어남";
+      data.value = await getSampleApi();
+      data2.value = await getSampleApi();
     } else {
       hereLog = "탭으로 돌아옴";
     }
     console.log(hereLog);
     log.value.push(hereLog);
+  };
+
+  const getSampleApi = async () => {
+    const res = await $fetch("https://test.com/test");
+    return res;
   };
 
   const handleNetwork = () => {
@@ -48,6 +58,8 @@ export function usePageVisibility() {
     isHidden,
     log,
     isOnline,
-    networkType
+    networkType,
+    data,
+    data2
   };
 }
