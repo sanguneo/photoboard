@@ -3,6 +3,8 @@
 <template>
   <main>
     <NuxtLink to="/idb">IDB</NuxtLink>
+    <br><br>
+    <NuxtLink to="/native">네이티브 기능 확인</NuxtLink>
   </main>
 </template>
 <style lang="scss" scoped>
