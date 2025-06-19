@@ -1,73 +1,19 @@
 <script setup lang="ts">
 
-const wifiStatus = ref<string>('⏳ 상태 확인 전');
-const preview = ref<string>();
-
-const onChangeFile = (event: Event) => {
-  const file = (event.target as HTMLInputElement).files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      preview.value = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
-};
-
-function checkNetworkStatus() {
-  wifiStatus.value = '⏳ 상태 확인 전';
-  try {
-    // Android Java의 @JavascriptInterface 메서드를 호출하여 와이파이 상태를 확인
-    if (window.app && typeof window.app.checkWifiConnection === 'function') {
-      alert('안드로이드에서 와이파이 상태를 확인합니다.');
-      window.app.checkWifiConnection((status)=>{
-        wifiStatus.value = status;
-      });
-    }
-    // iOS Swift의 @objc 메서드를 호출하여 와이파이 상태를 확인
-    else if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.ios_checkWifiConnection) {
-      // show debug alert popup
-      alert('iOS에서 와이파이 상태를 확인합니다.');
-      window.webkit.messageHandlers.ios_checkWifiConnection.postMessage('checkWifiConnection');
-    } else {
-      alert('와이파이 상태를 확인할 수 있는 메서드가 정의되어 있지 않습니다.');
-      console.error('app.checkWifiConnection 메서드가 정의되어 있지 않습니다.');
-      wifiStatus.value = '❌ 와이파이 상태 확인 실패';
-    }
-
-  } catch (e) {
-    alert('와이파이 상태 확인 중 오류 발생: ' + e.message);
-    console.error('와이파이 상태 확인 중 오류 발생:', e);
-    wifiStatus.value = '❌ 와이파이 상태 확인 실패';
-
-  }
-}
+const { log, isOnline, networkType } = usePageVisibility();
 
 onMounted(() => {
-  checkNetworkStatus();
+  console.log('isConnect', isOnline.value);
+  console.log('networkType', networkType.value);
 });
 
 </script>
 <template>
   <main>
-    <h2>📷 네이티브 브릿지 테스트 페이지</h2>
-
-    <h3>📷 카메라 테스트</h3>
-    <p>아래 버튼을 눌러 사진을 촬영하세요:</p>
-    <input id="cameraInput" type="file" accept="image/*" capture="environment" @change="onChangeFile">
-
-
-    <div>
-      <p><strong>촬영한 사진 미리보기:</strong></p>
-      <img id="preview" src="" alt="촬영 사진" :style="{display: preview ? 'block' : 'none'}" >
-    </div>
-
-    <h3>📷 카메라 테스트</h3>
-    <!-- 와이파이 상태 버튼 및 텍스트 -->
-    <div>
-      <button @click="checkNetworkStatus()">📶 와이파이 상태 확인</button>
-      <p id="wifiStatus">⏳ 상태 확인 전</p>
-    </div>
+    <h1>WIFI TEST</h1>
+    <h1>네트워그 연결 여부 : {{ isOnline  }}</h1>
+    <h1>백그라운드 벗어났는지 로그 : {{ log }}</h1>
+    <h1>networkType : {{ networkType }}</h1>
   </main>
 </template>
 <style lang="scss" scoped>
@@ -79,4 +25,3 @@ a {
   font-size: 40px;
 }
 </style>
-
