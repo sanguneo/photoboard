@@ -4,11 +4,11 @@ const wifiStatus = ref<string>('⏳ 상태 확인 전');
 const preview = ref<string>();
 
 const onChangeFile = (event: Event) => {
-  const file = (event.target as HTMLInputElement).files[0];
+  const file = (event.target as HTMLInputElement)?.files?.[0];
   if (file) {
     const reader = new FileReader();
     reader.onload = function (e) {
-      preview.value = e.target.result;
+      preview.value = (e.target as FileReader).result as string;
     };
     reader.readAsDataURL(file);
   }
@@ -19,10 +19,8 @@ function checkNetworkStatus() {
   try {
     // Android Java의 @JavascriptInterface 메서드를 호출하여 와이파이 상태를 확인
     if (window.app && typeof window.app.checkWifiConnection === 'function') {
-      alert('안드로이드에서 와이파이 상태를 확인합니다.');
-      window.app.checkWifiConnection((status)=>{
-        wifiStatus.value = status;
-      });
+      alert('안드로이드에서 와이파이 상태를 확인합니다.!!!');
+      window.app.checkWifiConnection();
     }
     // iOS Swift의 @objc 메서드를 호출하여 와이파이 상태를 확인
     else if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.ios_checkWifiConnection) {
@@ -39,12 +37,18 @@ function checkNetworkStatus() {
     alert('와이파이 상태 확인 중 오류 발생: ' + e.message);
     console.error('와이파이 상태 확인 중 오류 발생:', e);
     wifiStatus.value = '❌ 와이파이 상태 확인 실패';
-
   }
+}
+
+// 와이파이 상태 확인 결과를 표시하는 함수
+function updateWifiStatus(status_str: string) {
+  alert('[updateWifiStatus]와이파이 상태 확인 결과: ' + status_str);
+  wifiStatus.value = status_str;
 }
 
 onMounted(() => {
   checkNetworkStatus();
+  window.updateWifiStatus = updateWifiStatus;
 });
 
 </script>
@@ -59,14 +63,14 @@ onMounted(() => {
 
     <div>
       <p><strong>촬영한 사진 미리보기:</strong></p>
-      <img id="preview" src="" alt="촬영 사진" :style="{display: preview ? 'block' : 'none'}" >
+      <img v-if="preview" id="preview" :src="preview" alt="촬영 사진" >
     </div>
 
     <h3>📷 카메라 테스트</h3>
     <!-- 와이파이 상태 버튼 및 텍스트 -->
     <div>
       <button @click="checkNetworkStatus()">📶 와이파이 상태 확인</button>
-      <p id="wifiStatus">⏳ 상태 확인 전</p>
+      <p id="wifiStatus">{{ wifiStatus }}</p>
     </div>
   </main>
 </template>

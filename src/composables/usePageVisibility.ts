@@ -1,6 +1,6 @@
 export function usePageVisibility() {
   const isHidden = ref(false);
-  const log = ref([""]);
+  const log = ref(['']);
   const networkType = ref();
 
   const data = ref();
@@ -10,47 +10,47 @@ export function usePageVisibility() {
 
   const handleVisibilityChange = async () => {
     isHidden.value = document.hidden;
-    let hereLog = "";
+    let hereLog = '';
     if (isHidden.value) {
-      hereLog = "탭에서 벗어남";
+      hereLog = '탭에서 벗어남';
       data.value = await getSampleApi();
       data2.value = await getSampleApi();
     } else {
-      hereLog = "탭으로 돌아옴";
+      hereLog = '탭으로 돌아옴';
     }
     console.log(hereLog);
     log.value.push(hereLog);
   };
 
   const getSampleApi = async () => {
-    const res = await $fetch("https://test.com/test");
+    const res = await $fetch('https://test.com/test');
     return res;
   };
 
   const handleNetwork = () => {
-    if ("connection" in window.navigator) {
+    if ('connection' in window.navigator) {
       const connection =
         window.navigator.connection ||
         window.navigator.mozConnection ||
         window.navigator.webkitConnection;
 
       networkType.value = connection.effectiveType;
-      console.log("Effective type:", connection.effectiveType); // 예: 'wifi', '4g', 'ethernet' 등 추정값
-      console.log("Downlink:", connection.downlink + "Mb/s");
-      console.log("RTT:", connection.rtt + "ms");
+      console.log('Effective type:', connection.effectiveType); // 예: 'wifi', '4g', 'ethernet' 등 추정값
+      console.log('Downlink:', connection.downlink + 'Mb/s');
+      console.log('RTT:', connection.rtt + 'ms');
     }
   };
 
   onMounted(() => {
     handleNetwork();
     if (import.meta.client) {
-      document.addEventListener("visibilitychange", handleVisibilityChange);
+      document.addEventListener('visibilitychange', handleVisibilityChange);
     }
   });
 
   onBeforeUnmount(() => {
     if (import.meta.client) {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     }
   });
 
@@ -60,6 +60,6 @@ export function usePageVisibility() {
     isOnline,
     networkType,
     data,
-    data2
+    data2,
   };
 }
