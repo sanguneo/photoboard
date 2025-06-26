@@ -14,41 +14,36 @@ const onChangeFile = (event: Event) => {
   }
 };
 
-function checkNetworkStatus() {
-  wifiStatus.value = '⏳ 상태 확인 전';
+const checkWifi = (timeout: number = 3000):Promise<string> => new Promise((resolve, reject) => {
+  window.updateWifiStatus = resolve;
   try {
-    // Android Java의 @JavascriptInterface 메서드를 호출하여 와이파이 상태를 확인
     if (window.app && typeof window.app.checkWifiConnection === 'function') {
-      alert('안드로이드에서 와이파이 상태를 확인합니다.!!!');
+      console.info('Check Wifi Connection on Android.');
       window.app.checkWifiConnection();
-    }
-    // iOS Swift의 @objc 메서드를 호출하여 와이파이 상태를 확인
-    else if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.ios_checkWifiConnection) {
-      // show debug alert popup
-      alert('iOS에서 와이파이 상태를 확인합니다.');
+    } else if (window?.webkit?.messageHandlers?.ios_checkWifiConnection) {
+      console.info('Check Wifi Connection on IOS.');
       window.webkit.messageHandlers.ios_checkWifiConnection.postMessage('checkWifiConnection');
     } else {
-      alert('와이파이 상태를 확인할 수 있는 메서드가 정의되어 있지 않습니다.');
-      console.error('app.checkWifiConnection 메서드가 정의되어 있지 않습니다.');
-      wifiStatus.value = '❌ 와이파이 상태 확인 실패';
+      throw new Error('No \'checkWifiConnection\' method');
     }
-
+    setTimeout(() => {
+      reject(new Error('Check Wifi status timeout'));
+    }, timeout);
   } catch (e) {
-    alert('와이파이 상태 확인 중 오류 발생: ' + e.message);
-    console.error('와이파이 상태 확인 중 오류 발생:', e);
+    reject(e);
+  }
+});
+
+const checkWifiStatus = async () => {
+  try {
+    wifiStatus.value = await checkWifi();
+  } catch (e) {
+    console.error(e);
     wifiStatus.value = '❌ 와이파이 상태 확인 실패';
   }
-}
-
-// 와이파이 상태 확인 결과를 표시하는 함수
-function updateWifiStatus(status_str: string) {
-  alert('[updateWifiStatus]와이파이 상태 확인 결과: ' + status_str);
-  wifiStatus.value = status_str;
-}
-
+};
 onMounted(() => {
-  checkNetworkStatus();
-  window.updateWifiStatus = updateWifiStatus;
+  checkWifiStatus();
 });
 
 </script>
