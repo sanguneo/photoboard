@@ -64,7 +64,7 @@ onMounted(() => {
     <h3>📷 카메라 테스트</h3>
     <!-- 와이파이 상태 버튼 및 텍스트 -->
     <div>
-      <button @click="checkNetworkStatus()">📶 와이파이 상태 확인</button>
+      <button @click="checkWifiStatus()">📶 와이파이 상태 확인</button>
       <p id="wifiStatus">{{ wifiStatus }}</p>
     </div>
   </main>
