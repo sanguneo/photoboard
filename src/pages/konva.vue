@@ -1,69 +1,57 @@
 <script setup lang="ts">
 const imageFile = ref<File | null>(null);
 const imageSrc = ref<string>('');
+const route = useRoute();
+const router = useRouter();
 
 interface IInputList {
   title: string;
-  value: string;
+  content: string;
   placeholder?: string;
 }
 
 const inputList = ref<IInputList[]>([
-  { title: '단지명', value: '단지명', placeholder: '단지명' },
-  { title: '위치', value: '위치', placeholder: '위치' },
-  { title: '내용', value: '내용', placeholder: '내용' },
-  { title: '날짜', value: '날짜', placeholder: '날짜' },
+  { title: '단지명', content: '단지명', placeholder: '단지명' },
+  { title: '위치', content: '위치', placeholder: '위치' },
+  { title: '내용', content: '내용', placeholder: '내용' },
+  { title: '날짜', content: '날짜', placeholder: '날짜' },
 ]);
 
 const konvaCanvas = ref();
-const croppedImage = ref<string | null>(null);
-const cropImage = () => {
-  croppedImage.value = konvaCanvas.value.cropImage();
-};
-
-const photoInfoList = ref<{ title: string; content: string }[]>([]);
 
 const handleFile = (e: Event) => {
   const file = (e.target as HTMLInputElement)?.files?.[0];
   if (!file) return;
   imageFile.value = file;
+  const reader = new FileReader();
+  reader.onload = () => {
+    imageSrc.value = reader.result as string;
+  };
+  reader.readAsDataURL(imageFile.value);
 };
 
-const update = () => {
-  if (imageFile.value) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      imageSrc.value = reader.result as string;
-    };
-    reader.readAsDataURL(imageFile.value);
+onMounted(() => {
+  const imageSrcQuery = route.query.imageSrc;
+  if (imageSrcQuery) {
+    imageSrc.value = imageSrcQuery as string;
   }
-
-  photoInfoList.value = inputList.value.map((field) => ({
-    title: field.title,
-    content: field.value,
-  }));
-};
+});
 </script>
 
 <template>
   <div class="input-container">
     <div v-for="input in inputList" :key="input.title" class="input-group">
-      <input v-model="input.value" :placeholder="input.placeholder" maxlength="30" />
+      <input v-model="input.content" :placeholder="input.placeholder" maxlength="30" />
     </div>
     <input type="file" accept="image/*" class="file-input" @change="handleFile" />
     <div class="button-group">
-      <button @click="update">캔버스 업데이트</button>
       <button @click="konvaCanvas.rotateImage">회전</button>
-      <button @click="cropImage">자르기</button>
+      <button @click="router.push({ path: '/crop', query: { imageSrc: imageSrc } })">자르기</button>
     </div>
   </div>
   <div class="canvas-container">
     <h3>캔버스</h3>
-    <KonvaCanvas ref="konvaCanvas" :width="500" :height="500" :image-src="imageSrc" :photo-info-list="photoInfoList" />
-    <h3>자른 이미지</h3>
-    <div class="cropped-image">
-      <img v-if="croppedImage" :src="croppedImage" alt="" />
-    </div>
+    <KonvaCanvas ref="konvaCanvas" :width="500" :height="500" :image-src="imageSrc" :photo-info-list="inputList" />
   </div>
 </template>
 
@@ -108,6 +96,7 @@ const update = () => {
 
 .canvas-container {
   display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
