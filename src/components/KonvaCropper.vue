@@ -35,6 +35,9 @@ const crop = ref({
   height: stageSize.value.height,
 });
 
+type AnchorPosition = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
+const anchorMap = ref<Record<AnchorPosition, Konva.Group>>({} as any);
+
 const clamp = (val: number, min: number, max: number) => Math.max(min, Math.min(max, val));
 
 const createKonvaImage = () => {
@@ -88,133 +91,133 @@ const createKonvaGridGroup = () => {
   return gridGroup;
 };
 
+const updateCropUI = () => {
+  if (!cropRectRef.value || Object.keys(anchorMap.value).length === 0) return;
+
+  const { x, y, width, height } = crop.value;
+  cropRectRef.value.setAttrs({ x, y, width, height });
+
+  anchorMap.value.topLeft.position({ x, y });
+  anchorMap.value.topRight.position({ x: x + width, y });
+  anchorMap.value.bottomLeft.position({ x, y: y + height });
+  anchorMap.value.bottomRight.position({ x: x + width, y: y + height });
+
+  if (gridGroupRef.value) {
+    const [hLine1, hLine2, vLine1, vLine2] = gridGroupRef.value.children as Konva.Line[];
+    const thirdHeight = height / 3;
+    const thirdWidth = width / 3;
+    hLine1.points([x, y + thirdHeight, x + width, y + thirdHeight]);
+    hLine2.points([x, y + thirdHeight * 2, x + width, y + thirdHeight * 2]);
+    vLine1.points([x + thirdWidth, y, x + thirdWidth, y + height]);
+    vLine2.points([x + thirdWidth * 2, y, x + thirdWidth * 2, y + height]);
+  }
+  layerRef.value?.getNode()?.batchDraw();
+};
+
+const lineLength = 20;
+
+// 앵커 드래그 로직을 처리하는 통합 함수
+const handleAnchorDrag = (pos: AnchorPosition, group: Konva.Group) => {
+  const oldCrop = { ...crop.value };
+  const minSize = lineLength * 2;
+  const newPos = group.position();
+
+  // 1. 드래그 경계 계산 (반대편 모서리를 기준으로)
+  const oppositeX = pos.includes('Left') ? oldCrop.x + oldCrop.width : oldCrop.x;
+  const oppositeY = pos.includes('Top') ? oldCrop.y + oldCrop.height : oldCrop.y;
+
+  const minX = pos.includes('Left') ? 0 : oppositeX + minSize;
+  const maxX = pos.includes('Left') ? oppositeX - minSize : stageSize.value.width;
+  const minY = pos.includes('Top') ? 0 : oppositeY + minSize;
+  const maxY = pos.includes('Top') ? oppositeY - minSize : stageSize.value.height;
+
+  // 2. 앵커 위치를 경계 안으로 제한
+  const clampedX = clamp(newPos.x, minX, maxX);
+  const clampedY = clamp(newPos.y, minY, maxY);
+  group.position({ x: clampedX, y: clampedY });
+
+  // 3. 제한된 위치를 기반으로 crop 영역 업데이트 (반복문 대신 조건부 로직 사용)
+  if (pos.includes('Left')) {
+    crop.value.width = oppositeX - clampedX;
+    crop.value.x = clampedX;
+  } else {
+    // 'Right'
+    crop.value.width = clampedX - oppositeX;
+  }
+
+  if (pos.includes('Top')) {
+    crop.value.height = oppositeY - clampedY;
+    crop.value.y = clampedY;
+  } else {
+    // 'Bottom'
+    crop.value.height = clampedY - oppositeY;
+  }
+
+  updateCropUI();
+};
+
+// 앵커별 드로잉 및 로직 설정을 위한 객체
+const anchorConfigs: Record<AnchorPosition, { xSign: 1 | -1; ySign: 1 | -1 }> = {
+  topLeft: { xSign: 1, ySign: 1 },
+  topRight: { xSign: -1, ySign: 1 },
+  bottomLeft: { xSign: 1, ySign: -1 },
+  bottomRight: { xSign: -1, ySign: -1 },
+};
+
 const draw = () => {
   const layer = layerRef.value.getNode();
   if (!layer || !imageRef.value) return;
+
   layer.destroyChildren();
 
-  const konvaImg = createKonvaImage();
-  const overlay = createKonvaOverlay();
-  const rect = createKonvaCropRect();
-  const gridGroup = createKonvaGridGroup();
+  // 1. 기본 요소들 생성 및 레이어에 추가
+  layer.add(createKonvaImage());
+  layer.add(createKonvaOverlay());
+  layer.add(createKonvaCropRect());
+  layer.add(createKonvaGridGroup());
 
-  layer.add(konvaImg);
-  layer.add(overlay);
-  layer.add(rect);
-  layer.add(gridGroup);
-
-  const anchors = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'] as const;
-  const anchorMap: Record<(typeof anchors)[number], Konva.Group> = {};
-
-  const lineLength = 20;
   const lineWidth = 4;
+  const hitAreaSize = 44; // 모바일 터치 영역 크기
 
-  anchors.forEach((pos) => {
-    const group = new Konva.Group({
-      draggable: true,
+  // 2. 앵커 생성 로직 (config 객체를 사용하여 반복문 단순화)
+  (Object.keys(anchorConfigs) as AnchorPosition[]).forEach((pos) => {
+    const config = anchorConfigs[pos];
+    const group = new Konva.Group({ draggable: true });
+
+    // 터치 영역
+    group.add(
+      new Konva.Rect({
+        width: hitAreaSize,
+        height: hitAreaSize,
+        offsetX: hitAreaSize / 2,
+        offsetY: hitAreaSize / 2,
+      })
+    );
+
+    // 앵커 모양 (L자 라인)
+    const line1 = new Konva.Line({
+      points: [0, 0, lineLength * config.xSign, 0],
+      stroke: 'white',
+      strokeWidth: lineWidth,
+      lineCap: 'round',
     });
-
-    // 모바일 터치를 위한 보이지 않는 터치 영역(Hit Area) 생성
-    const hitAreaSize = 44;
-    const hitArea = new Konva.Rect({
-      width: hitAreaSize,
-      height: hitAreaSize,
-      // 앵커의 기준점(0,0)이 터치 영역의 중심에 오도록 offset 설정
-      offsetX: hitAreaSize / 2,
-      offsetY: hitAreaSize / 2,
-      fill: 'transparent', // 투명
+    const line2 = new Konva.Line({
+      points: [0, 0, 0, lineLength * config.ySign],
+      stroke: 'white',
+      strokeWidth: lineWidth,
+      lineCap: 'round',
     });
-    group.add(hitArea); // 그룹에 터치 영역을 먼저 추가
-
-    let line1Points: number[], line2Points: number[];
-    if (pos === 'topLeft') {
-      line1Points = [0, 0, lineLength, 0];
-      line2Points = [0, 0, 0, lineLength];
-    } else if (pos === 'topRight') {
-      line1Points = [0, 0, -lineLength, 0];
-      line2Points = [0, 0, 0, lineLength];
-    } else if (pos === 'bottomLeft') {
-      line1Points = [0, 0, lineLength, 0];
-      line2Points = [0, 0, 0, -lineLength];
-    } else {
-      line1Points = [0, 0, -lineLength, 0];
-      line2Points = [0, 0, 0, -lineLength];
-    }
-    const line1 = new Konva.Line({ points: line1Points!, stroke: 'white', strokeWidth: lineWidth, lineCap: 'round' });
-    const line2 = new Konva.Line({ points: line2Points!, stroke: 'white', strokeWidth: lineWidth, lineCap: 'round' });
     group.add(line1, line2);
 
-    group.on('dragmove', () => {
-      const old = { ...crop.value };
-      const minSize = lineLength * 2; // 최소 크기 (앵커 크기 * 2)
+    // 이벤트 핸들러 연결
+    group.on('dragmove', () => handleAnchorDrag(pos, group));
 
-      let newX = group.x();
-      let newY = group.y();
-
-      if (pos === 'topLeft') {
-        newX = clamp(newX, 0, old.x + old.width - minSize);
-        newY = clamp(newY, 0, old.y + old.height - minSize);
-      } else if (pos === 'topRight') {
-        newX = clamp(newX, old.x + minSize, stageSize.value.width);
-        newY = clamp(newY, 0, old.y + old.height - minSize);
-      } else if (pos === 'bottomLeft') {
-        newX = clamp(newX, 0, old.x + old.width - minSize);
-        newY = clamp(newY, old.y + minSize, stageSize.value.height);
-      } else if (pos === 'bottomRight') {
-        newX = clamp(newX, old.x + minSize, stageSize.value.width);
-        newY = clamp(newY, old.y + minSize, stageSize.value.height);
-      }
-
-      // 앵커의 시각적 위치를 제한된 값으로 설정 (스냅 현상 방지)
-      group.position({ x: newX, y: newY });
-
-      // 2. 제한된 앵커 위치를 기반으로 crop 영역을 업데이트합니다.
-      if (pos === 'topLeft') {
-        crop.value.width = old.width + old.x - newX;
-        crop.value.height = old.height + old.y - newY;
-        crop.value.x = newX;
-        crop.value.y = newY;
-      } else if (pos === 'topRight') {
-        crop.value.width = newX - old.x;
-        crop.value.height = old.height + old.y - newY;
-        crop.value.y = newY;
-      } else if (pos === 'bottomLeft') {
-        crop.value.width = old.width + old.x - newX;
-        crop.value.height = newY - old.y;
-        crop.value.x = newX;
-      } else if (pos === 'bottomRight') {
-        crop.value.width = newX - old.x;
-        crop.value.height = newY - old.y;
-      }
-
-      updateCropUI();
-    });
-    anchorMap[pos] = group;
+    anchorMap.value[pos] = group;
     layer.add(group);
   });
 
-  const updateCropUI = () => {
-    const { x, y, width, height } = crop.value;
-    cropRectRef.value?.setAttrs({ x, y, width, height });
-    anchorMap.topLeft.position({ x: x, y: y });
-    anchorMap.topRight.position({ x: x + width, y: y });
-    anchorMap.bottomLeft.position({ x: x, y: y + height });
-    anchorMap.bottomRight.position({ x: x + width, y: y + height });
-
-    if (gridGroupRef.value) {
-      const [hLine1, hLine2, vLine1, vLine2] = gridGroupRef.value.children as Konva.Line[];
-      const thirdHeight = height / 3;
-      const thirdWidth = width / 3;
-      hLine1.points([x, y + thirdHeight, x + width, y + thirdHeight]);
-      hLine2.points([x, y + thirdHeight * 2, x + width, y + thirdHeight * 2]);
-      vLine1.points([x + thirdWidth, y, x + thirdWidth, y + height]);
-      vLine2.points([x + thirdWidth * 2, y, x + thirdWidth * 2, y + height]);
-    }
-    layer.batchDraw();
-  };
-
+  // 3. 초기 UI 상태 업데이트
   updateCropUI();
-  layer.sortChildrenByZIndex();
 };
 
 const cropImage = () => {
@@ -223,15 +226,10 @@ const cropImage = () => {
   gridGroupRef.value?.hide();
   cropRectRef.value?.hide();
   const layer = layerRef.value.getNode();
-  layer.find('Group').forEach((group: Konva.Group) => {
-    group.hide();
-  });
+  layer.find('Group').forEach((group: Konva.Group) => group.hide());
 
   const dataURL = imageKonvaRef.value.toDataURL({
-    x: crop.value.x,
-    y: crop.value.y,
-    width: crop.value.width,
-    height: crop.value.height,
+    ...crop.value,
     mimeType: 'image/png',
     pixelRatio: 1,
   });
@@ -239,9 +237,7 @@ const cropImage = () => {
   overlayRef.value?.show();
   gridGroupRef.value?.show();
   cropRectRef.value?.show();
-  layer.find('Group').forEach((group: Konva.Group) => {
-    group.show();
-  });
+  layer.find('Group').forEach((group: Konva.Group) => group.show());
 
   setOriginalImage(dataURL);
 };
@@ -263,12 +259,6 @@ watch(
   { immediate: true }
 );
 
-onMounted(() => {
-  if (props.imageSrc && imageRef.value) {
-    draw();
-  }
-});
-
 defineExpose({
   cropImage,
 });
@@ -279,5 +269,3 @@ defineExpose({
     <v-layer ref="layerRef" />
   </v-stage>
 </template>
-
-<style scoped></style>
