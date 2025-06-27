@@ -1,23 +1,22 @@
 <script setup lang="ts">
 import KonvaCropper from '@/components/KonvaCropper.vue';
 
-const route = useRoute();
 const router = useRouter();
+const konvaStore = useKonvaStore();
+const { originalImage } = storeToRefs(konvaStore);
 
-const imageSrc = computed(() => route.query.imageSrc as string);
 const cropperRef = ref();
 const cropImage = () => {
+  if (!originalImage.value) return;
+  cropperRef.value?.cropImage();
   router.push({
     path: '/konva',
-    query: {
-      imageSrc: cropperRef.value?.cropImage(),
-    },
   });
 };
 </script>
 
 <template>
-  <KonvaCropper ref="cropperRef" :image-src="imageSrc" />
+  <KonvaCropper ref="cropperRef" :image-src="originalImage" />
   <button @click="cropImage">확인</button>
 </template>
 

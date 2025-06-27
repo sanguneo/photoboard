@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const imageFile = ref<File | null>(null);
-const imageSrc = ref<string>('');
-const route = useRoute();
 const router = useRouter();
+const konvaStore = useKonvaStore();
+const { originalImage } = storeToRefs(konvaStore);
 
 interface IInputList {
   title: string;
@@ -18,6 +18,7 @@ const inputList = ref<IInputList[]>([
 ]);
 
 const konvaCanvas = ref();
+const isArrow = ref(false);
 
 const handleFile = (e: Event) => {
   const file = (e.target as HTMLInputElement)?.files?.[0];
@@ -25,17 +26,14 @@ const handleFile = (e: Event) => {
   imageFile.value = file;
   const reader = new FileReader();
   reader.onload = () => {
-    imageSrc.value = reader.result as string;
+    konvaStore.setOriginalImage(reader.result as string);
   };
   reader.readAsDataURL(imageFile.value);
 };
 
-onMounted(() => {
-  const imageSrcQuery = route.query.imageSrc;
-  if (imageSrcQuery) {
-    imageSrc.value = imageSrcQuery as string;
-  }
-});
+const addArrow = () => {
+  isArrow.value = !isArrow.value;
+};
 </script>
 
 <template>
@@ -46,12 +44,13 @@ onMounted(() => {
     <input type="file" accept="image/*" class="file-input" @change="handleFile" />
     <div class="button-group">
       <button @click="konvaCanvas.rotateImage">회전</button>
-      <button @click="router.push({ path: '/crop', query: { imageSrc: imageSrc } })">자르기</button>
+      <button @click="router.push({ path: '/crop' })">자르기</button>
+      <button @click="addArrow">화살표</button>
     </div>
   </div>
   <div class="canvas-container">
     <h3>캔버스</h3>
-    <KonvaCanvas ref="konvaCanvas" :width="500" :height="500" :image-src="imageSrc" :photo-info-list="inputList" />
+    <KonvaCanvas ref="konvaCanvas" :is-arrow="isArrow" :width="500" :height="500" :image-src="originalImage" :photo-info-list="inputList" />
   </div>
 </template>
 

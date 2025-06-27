@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import Konva from 'konva';
 
-interface Props {
-  imageSrc: string;
+interface IKonvaCropperProps {
+  imageSrc?: string;
   width?: number;
   height?: number;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+const { setOriginalImage } = useKonvaStore();
+const props = withDefaults(defineProps<IKonvaCropperProps>(), {
   width: 360,
   height: 640,
+  imageSrc: undefined,
 });
 
 const stageRef = ref();
@@ -41,7 +43,6 @@ const createKonvaImage = () => {
     image: imageRef.value,
     width: stageSize.value.width,
     height: stageSize.value.height,
-    zIndex: 0,
   });
   imageKonvaRef.value = konvaImg;
   return konvaImg;
@@ -63,7 +64,6 @@ const createKonvaOverlay = () => {
       context.fill('evenodd');
     },
     listening: false,
-    zIndex: 1,
   });
   overlayRef.value = overlay;
   return overlay;
@@ -72,14 +72,13 @@ const createKonvaOverlay = () => {
 const createKonvaCropRect = () => {
   const rect = new Konva.Rect({
     ...crop.value,
-    zIndex: 3,
   });
   cropRectRef.value = rect;
   return rect;
 };
 
 const createKonvaGridGroup = () => {
-  const gridGroup = new Konva.Group({ listening: false, zIndex: 2 });
+  const gridGroup = new Konva.Group({ listening: false });
   const hLine1 = new Konva.Line({ stroke: 'white', strokeWidth: 1, lineCap: 'round', dash: [4, 4] });
   const hLine2 = new Konva.Line({ stroke: 'white', strokeWidth: 1, lineCap: 'round', dash: [4, 4] });
   const vLine1 = new Konva.Line({ stroke: 'white', strokeWidth: 1, lineCap: 'round', dash: [4, 4] });
@@ -113,7 +112,6 @@ const draw = () => {
   anchors.forEach((pos) => {
     const group = new Konva.Group({
       draggable: true,
-      zIndex: 4,
     });
 
     // 모바일 터치를 위한 보이지 않는 터치 영역(Hit Area) 생성
@@ -226,9 +224,7 @@ const cropImage = () => {
   cropRectRef.value?.hide();
   const layer = layerRef.value.getNode();
   layer.find('Group').forEach((group: Konva.Group) => {
-    // 앵커 그룹만 숨기기 위해 zIndex 등으로 구분하거나 이름을 부여할 수 있습니다.
-    // 여기서는 모든 그룹을 숨깁니다.
-    if (group.zIndex() === 4) group.hide();
+    group.hide();
   });
 
   const dataURL = imageKonvaRef.value.toDataURL({
@@ -244,10 +240,10 @@ const cropImage = () => {
   gridGroupRef.value?.show();
   cropRectRef.value?.show();
   layer.find('Group').forEach((group: Konva.Group) => {
-    if (group.zIndex() === 4) group.show();
+    group.show();
   });
 
-  return dataURL;
+  setOriginalImage(dataURL);
 };
 
 watch(

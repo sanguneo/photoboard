@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import type Konva from 'konva';
+import pointer from '@/assets/images/pointer.svg';
+import { useImage } from 'vue-konva';
 
 interface KonvaCanvasProps {
+  isArrow?: boolean;
   imageSrc?: string;
   width?: number;
   height?: number;
   photoInfoList: { title: string; content: string }[];
 }
 
+const [pointerImage] = useImage(pointer);
 const props = defineProps<KonvaCanvasProps>();
 const getStageSize = computed(() => ({
   width: props.width || window.innerWidth,
@@ -18,6 +21,16 @@ const isDragging = ref(false);
 const backgroundImage = ref<HTMLImageElement | null>(null);
 const stageRef = ref();
 const rotation = ref(0);
+const layerRef = ref();
+
+const pointerConfig = computed(() => ({
+  x: getStageSize.value.width / 3,
+  y: getStageSize.value.height / 3,
+  image: pointerImage.value,
+  width: 20,
+  height: 20,
+  draggable: true,
+}));
 
 const imageConfig = computed(() => ({
   image: backgroundImage.value,
@@ -92,8 +105,9 @@ defineExpose({ rotateImage });
 
 <template>
   <v-stage ref="stageRef" :config="getStageSize">
-    <v-layer>
+    <v-layer ref="layerRef">
       <v-image v-if="backgroundImage" :config="imageConfig" />
+      <v-image v-if="isArrow && pointerImage" :config="pointerConfig" />
       <v-group v-if="photoInfoList.length > 0" :config="groupConfig" @dragstart="handleDragStart" @dragend="handleDragEnd">
         <v-rect :config="rectConfig" />
         <v-text v-for="(text, index) in photoInfoList" :key="index" :config="textConfig(index, text.title, text.content)" />
