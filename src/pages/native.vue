@@ -53,7 +53,7 @@ onMounted(() => {
 
     <h3>📷 카메라 테스트</h3>
     <p>아래 버튼을 눌러 사진을 촬영하세요:</p>
-    <input id="cameraInput" type="file" accept="image/*" capture="environment" @change="onChangeFile">
+    <input id="cameraInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/bmp,image/svg+xml" capture="environment" @change="onChangeFile">
 
 
     <div>
