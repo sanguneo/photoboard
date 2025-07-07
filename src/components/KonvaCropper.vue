@@ -118,40 +118,63 @@ const lineLength = 20;
 
 // 앵커 드래그 로직을 처리하는 통합 함수
 const handleAnchorDrag = (pos: AnchorPosition, group: Konva.Group) => {
-  const oldCrop = { ...crop.value };
   const minSize = lineLength * 2;
   const newPos = group.position();
 
-  // 1. 드래그 경계 계산 (반대편 모서리를 기준으로)
-  const oppositeX = pos.includes('Left') ? oldCrop.x + oldCrop.width : oldCrop.x;
-  const oppositeY = pos.includes('Top') ? oldCrop.y + oldCrop.height : oldCrop.y;
-
-  const minX = pos.includes('Left') ? 0 : oppositeX + minSize;
-  const maxX = pos.includes('Left') ? oppositeX - minSize : stageSize.value.width;
-  const minY = pos.includes('Top') ? 0 : oppositeY + minSize;
-  const maxY = pos.includes('Top') ? oppositeY - minSize : stageSize.value.height;
-
-  // 2. 앵커 위치를 경계 안으로 제한
-  const clampedX = clamp(newPos.x, minX, maxX);
-  const clampedY = clamp(newPos.y, minY, maxY);
+  const clampedX = clamp(newPos.x, 0, props.width);
+  const clampedY = clamp(newPos.y, 0, props.height);
   group.position({ x: clampedX, y: clampedY });
 
-  // 3. 제한된 위치를 기반으로 crop 영역 업데이트 (반복문 대신 조건부 로직 사용)
-  if (pos.includes('Left')) {
-    crop.value.width = oppositeX - clampedX;
-    crop.value.x = clampedX;
-  } else {
-    // 'Right'
-    crop.value.width = clampedX - oppositeX;
+  let newX = crop.value.x;
+  let newY = crop.value.y;
+  let newWidth = crop.value.width;
+  let newHeight = crop.value.height;
+
+  // 기준점: 대각선 반대편
+  let fixedX, fixedY;
+
+  switch (pos) {
+    case 'topLeft':
+      fixedX = crop.value.x + crop.value.width;
+      fixedY = crop.value.y + crop.value.height;
+      newX = Math.min(clampedX, fixedX - minSize);
+      newY = Math.min(clampedY, fixedY - minSize);
+      newWidth = fixedX - newX;
+      newHeight = fixedY - newY;
+      break;
+
+    case 'topRight':
+      fixedX = crop.value.x;
+      fixedY = crop.value.y + crop.value.height;
+      newX = fixedX;
+      newY = Math.min(clampedY, fixedY - minSize);
+      newWidth = Math.max(minSize, clampedX - fixedX);
+      newHeight = fixedY - newY;
+      break;
+
+    case 'bottomLeft':
+      fixedX = crop.value.x + crop.value.width;
+      fixedY = crop.value.y;
+      newX = Math.min(clampedX, fixedX - minSize);
+      newY = fixedY;
+      newWidth = fixedX - newX;
+      newHeight = Math.max(minSize, clampedY - fixedY);
+      break;
+
+    case 'bottomRight':
+      fixedX = crop.value.x;
+      fixedY = crop.value.y;
+      newX = fixedX;
+      newY = fixedY;
+      newWidth = Math.max(minSize, clampedX - fixedX);
+      newHeight = Math.max(minSize, clampedY - fixedY);
+      break;
   }
 
-  if (pos.includes('Top')) {
-    crop.value.height = oppositeY - clampedY;
-    crop.value.y = clampedY;
-  } else {
-    // 'Bottom'
-    crop.value.height = clampedY - oppositeY;
-  }
+  crop.value.x = newX;
+  crop.value.y = newY;
+  crop.value.width = newWidth;
+  crop.value.height = newHeight;
 
   updateCropUI();
 };
