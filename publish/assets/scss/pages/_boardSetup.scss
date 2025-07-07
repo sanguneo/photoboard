@@ -1,0 +1,111 @@
+@use "../util/predefined.scss" as *;
+
+/* 📁 사진 보드판 설정 스타일 */
+.setting {
+  
+  /* 🧱 설정 전체 박스 영역 */
+  &-box {
+    display: block;
+    height: 100%;
+    padding-top: size(14); // 상단 여백
+  }
+
+  /* 📋 설정 리스트 (파일명, 큰 글씨, 전송 옵션 등) */
+  &-list {
+    display: flex;
+    flex-direction: column;
+    gap: size(16); // 항목 간 간격
+    padding: 0 size(20); // 좌우 여백
+
+    /* 🔹 리스트 개별 항목 */
+    &-item {
+      display: flex;
+      flex-wrap: wrap;
+      padding-bottom: size(16);
+      border-bottom: 1px solid var(--divider-normal); // 항목 하단 구분선
+      gap: size(6);
+
+      /* 🔸 항목 우측에 정렬되는 링크 및 스위치 */
+      .text-link,
+      .switch {
+        margin-left: auto;
+      }
+
+      /* 🔸 텍스트 링크 (화살표 + 텍스트) */
+      .text-link {
+        display: flex;
+        height: size(28);
+        align-items: center;
+        gap: 4px;
+
+        span {
+          font-size: size(14);
+          color: var(--primary);
+        }
+      }
+
+      /* 🔸 마지막 항목은 하단 선 제거 */
+      &:last-child {
+        border-bottom: 0;
+      }
+
+      /* 🔸 설명 문구 (항목 하단 정보 텍스트) */
+      &-info {
+        width: 100%;
+        font-size: size(13);
+        color: var(--text-secondary);
+        line-height: 100%;
+      }
+    }
+  }
+
+  /* 🏷️ 설정 항목 제목 텍스트 (예: 보드판 큰 글씨) */
+  &-title {
+    height: size(28);
+    font-size: size(16);
+    line-height: 100%;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    @include regular;
+  }
+
+  /* 📝 설정 정보 및 보드판 위치 미리보기 포함 영역 */
+  &-info {
+    display: block;
+    padding: 0 size(20);
+    margin-bottom: size(24);
+    width: 100%;
+
+    /* 📌 설명 문단 */
+    p {
+      font-size: size(14);
+      line-height: 150%;
+      color: var(--text-secondary);    
+    }
+
+    /* 🧭 보드판 위치 미리보기 영역 (미니 보드판 박스) */
+    .board-preview-position {
+      width: size(200);
+      height: size(150);
+      background: var(--background-normal);
+      position: relative;
+      display: flex;
+      margin: 0 auto size(12); // 중앙 정렬 + 하단 여백
+      border-radius: size(8);
+      padding: size(16);
+
+      /* 🖼️ 보드판 위치를 나타내는 이미지 */
+      #imgPosition {
+        filter: drop-shadow(var(--spacing-2) var(--spacing-2) var(--spacing-4) 0 rgba(174, 182, 190, 0.4));
+        object-fit: none;
+
+        /* 📍 위치 지정 클래스 (라디오 버튼과 연동) */
+        &.leftTop    { margin: 0 auto auto 0; }
+        &.leftBottom { margin: auto auto 0 0; }
+        &.rightTop   { margin: 0 0 auto auto; }
+        &.rightBottom{ margin: auto 0 0 auto; }
+      }
+    }
+  }
+}

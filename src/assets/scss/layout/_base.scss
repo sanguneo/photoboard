@@ -1,0 +1,274 @@
+@use "../util/predefined.scss" as *;
+
+.m2 { margin: size(2); }
+.m4 { margin: size(4); }
+.m6 { margin: size(6); }
+.m8 { margin: size(8); }
+.m10 { margin: size(10); }
+.m12 { margin: size(12); }
+.m14 { margin: size(14); }
+.m16 { margin: size(16); }
+.m18 { margin: size(18); }
+.m20 { margin: size(20); }
+.m22 { margin: size(22); }
+.m24 { margin: size(24); }
+.m26 { margin: size(26); }
+.m28 { margin: size(28); }
+.m30 { margin: size(30); }
+.m32 { margin: size(32); }
+.m34 { margin: size(34); }
+.m36 { margin: size(36); }
+.m38 { margin: size(38); }
+.m40 { margin: size(40); }
+.m42 { margin: size(42); }
+.m44 { margin: size(44); }
+.m46 { margin: size(46); }
+.m48 { margin: size(48); }
+.m50 { margin: size(50); }
+
+.mt2 { margin-top: size(2); }
+.mt4 { margin-top: size(4); }
+.mt6 { margin-top: size(6); }
+.mt8 { margin-top: size(8); }
+.mt10 { margin-top: size(10); }
+.mt12 { margin-top: size(12); }
+.mt14 { margin-top: size(14); }
+.mt16 { margin-top: size(16); }
+.mt18 { margin-top: size(18); }
+.mt20 { margin-top: size(20); }
+.mt22 { margin-top: size(22); }
+.mt24 { margin-top: size(24); }
+.mt26 { margin-top: size(26); }
+.mt28 { margin-top: size(28); }
+.mt30 { margin-top: size(30); }
+.mt32 { margin-top: size(32); }
+.mt34 { margin-top: size(34); }
+.mt36 { margin-top: size(36); }
+.mt38 { margin-top: size(38); }
+.mt40 { margin-top: size(40); }
+.mt42 { margin-top: size(42); }
+.mt44 { margin-top: size(44); }
+.mt46 { margin-top: size(46); }
+.mt48 { margin-top: size(48); }
+.mt50 { margin-top: size(50); }
+
+.mb2 { margin-bottom: size(2); }
+.mb4 { margin-bottom: size(4); }
+.mb6 { margin-bottom: size(6); }
+.mb8 { margin-bottom: size(8); }
+.mb10 { margin-bottom: size(10); }
+.mb12 { margin-bottom: size(12); }
+.mb14 { margin-bottom: size(14); }
+.mb16 { margin-bottom: size(16); }
+.mb18 { margin-bottom: size(18); }
+.mb20 { margin-bottom: size(20); }
+.mb22 { margin-bottom: size(22); }
+.mb24 { margin-bottom: size(24); }
+.mb26 { margin-bottom: size(26); }
+.mb28 { margin-bottom: size(28); }
+.mb30 { margin-bottom: size(30); }
+.mb32 { margin-bottom: size(32); }
+.mb34 { margin-bottom: size(34); }
+.mb36 { margin-bottom: size(36); }
+.mb38 { margin-bottom: size(38); }
+.mb40 { margin-bottom: size(40); }
+.mb42 { margin-bottom: size(42); }
+.mb44 { margin-bottom: size(44); }
+.mb46 { margin-bottom: size(46); }
+.mb48 { margin-bottom: size(48); }
+.mb50 { margin-bottom: size(50); }
+
+.ml2 { margin-left: size(2); }
+.ml4 { margin-left: size(4); }
+.ml6 { margin-left: size(6); }
+.ml8 { margin-left: size(8); }
+.ml10 { margin-left: size(10); }
+.ml12 { margin-left: size(12); }
+.ml14 { margin-left: size(14); }
+.ml16 { margin-left: size(16); }
+.ml18 { margin-left: size(18); }
+.ml20 { margin-left: size(20); }
+.ml22 { margin-left: size(22); }
+.ml24 { margin-left: size(24); }
+.ml26 { margin-left: size(26); }
+.ml28 { margin-left: size(28); }
+.ml30 { margin-left: size(30); }
+.ml32 { margin-left: size(32); }
+.ml34 { margin-left: size(34); }
+.ml36 { margin-left: size(36); }
+.ml38 { margin-left: size(38); }
+.ml40 { margin-left: size(40); }
+.ml42 { margin-left: size(42); }
+.ml44 { margin-left: size(44); }
+.ml46 { margin-left: size(46); }
+.ml48 { margin-left: size(48); }
+.ml50 { margin-left: size(50); }
+
+.mr2 { margin-right: size(2); }
+.mr4 { margin-right: size(4); }
+.mr6 { margin-right: size(6); }
+.mr8 { margin-right: size(8); }
+.mr10 { margin-right: size(10); }
+.mr12 { margin-right: size(12); }
+.mr14 { margin-right: size(14); }
+.mr16 { margin-right: size(16); }
+.mr18 { margin-right: size(18); }
+.mr20 { margin-right: size(20); }
+.mr22 { margin-right: size(22); }
+.mr24 { margin-right: size(24); }
+.mr26 { margin-right: size(26); }
+.mr28 { margin-right: size(28); }
+.mr30 { margin-right: size(30); }
+.mr32 { margin-right: size(32); }
+.mr34 { margin-right: size(34); }
+.mr36 { margin-right: size(36); }
+.mr38 { margin-right: size(38); }
+.mr40 { margin-right: size(40); }
+.mr42 { margin-right: size(42); }
+.mr44 { margin-right: size(44); }
+.mr46 { margin-right: size(46); }
+.mr48 { margin-right: size(48); }
+.mr50 { margin-right: size(50); }
+
+.p2 { padding: size(2); }
+.p4 { padding: size(4); }
+.p6 { padding: size(6); }
+.p8 { padding: size(8); }
+.p10 { padding: size(10); }
+.p12 { padding: size(12); }
+.p14 { padding: size(14); }
+.p16 { padding: size(16); }
+.p18 { padding: size(18); }
+.p20 { padding: size(20); }
+.p22 { padding: size(22); }
+.p24 { padding: size(24); }
+.p26 { padding: size(26); }
+.p28 { padding: size(28); }
+.p30 { padding: size(30); }
+.p32 { padding: size(32); }
+.p34 { padding: size(34); }
+.p36 { padding: size(36); }
+.p38 { padding: size(38); }
+.p40 { padding: size(40); }
+.p42 { padding: size(42); }
+.p44 { padding: size(44); }
+.p46 { padding: size(46); }
+.p48 { padding: size(48); }
+.p50 { padding: size(50); }
+
+.pt2 { padding-top: size(2); }
+.pt4 { padding-top: size(4); }
+.pt6 { padding-top: size(6); }
+.pt8 { padding-top: size(8); }
+.pt10 { padding-top: size(10); }
+.pt12 { padding-top: size(12); }
+.pt14 { padding-top: size(14); }
+.pt16 { padding-top: size(16); }
+.pt18 { padding-top: size(18); }
+.pt20 { padding-top: size(20); }
+.pt22 { padding-top: size(22); }
+.pt24 { padding-top: size(24); }
+.pt26 { padding-top: size(26); }
+.pt28 { padding-top: size(28); }
+.pt30 { padding-top: size(30); }
+.pt32 { padding-top: size(32); }
+.pt34 { padding-top: size(34); }
+.pt36 { padding-top: size(36); }
+.pt38 { padding-top: size(38); }
+.pt40 { padding-top: size(40); }
+.pt42 { padding-top: size(42); }
+.pt44 { padding-top: size(44); }
+.pt46 { padding-top: size(46); }
+.pt48 { padding-top: size(48); }
+.pt50 { padding-top: size(50); }
+
+.pb2 { padding-bottom: size(2); }
+.pb4 { padding-bottom: size(4); }
+.pb6 { padding-bottom: size(6); }
+.pb8 { padding-bottom: size(8); }
+.pb10 { padding-bottom: size(10); }
+.pb12 { padding-bottom: size(12); }
+.pb14 { padding-bottom: size(14); }
+.pb16 { padding-bottom: size(16); }
+.pb18 { padding-bottom: size(18); }
+.pb20 { padding-bottom: size(20); }
+.pb22 { padding-bottom: size(22); }
+.pb24 { padding-bottom: size(24); }
+.pb26 { padding-bottom: size(26); }
+.pb28 { padding-bottom: size(28); }
+.pb30 { padding-bottom: size(30); }
+.pb32 { padding-bottom: size(32); }
+.pb34 { padding-bottom: size(34); }
+.pb36 { padding-bottom: size(36); }
+.pb38 { padding-bottom: size(38); }
+.pb40 { padding-bottom: size(40); }
+.pb42 { padding-bottom: size(42); }
+.pb44 { padding-bottom: size(44); }
+.pb46 { padding-bottom: size(46); }
+.pb48 { padding-bottom: size(48); }
+.pb50 { padding-bottom: size(50); }
+
+.pl2 { padding-left: size(2); }
+.pl4 { padding-left: size(4); }
+.pl6 { padding-left: size(6); }
+.pl8 { padding-left: size(8); }
+.pl10 { padding-left: size(10); }
+.pl12 { padding-left: size(12); }
+.pl14 { padding-left: size(14); }
+.pl16 { padding-left: size(16); }
+.pl18 { padding-left: size(18); }
+.pl20 { padding-left: size(20); }
+.pl22 { padding-left: size(22); }
+.pl24 { padding-left: size(24); }
+.pl26 { padding-left: size(26); }
+.pl28 { padding-left: size(28); }
+.pl30 { padding-left: size(30); }
+.pl32 { padding-left: size(32); }
+.pl34 { padding-left: size(34); }
+.pl36 { padding-left: size(36); }
+.pl38 { padding-left: size(38); }
+.pl40 { padding-left: size(40); }
+.pl42 { padding-left: size(42); }
+.pl44 { padding-left: size(44); }
+.pl46 { padding-left: size(46); }
+.pl48 { padding-left: size(48); }
+.pl50 { padding-left: size(50); }
+
+
+ // ---------------------------------
+// aria-hidden 상태에 따른 노출/숨김 제어
+// ---------------------------------
+* {
+	&[aria-hidden="true"] {
+		display: none !important;         // 완전 숨김
+		visibility: hidden;
+		pointer-events: none;             // 클릭 불가
+		user-select: none;                // 텍스트 선택 불가
+	}
+	&[aria-hidden="false"] {
+		display: flex !important;
+		visibility: visible;
+		pointer-events: auto;
+		user-select: auto;
+	}
+}
+
+.whiteColor {
+  color: #fff !important
+}
+
+.icon {
+  display: inline-block;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+  vertical-align: middle;
+}
+.icon-16 { width: size(16); }
+.icon-20 { width: size(20); }
+.icon-24 { width: size(24); }
+.icon-32 { width: size(32); }
+.icon-40 { width: size(40); }
+
+.form-wrap {
+
+}

@@ -1,0 +1,119 @@
+@use "../util/predefined.scss" as *;
+
+// ===============================
+// .header 스타일 전체 영역
+//  - 상단 고정 헤더 영역
+//  - 뒤로가기 버튼, 타이틀, 우측 카메라·설정 버튼
+//  - 문서 안내 툴팁 (조건부 노출)
+//  - aria-hidden 값에 따른 노출/숨김 스타일 포함
+// ===============================
+
+.header {
+  // 헤더 기본 레이아웃
+  width: 100%;
+  height: size(52);   // 높이: spacing 변수 16 * 3배
+  padding: size(14) size(20);
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  &.shadow {
+    background: #fff;
+    box-shadow: 0 size(4) size(4) 0  rgba(0,0,0,0.2);
+    z-index: 5;
+  }
+  // 헤더 내부 메뉴 (제목 제외하고 좌우 정렬 영역)
+  &__menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    margin-left: 40px;
+  }
+
+  // 헤더 타이틀 스타일
+  &-title {
+    display: flex;
+    align-items: center;
+    gap: size(6);
+    h1 {
+      @include bold;
+      font-size: var(--spacing-20);
+      line-height: 100%;
+      color: var(--text-primary);
+    }
+    .doc-tip-content {
+      right: auto;
+      left: size(-4);
+    }
+  }
+
+  // h2 직접 스타일 (보통 타이틀)
+  h2 {
+    @include semi;
+    font-size: size(18);
+    color: var(--text-primary);
+    margin-left: size(12);
+  }
+
+  // 우측 카메라 및 설정 버튼 영역
+  .board-head-btn {
+    margin-left: auto;
+    display: flex;
+    gap: size(20);
+  }
+
+  // 문서 저장 안내 툴팁 영역 (초기에는 숨김 상태)
+  .doc-head-btn {
+    margin-left: auto;
+    position: relative;
+
+    // 툴팁 버튼 크기
+    .doc-tip-btn {
+      height: size(20);
+      display: flex;
+      align-items: center;
+      gap: size(2);
+      color: #4b5160;
+      font-size: 15px;
+      @include medium;
+    }
+
+    // 툴팁 본문 스타일
+    .doc-tip-content {
+      position: absolute;
+      width: size(195);
+      right : size(-8);
+      top: size(28);
+      background-color: var(--surface-white);
+      border-radius: size(8);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: size(14);
+      z-index: 10;
+      p {
+        font-size: size(13);
+        line-height: 140%;
+        color: var(--text-secondary);
+        font-weight: 400;
+        strong {
+          color: var(--primary);
+        }
+      }
+    }
+  }
+
+  // board-edit 상태 (필요시 확장)
+  &.board-edit {
+    // 이곳에 board-edit 전용 스타일 작성
+    h2 {
+      color: #fff;
+      @include ellipsis;
+    }
+  }
+
+  &.layer {
+    border-bottom: 1px solid var(--divider-normal);
+  }
+
+}

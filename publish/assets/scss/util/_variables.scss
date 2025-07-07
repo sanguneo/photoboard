@@ -1,0 +1,114 @@
+// scss 변수 정의
+$text-primary: #242424;
+$text-secondary: #4b5368;
+$text-disabled: #a0a0a4;
+$mono0: #fff;
+$mono1: #f2f3f5;
+$mono2: #e3e3e3;
+$mono3: #cacbcd;
+$background-normal: #f1f1f3;
+$surface-white: #fff;
+$surface-hover: #f5fafe;
+$surface-light: #fafafa;
+$icon-normal: #747e87;
+$icon-disabled: #c9ccd3;
+$border-light: #eef1f2;
+$border-default: #e5e5e5;
+$border-emphasis: #bcc0c9;
+$divider-normal: #f0f1f4;
+$divider-accent: #cfcfd3;
+$primary: #3d73e6;
+$state-error: #ef5353;
+$state-positive: #0db252;
+$color-darkblue: #272832;
+$color-purple: #6971ff; 
+$color-lightpurple: #b8c6ff;
+
+$use-rem: true;
+$base-size: 16;
+
+@function size($px) {
+  @if $use-rem {
+    @return ($px / $base-size) * 1rem;
+  } @else {
+    @return $px * 1px;
+  }
+}
+
+$spacing-2:  size(2);
+$spacing-4:  size(4);
+$spacing-5:  size(5);
+$spacing-8:  size(8);
+$spacing-10: size(10);
+$spacing-12: size(12);
+$spacing-14: size(14);
+$spacing-16: size(16);
+$spacing-20: size(20);
+$spacing-24: size(24);
+$spacing-28: size(28);
+$spacing-32: size(32);
+$spacing-36: size(36);
+$spacing-40: size(40);
+$spacing-44: size(44);
+$spacing-48: size(48);
+$spacing-56: size(56);
+$spacing-64: size(64);
+
+
+// css :root 변수에 scss 변수를 삽입
+:root {
+  --text-primary: #{$text-primary};
+  --text-secondary: #{$text-secondary};
+  --text-disabled: #{$text-disabled};
+  --mono0: #{$mono0};
+  --mono1: #{$mono1};
+  --mono2: #{$mono2};
+  --mono3: #{$mono3};
+  --background-normal: #{$background-normal};
+  --surface-white: #{$surface-white};
+  --surface-hover: #{$surface-hover};
+  --surface-light: #{$surface-light};
+  --icon-normal: #{$icon-normal};
+  --icon-disabled: #{$icon-disabled};
+  --border-light: #{$border-light};
+  --border-default: #{$border-default};
+  --border-emphasis: #{$border-emphasis};
+  --divider-normal: #{$divider-normal};
+  --divider-accent: #{$divider-accent};
+  --primary: #{$primary};
+  --state-error: #{$state-error};
+  --state-positive: #{$state-positive};
+  --color-darkblue: #{$color-darkblue};
+  --color-purple: #{$color-purple};
+  --color-lightpurple: #{$color-lightpurple};
+
+  // 사이즈 변수를 CSS 전역 변수로 변환
+  --base-size: #{$base-size};
+  --spacing-2: #{$spacing-2};
+  --spacing-4: #{$spacing-4};
+  --spacing-5: #{$spacing-5};
+  --spacing-8: #{$spacing-8};
+  --spacing-10: #{$spacing-10};
+  --spacing-12: #{$spacing-12};
+  --spacing-14: #{$spacing-14};
+  --spacing-16: #{$spacing-16};
+  --spacing-20: #{$spacing-20};
+  --spacing-24: #{$spacing-24};
+  --spacing-28: #{$spacing-28};
+  --spacing-32: #{$spacing-32};
+  --spacing-36: #{$spacing-36};
+  --spacing-40: #{$spacing-40};
+  --spacing-44: #{$spacing-44};
+  --spacing-48: #{$spacing-48};
+  --spacing-56: #{$spacing-56};
+  --spacing-64: #{$spacing-64};
+  
+}
+
+
+
+
+// breakpoints
+$mobile: 720px;
+$tablet: 1100px;
+$desktop: 1101px;

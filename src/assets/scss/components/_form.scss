@@ -1,0 +1,45 @@
+@use "../util/predefined.scss" as *;
+
+/* 🔹 입력 항목 리스트 */
+.form-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+
+  /* 🔸 각 입력 항목 (단지명, 위치, 내용, 날짜 등) */
+  &-item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    /* 🔸 라벨 텍스트 */
+    label {
+      width: size(40);
+      font-size: size(14);
+      color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+  }
+}
+
+
+/* 🧩 입력 필드 감싸는 공통 래퍼 */
+.form-wrap {
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+
+.form-vail {
+  color: var(--state-error);
+  font-size: size(12);
+  line-height: 100%;
+  padding-left: size(4);
+}
+
+.clear-btn {
+  position: absolute;
+  right: size(12);
+  top: 50%;
+  transform: translateY(-50%);
+}

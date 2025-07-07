@@ -1,0 +1,50 @@
+@use "../util/predefined.scss" as *;
+
+/* 기본 wrap main */
+
+.container {
+  // max-width: size(480); // 모바일 기준 최대 너비 (원하면 조정 가능)
+  margin: 0 auto;
+  padding-top: size(52);
+  height: min-content;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  &.bg-main {
+    background: #F1F1F3;
+  }
+  &.bg-content {
+    background: #fff;
+  }
+  &.board-edit {
+    background: #191919;
+    height: 100%;
+    main {
+      height: 100%;
+    }
+  }
+  &.preview {
+    background: linear-gradient(180deg, #F2F4FF 35.18%, #FBFCFF 74.26%, #FFF 100%);
+    height: 100%;
+    .header {
+      background: #fff;
+    }
+  }
+  &.regist-type {
+    height: 100%;
+    main {
+      height: 100%;
+    }
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+
+  &.preview-content {
+    height: 100%;
+  }
+}

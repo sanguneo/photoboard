@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/xpboard.min.css?v=1">
+    <title>사진보드판</title>
+</head>
+
+<body>
+    <!-- 사진보드판 초기화면 헤더 -->
+    <header class="header" aria-label="앱 상단 헤더">
+		<h1 class="header-title">
+			사진보드판
+			<!-- 🧾 문서 안내 툴팁 버튼 및 설명 (토글 노출) -->
+			<div class="doc-head-btn" aria-hidden="false">
+				<button type="button" class="doc-tip-btn" aria-label="문서 저장 경로 안내">
+					<img src="./assets/images/info-big.svg" alt="도움말 아이콘" class="icon icon-20">
+				</button>
+				<div class="doc-tip-content" aria-hidden="true">
+					<p>
+						등록한 파일은 ‘Xp문서함(PC) &gt; 단지문서함 &gt; <strong>사진보드판</strong>’ 폴더에 자동 저장됩니다.
+					</p>
+				</div>
+			</div>
+		</h1>
+		<!-- -->
+		<button type="button" class="icon-btn close-btn" aria-label="닫기">
+			<img src="./assets/images/close-btn.svg" alt="">
+		</button>
+	</header>
+
+    <!-- 보드판 사진등록 접근 시 노출 타입 헤더 -->
+    <header class="header" aria-label="사진 등록 상단 헤더">
+        <a href="index.html" type="button" class="icon-btn" aria-label="뒤로가기">
+            <img src="../../assets/images/back.svg" alt="뒤로가기 아이콘">
+        </a>
+        <h2>사진 등록</h2>
+
+        <!-- 📌 설정 버튼 영역 -->
+        <div class="board-head-btn">
+            <button type="button" class="icon-btn" aria-label="카메라" aria-hidden="true">
+                <img src="../../assets/images/camera.svg" alt="카메라 아이콘">
+            </button>
+            <a href="boardSetting.html" class="icon-btn" aria-label="사진 등록 설정" aria-hidden="true">
+                <img src="../../assets/images/setting.svg" alt="설정 아이콘">
+            </a>
+            <button type="button" class="button text-btn primary" aria-label="설정 저장">저장</button>
+        </div>
+    </header>
+    
+
+    <!-- ================================
+        📌 헤더 영역 (뒤로가기 + 타이틀 + 툴팁)
+        ================================ -->
+    <header class="header" aria-label="앱 상단 헤더">
+        <!-- 🔙 뒤로가기 버튼 -->
+        <a href="../../index.html" type="button" class="icon-btn" aria-label="뒤로가기">
+            <img src="../../assets/images/back.svg" alt="뒤로가기 아이콘">
+        </a>
+
+        <!-- 📄 타이틀 -->
+        <h2>Xp문서함</h2>
+
+        <!-- 🧾 문서 안내 툴팁 버튼 및 설명 (토글 노출) -->
+        <div class="doc-head-btn" aria-hidden="false">
+            <button type="button" class="doc-tip-btn" aria-label="문서 저장 경로 안내">
+                <img src="../../assets/images/info.svg" alt="도움말 아이콘">
+                저장위치
+            </button>
+            <div class="doc-tip-content" aria-hidden="true">
+                <p>
+                    등록한 파일은 ‘Xp문서함(PC) &gt; 단지문서함 &gt; <strong>사진보드판</strong>’ 폴더에 자동 저장됩니다.
+                </p>
+            </div>
+        </div>
+    </header>
+</body>
+
+<script src="../../assets/js/common.js"></script>
+</html>

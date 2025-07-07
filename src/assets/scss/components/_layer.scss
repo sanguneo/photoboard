@@ -1,0 +1,225 @@
+@use "../util/predefined.scss" as *;
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  border-radius: size(12);
+  padding: size(22) size(16) size(24);
+  background: var(--mono0);
+  width: size(300);
+  margin: auto;
+  &-title {
+    font-size: size(17);
+    color: var(--text-primary);
+    padding-left: size(4);
+    margin-bottom: size(16);
+  }
+  &-list {
+    display: block;
+    &-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    &-item {
+      .radio-box {
+        margin: size(14) size(4) size(16) size(2);
+      }
+    }
+    &-btn {
+      font-size: size(15);
+      color: var(--text-primary);
+      line-height: 100%;
+      display: flex;
+      padding: size(15) size(4) size(14) size(2);
+      width: 100%;
+    }
+  }
+  &-body {
+    margin: 0 32px 32px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  &-foot {
+    padding: 24px 24px 0;
+    border-top: 1px solid var(--border-light);
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    .button {
+      width: 90px;
+    }
+    &.border_none {
+      border-top: 0;
+    }
+  }
+}
+
+.send-group__search {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.none_search {
+  color: var(--text-disabled);
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  margin: auto;
+}
+
+.send-group__list {
+  border: 1px solid var(--border-default);
+  margin-top: 12px;
+  @include radius(6px);
+  padding: 4px 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 224px;
+  ul {
+    display: flex;
+    flex-direction: column;
+    max-height: 240px;
+    overflow-y: auto;
+    li {
+      display: flex;
+      height: 36px;
+      padding: 9px 16px;
+    }
+  }
+}
+
+.send-group__selected {
+  margin-top: 8px;
+  padding: 12px 12px 12px 16px;
+  background: #fafafa;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  .group-selected__title {
+    align-items: center;
+    display: flex;
+    height: 28px;
+    strong {
+      font-size: 14px;
+      word-spacing: -0.01em;
+      color: #007bff;
+    }
+    .clear-btn {
+      margin-left: 6px;
+    }
+  }
+}
+.clear-btn {
+  cursor: pointer;
+  .icon {
+    width: 16px;
+    height: 16px;
+    background-size: 16px;
+  }
+}
+
+.confirm {
+  display: flex;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 20px 0 rgba(25, 33, 61, 0.06);
+  margin: auto;
+  padding: 28px 24px 24px;
+  flex-direction: column;
+  min-width: 388px;
+
+  &:has(.icon) {
+    padding: 32px 20px;
+  }
+
+  &__header {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    .icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    h2 {
+      font-size: 18px;
+    }
+
+    h3 {
+      text-align: left;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 100%;
+      word-spacing: -0.01em;
+      color: var(--text-primary);
+    }
+  }
+
+  &__contents {
+    margin-top: 8px;
+    white-space: pre-line;
+    .content {
+      text-align: left;
+      color: var(--text-primary);
+      word-spacing: normal;
+      font-size: 15px;
+      line-height: 150%;
+    }
+    .sub-content {
+      margin-top: 8px;
+      font-size: 14px;
+      line-height: 100%;
+      letter-spacing: -1%;
+      color: #616161;
+    }
+  }
+
+  &__button {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 28px;
+    .button {
+      min-width: 90px;
+    }
+  }
+}
+
+.toast-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  gap: 8px;
+  flex-direction: column;
+  &[aria-hidden="true"] {
+    display: none;
+  }
+  &[aria-hidden="false"] {
+    display: flex;
+  }
+}
+
+.toast-message {
+  padding: size(10) size(14);
+  border-radius: size(50);
+  @include flex-center;
+  box-shadow: size(2) size(2) size(6) 0 #00000029;
+  background-color: #fff;
+  width: auto; /* 컨텐츠 크기에 맞게 너비 설정 */
+  max-width: 100%; /* 너비가 너무 커지는 것을 방지 */
+  flex-shrink: 0; /* 줄어들지 않도록 */
+  flex-grow: 0; /* 자식 요소 크기 자동 조정 */
+  gap: size(6);
+  span {
+    font-size: size(13);
+    font-weight: 500;
+    color: var(--state-error);
+  }
+}

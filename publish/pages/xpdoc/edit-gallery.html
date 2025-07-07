@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/xpboard.min.css?v=1">
+    <title>사진보드판</title>
+</head>
+
+<body>
+    <div class="container bg-content">
+    
+        <!-- ========================
+           📌 상단 헤더 영역
+           ======================== -->
+        <header class="header" aria-label="앱 상단 헤더">
+            <!-- 🔙 닫기(뒤로가기) 버튼 -->
+            <a href="index.html" type="button" class="icon-btn doc-more" aria-label="닫기">
+                <img src="../../assets/images/close-btn.svg" alt="닫기 아이콘">
+            </a>
+            <!-- 📄 페이지 타이틀 -->
+            <h2>파일선택</h2>
+        </header>
+    
+        <main aria-label="메인 콘텐츠">
+            <!-- ========================
+             📂 문서 리스트/선택 섹션
+             ======================== -->
+            <section class="xpdoc-body pt16" aria-label="문서 리스트 선택 영역">
+    
+                <!-- ▷ 전체선택 체크박스 -->
+                <div class="xpdoc-header-option">
+                    <div class="check-btn txt">
+                        <input type="checkbox" id="allCheck" aria-label="전체 선택">
+                        <label for="allCheck">
+                            <span class="check-bg">
+                                <span class="check-icon"></span>
+                            </span>
+                            전체선택
+                        </label>
+                    </div>
+                </div>
+    
+                <!-- ▷ 문서 리스트 영역 -->
+                <div class="xpdoc-contents-edit" aria-label="Xp문서 리스트">
+                    <div class="xpdoc-list">
+                        <ul class="xpdoc-list-menu gallery">
+                        
+                            <!-- ------------------------
+                                                        📁 리스트 개별 항목 1
+                                                    ------------------------ -->
+                            <li class="xpdoc-list-item status-selected">
+                                <div class="check-btn image">
+                                    <input type="checkbox" id="checkbox11" aria-label="20250908 주차장 전기자동차 충전기 민원 관리" checked>
+                                    <label for="checkbox11">
+                                        <span class="check-bg">
+                                            <span class="check-icon"></span>
+                                        </span>
+                                        <span class="xpdoc-thum">
+                                            <img src="../../assets/images/doc-test01.png" alt="20250908 주차장 전기자동차 충전기 민원 관리 썸네일">
+                                        </span>
+                                        <span class="xpdoc-check-warp">
+                                            <div class="list-item-wrap">
+                                                <span class="xpdoc-name">20250908 주차장 전기자동차 충전기 민원 관리</span>
+                                                <span class="xpdoc-date">2025.09.28</span>
+                                            </div>
+                                        </span>
+                                    </label>
+                                </div>
+                        
+                            </li>
+                        
+                            <!-- ------------------------
+                                                    📁 리스트 개별 항목 2
+                                                    ------------------------ -->
+                            <li class="xpdoc-list-item">
+                                <div class="check-btn image">
+                                    <input type="checkbox" id="checkbox12" aria-label="주차장 입구 민원">
+                                    <label for="checkbox12">
+                                        <span class="check-bg">
+                                            <span class="check-icon"></span>
+                                        </span>
+                                        <span class="xpdoc-thum">
+                                            <img src="../../assets/images/doc-test02.png" alt="주차장 입구 민원 썸네일">
+                                        </span>
+                                        <span class="xpdoc-check-warp">
+                                            <div class="list-item-wrap">
+                                                <span class="xpdoc-name">주차장 입구 민원</span>
+                                                <span class="xpdoc-date">2025.09.28</span>
+                                            </div>
+                                        </span>
+                                    </label>
+                                </div>
+                        
+                            </li>
+                        
+                            <!-- ------------------------
+                                                    📁 리스트 개별 항목 3
+                                                    ------------------------ -->
+                            <li class="xpdoc-list-item status-selected">
+                                <div class="check-btn image">
+                                    <input type="checkbox" id="checkbox13" aria-label="20250915 101동 정문 앞" checked>
+                                    <label for="checkbox13">
+                                        <span class="check-bg">
+                                            <span class="check-icon"></span>
+                                        </span>
+                                        <span class="xpdoc-thum">
+                                            <img src="../../assets/images/doc-test03.png" alt="20250915 101동 정문 앞 썸네일">
+                                        </span>
+                                        <span class="xpdoc-check-warp">
+                                            <div class="list-item-wrap">
+                                                <span class="xpdoc-name">20250915 101동 정문 앞</span>
+                                                <span class="xpdoc-date">2025.09.28</span>
+                                            </div>
+                                        </span>
+                                    </label>
+                                </div>
+                        
+                            </li>
+                        
+                            <!-- ------------------------
+                                                    📁 리스트 개별 항목 4
+                                                    ------------------------ -->
+                            <li class="xpdoc-list-item">
+                                <div class="check-btn image">
+                                    <input type="checkbox" id="checkbox14" aria-label="안전 점검">
+                                    <label for="checkbox14">
+                                        <span class="check-bg">
+                                            <span class="check-icon"></span>
+                                        </span>
+                                        <span class="xpdoc-thum">
+                                            <img src="../../assets/images/doc-test04.png" alt="안전 점검 썸네일">
+                                        </span>
+                                        <span class="xpdoc-check-warp">
+                                            <div class="list-item-wrap">
+                                                <span class="xpdoc-name">안전 점검</span>
+                                                <span class="xpdoc-date">2025.09.28</span>
+                                            </div>
+                                        </span>
+                                    </label>
+                                </div>
+                        
+                            </li>
+                        
+                            <!-- ------------------------
+                                             📁 리스트 개별 항목 5
+                                             ------------------------ -->
+                            <li class="xpdoc-list-item">
+                                <div class="check-btn image">
+                                    <input type="checkbox" id="checkbox15" aria-label="소방 정기 점검">
+                                    <label for="checkbox15">
+                                        <span class="check-bg">
+                                            <span class="check-icon"></span>
+                                        </span>
+                                        <span class="xpdoc-thum">
+                                            <img src="../../assets/images/doc-test05.png" alt="소방 정기 점검 썸네일">
+                                        </span>
+                                        <span class="xpdoc-check-warp">
+                                            <div class="list-item-wrap">
+                                                <span class="xpdoc-name">소방 정기 점검</span>
+                                                <span class="xpdoc-date">2025.09.28</span>
+                                            </div>
+                                        </span>
+                                    </label>
+                                </div>
+                        
+                            </li>
+                        
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+</body>
+<script>
+
+    
+
+
+</script>
+
+<script src="../../assets/js/common.js"></script>
+</html>

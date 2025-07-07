@@ -1,0 +1,517 @@
+@use "../util/predefined.scss" as *;
+
+// =============================================
+// 📌 [검색 영역]
+// =============================================
+.xpdoc-search {
+    display: flex;
+    flex: 1;
+    position: relative;
+    .search-btn {
+        position: absolute;
+        right: size(20); top: size(12);
+    }
+}
+
+// =============================================
+// 📌 [상단 헤더 및 옵션 영역]
+// =============================================
+.xpdoc-header {
+    display: flex; 
+    padding: size(4) size(16); 
+    margin-bottom: size(20);
+
+    &-option {
+        display: flex;  
+        padding: 0 size(20); 
+
+        .option-align-btn {
+            display: flex;
+            align-items: center;
+            height: size(24);
+
+            .align-name {
+                font-size: size(14);
+                color: var(--text-secondary);
+            }
+        }
+    }
+}
+
+// =============================================
+// 📌 [파일 없음(empty) 안내 UI]
+// =============================================
+.xpdoc-none {
+    display: flex;
+    flex: 1;
+    &-cont {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        top: -12%;
+        position: relative;
+        margin: auto;
+        gap: size(24);
+        .none-img-box {
+            width: size(80);
+            height: size(80);
+            @include radius(50%);
+            @include flex-center;
+            background-color: var(--background-normal);
+        }
+        p {
+            font-size: size(16);
+            color: var(--text-secondary);
+        }
+    }
+}
+
+// =============================================
+// 📌 [옵션/툴버튼 박스]
+// =============================================
+.option-edit-box {
+    display: flex;
+    margin-left: auto;
+    gap: size(10);
+    align-items: center;
+
+    .line {
+        display: inline-flex;
+        height: size(14);
+        width: 1px;
+        background: var(--divider-accent);
+    }
+    .text-btn {
+        font-size: size(14);
+        color: var(--text-primary);
+    }
+}
+
+// =============================================
+// 📌 [업로드 대기/진행 안내 박스]
+// =============================================
+.xpdoc-upload-waiting {
+    height: size(40);
+    border-radius: size(6);
+    background-color: #3d73e612;
+    display: flex;
+    align-items: center;
+    margin: 0 size(20);
+    padding: size(12) size(10) size(12) size(12);
+    gap: size(8);
+
+    span {
+        font-weight: 500;
+        color: var(--primary);
+        font-size: size(14);
+        word-spacing: -0.01em;
+    }
+    .icon {
+        margin-left: auto;
+    }
+}
+
+// =============================================
+// 📌 [문서 리스트 전체 영역]
+// =============================================
+.xpdoc-contents {
+    padding: 0 size(20);
+    display: flex;
+    flex: 1;
+
+    // ▷ 편집 모드 전용
+    &-edit {
+        display: flex;
+        .xpdoc-list-menu {
+            gap: 0;
+            &.gallery {
+                padding: 0 size(20);
+                .xpdoc-list-item {
+                    padding: 0;
+                    .xpdoc-check-warp {
+                        padding-top: size(12);
+                        padding-right: 0;
+                        margin: 0;
+                        width: 100%;
+                        max-width: 100%;
+                    }
+                    .xpdoc-thum {
+                        margin: 0;
+                    }
+                    .check-btn {
+                        width: 100%;
+                        label {
+                            width: 100%;
+                        }
+                    }
+                    &.status-selected {
+                        background: inherit;
+                        .xpdoc-thum {
+                            position: relative;
+                            overflow: hidden;
+                            &:before {
+                                content: "";
+                                width: 100%;
+                                height: 100%;
+                                background: rgba(0,0,0,0.35);
+                                position: absolute;
+                                z-index: 1;
+                            }
+                        }
+                    }
+                }
+            }
+            &.list-type {
+                .xpdoc-list-item {
+                    .check-btn {
+                        padding: 0 size(20);
+                    }
+                    
+                    .xpdoc-check-warp {
+                        padding: size(18) 0;
+                        width: 100%;
+                        margin-left: size(10);
+                        border-bottom: 1px solid #f0f1f4;
+                        .list-item-wrap {
+                            width: 100%;
+                        }
+                    }
+                    .xpdoc-name {
+                        max-width: 100%;
+                    }
+                    .xpdoc-thum {
+                        margin-left: size(8);
+                    }
+                }
+            }
+        }
+        .xpdoc-check-warp {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            flex-shrink: 0;
+            min-width: 0;
+        }
+        .check-btn {
+            display: block;
+            width: 100%;
+            label {
+                width: 100%;
+            }
+        }
+        
+    }
+}
+
+// =============================================
+// 📌 [본문 컨텐츠 영역]
+// =============================================
+.xpdoc-body {
+    display: flex;
+    flex-direction: column;
+    gap: size(20);
+    flex: 1;
+    &.edit-type {
+        padding-bottom: size(72);
+    }
+}
+
+// =============================================
+// 📌 [문서 리스트/항목 구조]
+// =============================================
+.xpdoc-list {
+    display: block;
+    width: 100%;
+
+    // ▷ 리스트 타입 (세로)
+    &-menu {
+        display: flex;
+        flex-direction: column;
+        gap: size(16);
+        flex: 1;
+
+        // ▷ 갤러리 타입 (2열)
+        &.gallery {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: size(40) size(8);
+
+            .xpdoc-list-item {
+                flex-direction: column;
+                width: calc(50% - size(4));
+                .xpdoc-link {
+                    border-bottom: 0;
+                    padding: 0 size(6) 0 size(2);
+                    width: 100%;
+                }
+                .xpdoc-thum {
+                    width: 100%;
+                    aspect-ratio: 156/130;
+                    height: auto;
+                }
+                .xpdoc-name {
+                    max-width: 100%;
+                }
+            }
+        }
+
+        // ▷ 업로드 진행/대기 리스트
+        &.upload {
+            gap: size(18);
+            .xpdoc-list-item {
+                align-items: center;
+                padding-bottom: size(16);
+                border-bottom: 1px solid #f0f1f4;
+                gap: 0;
+                .xpdoc-name {
+                    width: calc(100% - size(142));
+                    margin: 0 size(20) 0 size(8);
+                }
+                &:last-child {
+                    border-bottom: 0;
+                }
+            }
+        }
+    }
+
+    // ▷ 리스트 한 줄/항목 단위
+    &-item {
+        display: flex;
+        gap: size(12);
+        width: 100%;
+        .icon-btn.doc-more {
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+        &.status-selected {
+            background: #3d73e612;
+        }
+        &:last-child {
+            .xpdoc-link {
+                border: 0;
+            }
+        }
+    }
+
+    // ▷ 문서 상세 링크
+    .xpdoc-link {
+        border-bottom: 1px solid #f0f1f4;
+        flex-shrink: 0;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        padding: size(6) 0 size(18);
+        width: calc(100% - size(60));
+        &.folder {
+            padding: 0 0 size(16);
+            .xpdoc-name {
+                height: size(24);
+                display: flex;
+                align-items: center;
+            } 
+        }
+    }
+
+    .list-item-wrap {
+        flex: 1;
+        gap: size(8);
+        display: flex;
+        flex-direction: column;
+        width: calc(100% - size(24));
+        position: relative;
+    }
+    // ▷ 문서 이름/날짜/썸네일 등
+    .xpdoc-name {
+        flex-shrink: 0;
+        line-height: 100%;
+        font-size: size(15);
+        display: inline-block;
+        @include ellipsis;
+        color: var(--text-primary);
+        max-width: calc(100% - 32px);
+        width: 100%;
+    }
+    .xpdoc-icon {
+        flex-shrink: 0;
+        width: size(24);
+        height: size(24);
+    }
+    .xpdoc-thum {
+        flex-shrink: 0;
+        width: size(48);
+        height: size(48);
+        border-radius: size(6);
+        overflow: hidden;
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .xpdoc-date {
+        font-size: size(13);
+        line-height: 100%;
+        width: 100%;
+        color: var(--text-secondary);
+    }
+
+    // ▷ 업로드 버튼 영역
+    .upload-btn-box {
+        display: flex;
+        gap: size(16);
+        flex-shrink: 0;
+        margin-left: auto;
+        .text-btn {
+            font-size: size(14);
+            padding: size(6) 0;
+            line-height: 100%;
+        }
+        .button {
+            min-width: size(42);
+            &.upload-btn {
+                background: #dbe7ff;
+                color: var(--primary);
+                font-weight: 500;
+                font-size:  size(14);
+            }
+        }
+    }
+}
+
+// =============================================
+// 📌 [문서함 탭 UI]
+// =============================================
+.xpdoc-tab {
+    display: flex;
+    flex-direction: column;
+    gap: size(20);
+
+    // ▷ 탭 버튼 그룹
+    .tab-btn-box {
+        display: flex;
+        flex: 1;
+        li {
+            width: 50%;
+            display: flex;
+        }
+        .tab-btn {
+            height: size(44);
+            border: 0;
+            flex: 1;
+            @include flex-center;
+            border-bottom: 1px solid #ededed;            
+            cursor: pointer;
+            color: var(--text-secondary);
+            position: relative;
+            font-size: size(14);
+
+            &.active {
+                background: #fff;
+                color: var(--primary);
+                font-weight: 600;
+                &:before {
+                    height: 3px;
+                }
+            }
+            &:before {
+                content: "";
+                height: 0;
+                width: 100%;
+                bottom: 0;
+                position: absolute;
+                left: 0;
+                background-color: var(--primary);
+            }
+        }
+    }
+
+    // ▷ 탭 컨텐츠 영역
+    &-panels {
+        padding: 0 size(20) size(24);
+        .tab-panel {
+            display: none;
+            &.active {
+                display: block;
+            }
+        }
+    }
+}
+
+// =============================================
+// 📌 [하단 고정 버튼]
+// =============================================
+.board-add-btn {
+    position: fixed;
+    padding: size(12) size(18) size(12) size(14);
+    border-radius: size(40);
+    @include flex-center;
+    z-index: 2;
+    background: var(--primary);
+    bottom: size(20);
+    right: size(20);
+    box-shadow: size(2) size(2) size(6) 0 rgba(0,0,0,0.2);
+    span {
+        color: #fff;
+        font-size: size(16);
+        font-weight: 500;
+        line-height: 100%;
+    }
+}
+
+// =============================================
+// 📌 [업로드 안내/상태 박스]
+// =============================================
+.xpdoc-upload-infobox {
+    padding: size(16) 0 size(24) 0;
+    display: flex;
+    flex-direction: column;
+    gap: size(24);
+    position: relative;
+
+    .upload-info {
+        padding: 0 size(20);
+        p {
+            font-size: size(14);
+            color: var(--text-secondary);
+        }
+        .text-btn.underline {
+            font-size: size(14);
+            color: var(--text-primary);
+            line-height: 100%;
+            text-decoration: underline;
+            margin-top: size(12);
+        }
+    }
+    .xpdoc-upload-waiting {
+        padding: size(14) size(12) size(15);
+        height: auto;
+        align-items: flex-start;
+        .sub-text {
+            margin-top: size(10);
+            font-weight: 400;
+            font-size: size(13);
+            color: var(--text-secondary);
+            display: block;
+            margin-top: size(10);
+        }
+    }
+}
+
+// =============================================
+// 📌 [라인 구분선]
+// =============================================
+.line-cont {
+    width: 100%;
+    height: size(8);
+    background-color: var(--background-normal);
+}
+
+// =============================================
+// 📌 [검색어 강조 텍스트]
+// =============================================
+.search-result-txt {
+    font-size: inherit;
+    color: var(--primary);
+    font-weight: 600 !important;
+}

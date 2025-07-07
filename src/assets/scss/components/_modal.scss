@@ -1,0 +1,383 @@
+@use "../util/predefined.scss" as *;
+
+// ==========================================
+// 📌 [모달] 전체 딤 처리 및 팝업 레이어 영역
+// ==========================================
+.modal-dim {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: auto; // 극한 확대/접근성 환경에서 전체 스크롤 보장
+  // aria-hidden으로 노출/숨김 제어
+  &[aria-hidden="false"] {
+    display: flex;
+  }
+}
+
+// ==========================================
+// 📌 [모달] 본문 및 내부 요소 스타일
+// ==========================================
+.modal {
+  display: flex;
+  flex-direction: column;
+  border-radius: size(12);
+  background: var(--mono0);
+  width: size(300);
+  max-width: size(300);
+  margin: auto;
+  flex-shrink: 0;
+
+  // ▷ 일반 팝업 타입
+  &-pop {
+    padding: size(22) size(16) size(24);
+  }
+
+  // ▷ 컨펌 타입(확인/취소)
+  &-confirm {
+    padding: size(40) size(16) size(16);
+    gap: size(32);
+  }
+
+  // ▷ 하단 바텀시트형 팝업
+  &-bottom {
+    padding: size(24) size(20) 0;
+    border-radius: size(12) size(12) 0 0;
+    margin: auto 0 0 0;
+    max-width: 100%;
+    width: 100%;
+    .modal-title {
+      padding: 0;
+      margin-bottom: size(12);
+    }
+    // 업로드 진행률 영역
+    .upload-progress {
+      display: flex;
+      flex-direction: column;
+      gap: size(24);
+      margin: size(24) 0 size(35);
+      .upload-counting {
+        text-align:  center;
+        strong {
+          color: var(--primary);
+          font-size: size(14);
+          font-weight: 500;
+        }
+        span {
+          color: var(--text-secondary);
+          font-size: size(14);
+          font-weight: 500;
+        }
+      }
+    }
+    // 진행률 바
+    .progressbar {
+      width: 100%;
+      height: size(10);
+      background: #D8E4FF;
+      border-radius: size(10); 
+      overflow: hidden;
+      appearance: none;
+      vertical-align: middle;
+    }
+    // 크롬, 엣지, 사파리
+    .progressbar::-webkit-progress-bar {
+      background: #3d73e615;
+      border-radius: 0 size(10) size(10) 0;
+      overflow: hidden;
+    }
+    .progressbar::-webkit-progress-value {
+      background: var(--primary);
+      border-radius: 0 size(10) size(10) 0;
+      transition: width 0.3s;
+    }
+    // 파이어폭스
+    .progressbar::-moz-progress-bar {
+      background: var(--primary);
+      border-radius: 0 size(10) size(10) 0;
+      transition: width 0.3s;
+    }
+    .progressbar[value="100"]::-moz-progress-bar {
+      border-radius: 0;
+    }
+    // IE 기본 progress 스타일
+    .progressbar::-ms-fill {
+      background: var(--primary);
+      border-radius: 0 size(10) size(10) 0;
+    }
+  }
+
+  // ▷ 안내 텍스트 스타일
+  &-text {
+    color: var(--text-secondary);
+    font-size: size(14);
+    line-height: 140%;
+  }
+
+  // ▷ 안내 텍스트 박스
+  &-text-box {
+    background-color: var(--background-normal);
+    padding: size(16) size(10) size(14);
+    border-radius: size(8);
+    margin-bottom: size(20);
+    p {
+      color: var(--text-secondary);
+      font-size: size(14);
+      line-height: 140%;
+      font-weight: 500;
+    }
+  }
+
+  // ▷ 모달 타이틀
+  &-title {
+    font-size: size(17);
+    color: var(--text-primary);
+    padding-left: size(4);
+    margin-bottom: size(16);
+    @include ellipsis;
+    &.center {
+      font-size: size(15);
+      font-weight: 500;
+      text-align: center;
+    }
+  }
+
+  // ▷ 리스트/라디오 버튼 영역
+  &-list {
+    display: block;
+    &-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    &-item {
+      .radio-box {
+        margin: size(14) size(4) size(16) size(2);
+      }
+    }
+    &-btn {
+      font-size: size(15);
+      color: var(--text-primary);
+      line-height: 100%;
+      display: flex;
+      padding: size(15) size(4) size(14) size(2);
+      width: 100%;
+    }
+  }
+
+  // ▷ 폼 입력 영역
+  &-form {
+    display: flex;
+    flex-direction: column;
+    gap: size(8);
+    margin-bottom: size(24);
+    position: relative;
+    .modal-input {
+      background-color: var(--background-normal);
+      height: size(48);
+      width: 100%;
+    }
+  }
+
+  // ▷ 모달 본문 컨텐츠
+  &-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    .content {
+      text-align: center;
+      line-height: 1.5;
+      font-weight: 500;
+      color: var(--text-primary);
+      font-size: size(15);
+      word-break: keep-all;
+    }
+  }
+
+  // ▷ 하단 버튼영역 (취소/확인)
+  &-foot {    
+    display: flex;
+    justify-content: flex-end;
+    gap: size(8);
+    .button {
+      flex: 1;
+      height: size(48);
+      font-size: size(16);
+      font-weight: 600; 
+      border-radius: size(8);
+    }
+  }
+
+  // ▷ 컨펌 모달 추가 클래스 (버튼 2개)
+  &.confirm {
+    padding: size(40) size(16) size(16);
+    gap: size(32);
+  }
+}
+
+// ==========================================
+// 📌 [그룹 전송] 검색/리스트/선택 영역
+// ==========================================
+.send-group__search {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+// ▷ 검색 결과 없음 안내
+.none_search {
+  color: var(--text-disabled);
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  margin: auto;
+}
+
+// ▷ 그룹 리스트
+.send-group__list {
+  border: 1px solid var(--border-default);
+  margin-top: 12px;
+  @include radius(6px);
+  padding: 4px 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 2size(10);
+  ul {
+    display: flex;
+    flex-direction: column;
+    max-height: 240px;
+    overflow-y: auto;
+    li {
+      display: flex;
+      height: 36px;
+      padding: 9px 16px;
+    }
+  }
+}
+
+// ▷ 선택된 그룹 UI
+.send-group__selected {
+  margin-top: 8px;
+  padding: 12px 12px 12px 16px;
+  background: #fafafa;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  .group-selected__title {
+    align-items: center;
+    display: flex;
+    height: 28px;
+    strong {
+      font-size: 14px;
+      word-spacing: -0.01em;
+      color: #007bff;
+    }
+    .clear-btn {
+      margin-left: 6px;
+    }
+  }
+}
+.clear-btn {
+  cursor: pointer;
+  .icon {
+    width: 16px;
+    height: 16px;
+    background-size: 16px;
+  }
+}
+
+// ==========================================
+// 📌 [토스트] 중앙 알림 메시지 팝업
+// ==========================================
+.toast {
+  &-container {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    gap: size(8);
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    &:has(.toast-validation) {
+      top: auto;
+      left: auto;
+      bottom: size(76)
+    }
+  }
+
+  &-validation {
+    padding: size(10) size(14);
+    border-radius: size(50);
+    @include flex-center;
+    box-shadow: size(2) size(2) size(6) 0 #00000029;
+    background-color: #fff;
+    width: auto; // 컨텐츠 크기에 맞게 너비 설정
+    max-width: max-content; // 너무 커지지 않도록
+    gap: size(6);
+    span {
+      font-size: size(13);
+      font-weight: 500;
+      color: var(--state-error);
+    }
+  }
+  &-message {
+    padding: size(11) size(16);
+    border-radius: size(4);
+    @include flex-center;
+    background-color: #38394096;
+    width: fit-content; // 컨텐츠 크기에 맞게 너비 설정
+    max-width: size(284);
+    gap: size(6);
+    span {
+      font-size: size(14);
+      color: #fff;
+      text-align: center;
+      line-height: 133%;
+    }
+  }
+}
+
+// ==========================================
+// 📌 [파일 옵션] 파일/버튼/삭제 옵션
+// ==========================================
+.file-options {
+  &-list {
+    margin-top: size(16);
+    display: flex;
+    flex-direction: column;
+    gap: size(32);
+  }
+  &-item {
+    display: flex;
+    align-items: center;
+  }
+  &-button {
+    display: flex;
+    align-items: center;
+    gap: size(10);
+    span {
+      font-size: size(15);
+      color: var(--text-primary);
+    }
+    &.file-delete {
+      margin-top: size(24);
+      position: relative;
+      padding: size(24) 0 size(30);
+      span {
+        color: var(--state-error);
+      }
+      &:before {
+        content: "";
+        width: calc(100% + size(8));
+        background: var(--divider-normal);
+        height: 1px;
+        position: absolute;
+        top: 0;
+        left: size(-4);
+      }
+    }
+  }
+}

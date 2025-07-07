@@ -1,0 +1,144 @@
+@use "../util/predefined.scss" as *;
+
+input:-webkit-autofill {
+  box-shadow:
+    inset 0 0 0 1px var(--border-default),          /* 기존 테두리 유지 */
+    inset 0 0 0 1000px var(--surface-light) !important;      /* autofill 파란 배경 덮기 */
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow:
+    inset 0 0 0 1px var(--border-default),          /* 기존 테두리 유지 */
+    inset 0 0 0 1000px var(--surface-light)  !important;      /* autofill 파란 배경 덮기 */
+  }
+}
+
+input {
+  &[type="text"],
+  &[type="password"],
+  &[type="search"],
+  &[type="email"],
+  &[type="number"],
+  &[type="tel"] {
+    padding: var(--spacing-8) var(--spacing-12);
+    font-size: size(15);
+    height:size(36);
+    @include line(1px, #e5e5e5, size(6));
+    background: var(--mono0);
+    color: var(--text-primary);
+    flex: 1;
+    text-align: left;
+    &::placeholder {
+        font-size: size(15);
+        line-height: 100%;
+        color: var(--text-disabled);
+    }
+    &:focus {
+      border-color: #535862;
+      outline: none;
+    }
+    &:hover,
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      color: var(--text-disabled);
+    }
+    &.large {
+      height: 48px;
+    }
+    &.error {
+      background-color: rgba(239, 83, 83, 0.05);
+      border-color: var(--state-error);
+      color: var(--state-error);
+    }
+  }
+
+  &[type="date"] {
+    opacity: 0;
+		position: absolute;
+		left: 0;
+    width: 100%;
+    height: 100%;
+    &::-webkit-calendar-picker-indicator {
+      opacity: 0;
+      position: absolute;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+    & + label {
+      padding: var(--spacing-8) var(--spacing-12);
+      font-size: size(15);
+      @include line(1px, #e5e5e5, 6px);
+      background: var(--mono0);
+      color: var(--text-primary);
+      flex: 1;
+      appearance: none;
+      -webkit-appearance: none;
+      height:size(36);
+      text-align: left;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &[type="search"] {
+    height: size(44);
+    padding: size(12) size(52) size(12) size(20);
+    background-color: #f1f1f3;
+    border-radius: size(20);
+    color: var(--text-primary);
+    border-color: transparent;
+    &::placeholder {
+      color: var(--text-disabled);
+      font-size: size(15);
+    }
+    &::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+      width: size(20);
+      height: size(20);
+      background: url("../../assets/images/clear.svg") no-repeat center center;
+      background-size: size(20);
+      cursor: pointer;
+    }
+  }
+}
+
+.readonly {
+  input,
+  label {
+    pointer-events: none;
+  }
+}
+
+input[readonly],
+input[readOnly] {
+  pointer-events: none;
+  & + label {
+    pointer-events: none;
+  }
+}
+
+/* 🔹 입력 항목 리스트 */
+  .form-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8);
+
+    /* 🔸 각 입력 항목 (단지명, 위치, 내용, 날짜 등) */
+    &-item {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+
+      /* 🔸 라벨 텍스트 */
+      label {
+        width: size(40);
+        font-size: size(14);
+        color: var(--text-secondary);
+        flex-shrink: 0;
+      }
+    }
+  }

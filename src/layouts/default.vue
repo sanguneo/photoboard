@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import Header from '@/components/layout/Header.vue';
 </script>
 
 <template>
-  <div class="layout">
-    <main class="container">
-      <slot />
-    </main>
+  <div class="container bg-content">
+    <Header />
+    <slot />
   </div>
 </template>
 

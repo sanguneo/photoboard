@@ -1,0 +1,242 @@
+@use "../util/predefined.scss" as *;
+
+/* 📌 사진 등록 상단 영역 (입력 폼 전체 영역) */
+.board-register-top {
+  padding: size(14) size(16);
+  background-color: var(--surface-white);
+}
+
+
+/* 🖼️ 사진 등록 중간 - 사진 선택 및 미리보기 영역 */
+.board-register-body {
+  position: relative;
+  @include flex-center;
+  text-align: center;
+  background-color: #323235;
+  flex: 1;
+  height: calc(100% - size(264));
+
+  /* 🔹 사진 선택 버튼과 안내 텍스트 영역 */
+  .images-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-16);
+
+    /* 👁️ 접근성: 숨김 처리 시 */
+    &[aria-hidden="true"] {
+      display: none;
+    }
+
+    /* 🔸 사진 선택 버튼 */
+    &-btn {
+      width: size(56);
+      height: size(56);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      background: #5a5a5f;
+
+      img {
+        width: size(56);
+        height: size(56);
+        position: absolute;
+      }
+    }
+
+    /* 🔸 사진 선택 안내 텍스트 */
+    &-guide {
+      font-size: size(16);
+      color: #fff;
+      line-height: 150%;
+      text-align: center;
+    }
+  }
+}
+
+/* ✅ 사진 등록 하단 - 저장 버튼 및 화살표 버튼 */
+.board-register-footer {
+  padding: size(8) var(--spacing-12) size(12);
+  background-color: #F1F1F3;
+  display: flex;
+  gap: var(--spacing-8);
+  .button {
+    font-size: size(16);
+    font-weight: 600;
+    flex: 1;
+
+    &--icon {
+      background: #fff;
+    }
+  }
+}
+
+/* 🔍 사진 등록 시 이미지 미리보기 */
+.board-preview {
+  display: none;
+  position: relative;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  &-warp {
+    display: inline-block;
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+  img {
+    max-width: 100%;
+    object-fit: contain;
+    max-height: 100%;
+  }
+
+  /* 📋 미리보기 우측 하단 패널 (텍스트 정보 요약) */
+  &-panel {
+    position: absolute;
+    z-index: 1;
+    right: size(10);
+    bottom: size(10);
+
+    table {
+      background: #fff;
+      width: 142px;
+      border-radius: 4px;
+
+      tbody {
+        th {
+          padding: size(4);
+          font-size: size(9);
+          height: size(18);
+          color: #4b536b;
+          line-height: 110%;
+          border-bottom: 1px solid #F0F1F4;
+          text-align: left;
+          width: 32px;
+        }
+
+        td {
+          padding: size(4);
+          height: size(18);
+          span {
+            font-size: size(9);
+            line-height: 110%;
+          }
+          color: var(--text-primary);
+          border-left: 1px solid #F0F1F4;
+          border-bottom: 1px solid #F0F1F4;
+          text-align: left;
+        }
+
+        /* 첫 번째 행 (상단 라운드 처리) */
+        tr:first-child {
+          th {
+            padding-top: size(6);
+            border-radius: 4px 0 0 0;
+            height: size(20);
+          }
+          td {
+            padding-top: size(6);
+            border-radius: 0 4px 0 0;
+            height: size(20);
+          }
+        }
+
+        /* 마지막 행 (하단 라운드 처리) */
+        tr:last-child {
+          th {
+            border-radius: 0 0 0 4px;
+            border-bottom: 0;
+            padding-bottom: size(6);
+            height: size(20);
+          }
+          td {
+            border-radius: 0 0 4px 0;
+            border-bottom: 0;
+            padding-bottom: size(6);
+            height: size(20);
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ✏️ 사진 편집 페이지: 이미지 + 툴 버튼 */
+.board-edit {
+  /* 🔹 이미지 편집 영역 */
+  &-area {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    height: calc(100% - size(84));
+    justify-content: center;
+    img {
+      max-width: 100%;
+      object-fit: contain;
+      max-height: 100%;
+    }
+  }
+
+  /* 🔹 하단 편집 툴 버튼들 */
+  .edit-button-box {
+    display: flex;
+    gap: size(20);
+    justify-content: center;
+    margin: auto auto 0;
+    .edit-btn {
+      width: size(86);
+      height: size(84);
+      @include flex-center;
+      flex-direction: column;
+      gap: size(11);
+
+      .btn-icon-title {
+        color: #fff;
+      }
+
+      &.status-active {
+        .btn-icon-title {
+          color: #66d1ff;
+        }
+      }
+    }
+  }
+}
+
+/* ➡️ 화살표 스티커 (활성화된 툴의 오버레이 UI) */
+.arrow-sticker {
+  position: absolute;
+  width: size(88);
+  height: size(88);
+  @include flex-center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  /* ❌ 닫기 버튼 */
+  .arrow-sticker-close {
+    position: absolute;
+    width: size(24);
+    height: size(24);
+    top: size(-12);
+    right: size(-12);
+    filter: drop-shadow(size(1) size(1) size(3) rgba(0,0,0,0.40));
+  }
+  .arrow-icon {
+    filter: drop-shadow(size(1) size(1) size(1) rgba(0,0,0,0.49));
+  }
+  &:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    border: 2px solid #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    filter: drop-shadow(size(1) size(1) size(3) rgba(0,0,0,0.40));
+  }
+}

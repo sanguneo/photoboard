@@ -1,0 +1,167 @@
+@use "../util/predefined.scss" as *;
+
+.faq-header {
+    margin: size(8) size(20) size(24);
+    border-radius: size(6);
+    padding: size(24) size(14) size(24) size(18);
+    background: #3d73e608;
+    display: flex;
+    justify-content: space-between;
+    .faq-info {
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        gap: size(8);
+        h3 {
+            font-size: size(15);
+            font-weight: 500;
+            color: var(--text-primary);
+            line-height: 100%;
+        }
+        span {
+            font-size: size(14);
+            color: var(--text-secondary);
+            line-height: 100%;
+            font-weight: 400;
+        }
+    }
+    .faq-callnum {
+        flex-shrink: 0;
+        @include line(1px, var(--primary), size(36));
+        word-spacing: -0.01em;
+        @include flex-center;
+        padding: size(10) size(12);
+        background: #fff;
+        gap: size(2);
+        strong {
+            color: var(--primary);
+            font-size: size(13);
+            font-weight: 500;
+            line-height: 100%;
+        }
+    }
+    @media screen and (max-width: 350px) {
+        flex-direction: column;
+        gap: size(12);
+    }
+}
+
+.faq-body {
+    padding: 0 size(20) size(20);
+}
+
+/* 탭 버튼 영역 */
+.faq-tab-list {
+    margin: 0 0 size(8);
+    ul {
+        display: flex;
+        gap: size(8);
+    }
+}
+
+.tab-button {
+  background: #f6f7fa;
+  border: none;
+  border-radius: size(20);
+  padding: size(8) size(20);
+  font-size: size(15);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  outline: none;
+  position: relative;
+}
+
+.tab-button.status-active,
+.tab-button[aria-selected="true"] {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.faq-list {
+    li {
+        border-bottom: size(1) solid #ececec;
+        .faq-q {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: size(16);
+        }
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+}
+
+details {
+    width: 100%;
+    background: #fff;
+    border-radius: size(6);
+    transition: box-shadow 0.2s;
+    height: 100%;
+    summary {
+        padding: size(24) size(0) size(24) size(4);
+        cursor: pointer;
+        outline: none;
+        font-size: size(16);
+        align-items: center;
+        gap: size(8);
+        display: flex;
+        img {
+            margin-left: auto;
+        }
+    }
+    &[open] {
+        padding-bottom: size(14);
+        summary {
+            padding: size(24) size(0) size(14) size(4);
+        }
+        img {
+            transform: rotate(180deg);
+        }
+    }
+
+}
+
+details[open] {
+    .faq-answer {
+        display: block;
+    }
+}
+
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question {
+  font-weight: 500;
+  color: #222;
+}
+
+.faq-answer {
+  padding: size(16);
+  color: var(--text-secondary);
+  font-size: size(14);
+  line-height: 160%;
+  background: var(--background-normal);
+  border-radius: size(8);
+}
+
+/* details 열렸을 때 summary 강조 */
+details[open] summary .faq-question {
+}
+
+@media (max-width: size(600)) {
+  .faq-tab-list ul {
+    gap: size(4);
+  }
+  .tab-button {
+    padding: size(6) size(12);
+    font-size: size(14);
+  }
+  summary {
+    font-size: size(15);
+    padding: size(10) size(4);
+  }
+}

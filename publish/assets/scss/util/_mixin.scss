@@ -1,0 +1,99 @@
+
+// ✅ 1. 반응형 대응용 미디어 쿼리
+@mixin respond($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: 720px) { @content; }
+  } @else if $breakpoint == tablet {
+    @media (max-width: 1100px) { @content; }
+  } @else if $breakpoint == desktop {
+    @media (min-width: 1101px) { @content; }
+  }
+}
+
+// ✅ 2. 말줄임 처리 (1줄 or N줄)
+@mixin ellipsis($lines: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @if $lines == 1 {
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+  }
+}
+
+// ✅ 3. 가운데 정렬
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// ✅ 4. 크기 지정 (width, height 한꺼번에)
+@mixin size($w, $h: $w) {
+  width: $w;
+  height: $h;
+}
+
+
+// ✅ 7. 접근성 포커스 처리
+@mixin a11y-focus {
+  &:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+}
+
+// ✅ 8. rem 변환 함수 + 폰트 사이즈 믹스인
+@function rem($px, $base: 16) {
+  @return #{$px / $base}rem;
+}
+
+@mixin font-rem($px, $base: 16) {
+  font-size: rem($px, $base);
+}
+
+@mixin line($size, $color, $radius) {
+  border: $size solid $color;
+  @if $radius != 0 {
+    border-radius: $radius;
+  }
+}
+
+@mixin radius($size) {
+  border-radius: $size;
+}
+
+//폰트 웨잇 고정
+@mixin regular {
+  font-weight: 400 !important;
+}
+@mixin medium {
+  font-weight: 500 !important;
+}
+@mixin semi {
+  font-weight: 600 !important;
+}
+@mixin bold {
+  font-weight: 700 !important;
+}
+
+@mixin mobile {
+  @media (max-width: $mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$mobile}) and (max-width: #{$tablet - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}

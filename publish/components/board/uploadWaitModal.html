@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/xpboard.min.css?v=1">
+    <title>사진보드판</title>
+</head>
+
+<body>
+    <!-- ================================
+         📌 [컨펌(confirm) 모달 팝업] 
+         ================================ -->
+    <div class="modal-dim" aria-label="컨펌창 영역" aria-hidden="false">
+        <!-- ▷ [1] 항목 삭제 컨펌 -->
+        <div class="modal modal-pop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <h2 id="modal-title" class="modal-title center">전송 대기중</h2>
+            <div class="modal-text-box">
+                <p>
+                    Xp문서함(PC) > 단지문서함 > 사진보드판에
+                    Wi-Fi 연결 후 전송됩니다.
+                </p>
+            </div>
+            <div class="modal-foot">
+                <button type="button" class="button primary-line" aria-label="추가 촬영">추가 촬영</button>
+                <button type="button" class="button primary-fill" aria-label="확인">확인</button>
+            </div>
+        </div>
+        <!-- ▷ [2] 특정 항목 삭제 컨펌 -->
+        <div class="modal modal-pop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <h2 id="modal-title" class="modal-title center">저장 완료</h2>
+            <div class="modal-text-box">
+                <p>
+                    Xp문서함(PC) > 단지문서함 > 사진보드판
+                </p>
+            </div>
+            <div class="modal-foot">
+                <button type="button" class="button primary-line" aria-label="추가 촬영">추가 촬영</button>
+                <button type="button" class="button primary-fill" aria-label="확인">확인</button>
+            </div>
+        </div>        
+    </div>
+</body>
+
+<script src="../../assets/js/common.js"></script>
+</html>

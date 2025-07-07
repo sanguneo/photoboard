@@ -7,7 +7,9 @@ export default defineNuxtConfig({
   app: {
     head: {
       meta: [
-        { name: 'viewport', content: 'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no' },
+        { name: 'charset', charset: 'UTF-8' },
+        { name: 'httpEquiv', 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no' },
       ],
       link: [],
       style: [],
@@ -35,7 +37,7 @@ export default defineNuxtConfig({
   msw: {
     folderPath: '@/mocks',
     // enable: JSON.parse(process.env.USE_MOCK || 'true'),
-    enable: true,
+    enable: false,
   },
   imports: {
     dirs: [
@@ -62,7 +64,7 @@ export default defineNuxtConfig({
         scss: {
           api: 'modern',
           quietDeps: true,
-          additionalData: '@use "@/assets/scss/_predefined.scss" as *;',
+          additionalData: '@use "@/assets/scss/util/_predefined.scss" as *;',
         },
       },
     },

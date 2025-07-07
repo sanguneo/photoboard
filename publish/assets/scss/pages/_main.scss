@@ -1,0 +1,132 @@
+@use "../util/predefined.scss" as *;
+
+// =============================================
+// 📌 [메인 컨텐츠 전체]
+// =============================================
+.main-content {
+    padding: size(16);
+    gap: size(40);
+}
+
+// =============================================
+// 📌 [상단 메인 메뉴 버튼 박스]
+// =============================================
+.main-menu-box {
+    display: flex;
+    gap: size(12);
+
+    // ▷ 개별 메인 메뉴 버튼
+    .main-menu-button {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        padding: size(24) size(20) size(20);
+        border-radius: size(12);
+        height: size(178);
+        aspect-ratio: 158/178;
+
+        // ▷ 버튼 내 텍스트
+        strong {
+            font-size: size(18);
+            color: #fff;
+            line-height: size(26);
+            word-spacing: -0.01em;
+            font-weight: 600;
+        }
+
+        // ▷ 등록 메뉴(파란 배경)
+        &.regist {
+            border-right: 1.25px solid #3367D9;
+            border-bottom: 1.25px solid #3367D9;
+            background: linear-gradient(145deg, #3D73E6 9.12%, #376CDF 136.34%);
+        }
+        // ▷ Xp문서함 메뉴(회색 배경)
+        &.xpdoc {
+            border-right: 1.25px solid #505571;
+            border-bottom: 1.25px solid #505571;
+            background-color: #53576B;
+        }
+        // ▷ 아이콘 위치
+        .icon {
+            margin-left: auto;
+            margin-top: auto;
+        }
+    }
+}
+
+// =============================================
+// 📌 [서비스(하단) 섹션 전체]
+// =============================================
+.service-section {
+    display: flex;
+    flex-direction: column;
+
+    // ▷ 서비스 섹션 타이틀
+    h2 {
+        padding-left: size(8);
+        color: var(--text-primary);
+        font-size: size(18);
+        font-weight: 600;
+        line-height: 100%;
+        margin-bottom: size(16);
+    }
+
+    // ▷ 서비스 리스트(전체)
+    .service-list {
+        display: flex;
+        flex-direction: column;
+        gap: size(10);
+    }
+
+    // ▷ 개별 서비스 항목
+    .service-item {
+        display: block;
+        flex-shrink: 0;
+        a {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-radius: size(8);
+            flex-shrink: 0;
+            height: size(74);
+            padding: size(18) size(16);
+            flex-wrap: wrap;
+            gap: size(8);
+        }
+        img {
+            width: size(40);
+            aspect-ratio: 1/1;
+        }
+    }
+
+    // ▷ 서비스명
+    .service-name {
+        color: var(--text-primary);
+        font-size: size(16);
+        font-weight: 500;
+        line-height: 100%;
+        word-spacing: -0.01em;
+    }
+
+    // ▷ 서비스 설명, 시간 묶음
+    .service-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: size(8);
+    }
+
+    // ▷ 서비스 운영 시간 등 서브 텍스트
+    .service-hours {
+        font-size: size(13);
+        word-spacing: -0.01em;
+        color: var(--text-secondary);
+        width: 100%;
+    }
+}
+
+// =============================================
+// 📌 [닫기 버튼]
+// =============================================
+.close-btn {
+    margin-left: auto;
+}

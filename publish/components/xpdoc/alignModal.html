@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/xpboard.min.css?v=1">
+    <title>사진보드판</title>
+</head>
+
+<body>
+    <div class="modal-dim" style="display: none" aria-hidden="false">
+        <div class="modal modal-pop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <h2 id="modal-title" class="modal-title">정렬 기준</h2>
+            <div class="modal-list">
+                <ul class="modal-list-menu">
+                    <li class="modal-list-item">
+                        <div class="radio-box">
+                            <input id="radio1" type="radio" class="radio-box_btn" name="radio" aria-labelledby="label1" checked>
+                            <label id="label1" class="radio-box_name" for="radio1">
+                                <span class="r_circle"></span>
+                                폴더 이름 (내림차순)
+                            </label>
+                        </div>
+                    </li>
+                    <li class="modal-list-item">
+                        <div class="radio-box">
+                            <input id="radio2" type="radio" class="radio-box_btn" name="radio" aria-labelledby="label2">
+                            <label id="label2" class="radio-box_name" for="radio2">
+                                <span class="r_circle"></span>
+                                폴더 이름 (오름차순)
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-dim" style="display: none" aria-hidden="false">
+        <div class="modal modal-pop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <h2 id="modal-title" class="modal-title">정렬 기준</h2>
+            <div class="modal-list">
+                <ul class="modal-list-menu">
+                    <li class="modal-list-item">
+                        <div class="radio-box">
+                            <input id="radio1" type="radio" class="radio-box_btn" name="radio" aria-labelledby="label1"
+                                checked>
+                            <label id="label1" class="radio-box_name" for="radio1">
+                                <span class="r_circle"></span>
+                                날짜 최신순
+                            </label>
+                        </div>
+                    </li>
+                    <li class="modal-list-item">
+                        <div class="radio-box">
+                            <input id="radio2" type="radio" class="radio-box_btn" name="radio" aria-labelledby="label2">
+                            <label id="label2" class="radio-box_name" for="radio2">
+                                <span class="r_circle"></span>
+                                날짜 오래된순
+                            </label>
+                        </div>
+                    </li>
+                    <li class="modal-list-item">
+                        <div class="radio-box">
+                            <input id="radio3" type="radio" class="radio-box_btn" name="radio" aria-labelledby="label3"
+                                checked>
+                            <label id="label3" class="radio-box_name" for="radio3">
+                                <span class="r_circle"></span>
+                                파일 이름 (내림차순)
+                            </label>
+                        </div>
+                    </li>
+                    <li class="modal-list-item">
+                        <div class="radio-box">
+                            <input id="radio4" type="radio" class="radio-box_btn" name="radio" aria-labelledby="label4">
+                            <label id="label4" class="radio-box_name" for="radio4">
+                                <span class="r_circle"></span>
+                                파일 이름 (오름차순)
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="../../assets/js/common.js"></script>
+</html>

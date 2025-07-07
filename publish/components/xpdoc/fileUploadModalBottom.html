@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/xpboard.min.css?v=1">
+    <title>사진보드판</title>
+</head>
+
+<body>
+    <!-- ================================
+         📌 [컨펌(confirm) 모달 팝업] 
+         ================================ -->
+    <div class="modal-dim" aria-label="컨펌창 영역" aria-hidden="false">
+        <!-- ▷ [1] 항목 삭제 컨펌 -->
+        <div class="modal modal-bottom" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <h2 id="modal-title" class="modal-title">파일 전송중</h2>
+            <div class="modal-text">
+                <p>
+                    파일 업로드가 완료되기 전에 화면을 닫거나,<br>
+                    앱을 종료하는 경우 업로드가 중단될 수 있습니다.
+                </p>
+            </div>
+            <div class="upload-progress">
+                <progress class="progressbar" value="20" max="100" aria-label="진행률"></progress>
+                <div class="upload-counting">
+                    <strong>175</strong>
+                    <span>/ 1,748개</span>
+                </div>
+            </div>
+        </div>
+             
+    </div>
+</body>
+
+<script src="../../assets/js/common.js"></script>
+</html>
