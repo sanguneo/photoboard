@@ -1,5 +1,14 @@
-<template>
+<script setup lang="ts">
+definePageMeta({
+  header: {
+    type: 3,
+    title: '파일 이름',
+    back: true,
+  },
+});
+</script>
 
+<template>
   <main aria-label="메인 콘텐츠">
     <section class="setting-box" aria-label="사진 등록 작성 영역">
       <ul class="setting-list" role="radiogroup" aria-label="설정 항목 선택">
@@ -45,4 +54,6 @@
 </template>
 
 
-<style lang="scss" src="@/assets/scss/pages/_boardSetting.scss"></style>
+<style lang="scss">
+@use '@/assets/scss/pages/_boardSetting.scss' as *;
+</style>

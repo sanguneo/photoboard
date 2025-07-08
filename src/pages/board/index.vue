@@ -1,42 +1,62 @@
+<script setup lang="ts">
+import dayjs from 'dayjs';
+import * as yup from 'yup';
+
+definePageMeta({
+  header: {
+    type: 1,
+    title: '사진 등록',
+    back: true,
+  },
+  container: 'bg-content regist-type',
+});
+
+const router = useRouter();
+
+const schema = yup.object().shape({
+  title: yup.string().required(),
+  location: yup.string().required(),
+  description: yup.string().required(),
+  date: yup.mixed().required(),
+});
+
+const { values, defineField, setFieldValue } = useForm<{
+  title: string;
+  location: string;
+  description: string;
+  date?: string;
+}>({
+  validationSchema: schema,
+  initialValues: {
+    title: '',
+    location: '',
+    description: '',
+    date: '',
+  },
+});
+
+const [ title ] = defineField('title');
+const [ location ] = defineField('location');
+const [ description ] = defineField('description');
+const [ date ] = defineField('date');
+const dateString = computed(()=>date.value ? dayjs(date.value).format('YYYY년 MM월 DD일') : '');
+const allFilled = computed(()=>Object.values(values).every(Boolean));
+
+const view = ref<'select'|'preview'>('select');
+
+
+
+</script>
+
 <template>
-  <!--    &lt;!&ndash; ✅ 토스트 메시지: 사용자 입력 오류 안내 &ndash;&gt;-->
-  <!--    <div class="toast-container" aria-live="polite" aria-hidden="true">-->
-  <!--        <div class="toast-validation">-->
-  <!--            <span class="icon">-->
-  <!--                <img src="@/assets/images/error.svg" alt="경고 아이콘">-->
-  <!--            </span>-->
-  <!--            <span>2자 이상 작성해 주세요.</span>-->
-  <!--        </div>-->
-  <!--    </div>-->
-  <!--    -->
-  <!--    &lt;!&ndash; ✅ 사진 선택 모달 &ndash;&gt;-->
-  <!--    <div class="modal-dim" style="display: none" aria-hidden="true">-->
-  <!--        <div class="modal modal-pop" role="dialog" aria-modal="true" aria-labelledby="modal-title">-->
-  <!--            <h2 id="modal-title" class="modal-title">보드판 사진 선택</h2>-->
-  <!--            <div class="modal-list">-->
-  <!--                <ul class="modal-list-menu">-->
-  <!--                    <li class="modal-list-item">-->
-  <!--                        <button type="button" class="modal-list-btn">사진 촬영</button>-->
-  <!--                    </li>-->
-  <!--                    <li class="modal-list-item">-->
-  <!--                        <button type="button" class="modal-list-btn">갤러리에서 사진 선택</button>-->
-  <!--                    </li>-->
-  <!--                </ul>-->
-  <!--            </div>-->
-  <!--        </div>-->
-  <!--    </div>-->
-
-  <!-- ✅ 메인 콘텐츠 -->
   <main aria-label="사진 등록 메인 콘텐츠">
-
-    <!-- 📄 작성 폼 -->
     <section class="board-register-top" aria-label="사진 정보 입력 영역">
       <ul class="form-list" role="list">
         <li class="form-list-item">
           <label for="input-title">단지명</label>
           <div class="form-wrap">
-            <input id="input-title" class="error" type="text" placeholder="광교자이더클래스" >
-            <button type="button" class="icon-btn clear-btn" aria-hidden="true" aria-label="초기화">
+            <input id="input-title" v-model="title" class="error" type="text" placeholder="광교자이더클래스" >
+            <button type="button" class="icon-btn clear-btn" :aria-hidden="title.trim().length <= 0" aria-label="초기화" @click="setFieldValue('title', '')">
               <img src="@/assets/images/clear.svg" alt="초기화">
             </button>
           </div>
@@ -44,8 +64,8 @@
         <li class="form-list-item">
           <label for="input-location">위치</label>
           <div class="form-wrap">
-            <input id="input-location" type="text" placeholder="사진 위치를 작성해 주세요." >
-            <button type="button" class="icon-btn clear-btn" aria-hidden="true" aria-label="초기화">
+            <input id="input-location" v-model="location" type="text" placeholder="사진 위치를 작성해 주세요." >
+            <button type="button" class="icon-btn clear-btn" :aria-hidden="location.trim().length <= 0" aria-label="초기화" @click="setFieldValue('location', '')">
               <img src="@/assets/images/clear.svg" alt="초기화">
             </button>
           </div>
@@ -53,8 +73,8 @@
         <li class="form-list-item">
           <label for="input-description">내용</label>
           <div class="form-wrap">
-            <input id="input-description" type="text" placeholder="예시) 소방 점검" >
-            <button type="button" class="icon-btn clear-btn" aria-hidden="true" aria-label="초기화">
+            <input id="input-description" v-model="description" type="text" placeholder="예시) 소방 점검" >
+            <button type="button" class="icon-btn clear-btn" :aria-hidden="description.trim().length <= 0" aria-label="초기화" @click="setFieldValue('description', '')">
               <img src="@/assets/images/clear.svg" alt="초기화">
             </button>
           </div>
@@ -62,49 +82,47 @@
         <li class="form-list-item">
           <label >날짜</label>
           <div class="form-wrap">
-            <input id="input-date" type="date">
-            <label for="input-date"/>
-            <button type="button" class="icon-btn clear-btn" aria-hidden="true" aria-label="초기화">
+            <input id="input-date" v-model="date" type="date">
+            <label for="input-date">{{date? dateString : ''}}</label>
+            <button type="button" class="icon-btn clear-btn" :aria-hidden="!date" aria-label="초기화" @click="setFieldValue('date', undefined)">
               <img src="@/assets/images/clear.svg" alt="초기화">
             </button>
           </div>
         </li>
       </ul>
     </section>
-
-    <!-- 📷 사진 등록 및 미리보기 -->
     <section class="board-register-body" aria-label="사진 미리보기 및 선택">
-      <!-- 사진 선택 버튼 -->
-      <div class="images-selector" aria-hidden="false">
-        <button type="button" class="images-selector-btn icon-btn" aria-label="사진 등록 및 갤러리 선택">
+      <!--
+        TODO: 사진선택버튼 누르면 모달 띄워서 처리
+              현재는 사진선택버튼 누르면 프리뷰로, 프리뷰에서 보드판 패널 누르면 돌아옴. -->
+      <div class="images-selector" :aria-hidden="view === 'preview'">
+        <button type="button" class="images-selector-btn icon-btn" aria-label="사진 등록 및 갤러리 선택" @click="view = 'preview'">
           <img src="@/assets/images/images-select.svg" alt="사진 선택 아이콘">
         </button>
         <p class="images-selector-guide">
           사진 촬영 또는 갤러리에서<br>사진을 선택해 주세요.
         </p>
       </div>
-
-      <!-- 미리보기 정보 -->
-      <div class="board-preview" aria-hidden="true">
+      <div class="board-preview" :aria-hidden="view === 'select'">
         <div class="board-preview-warp">
-          <div class="board-preview-panel">
+          <div class="board-preview-panel" @click="view = 'select'">
             <table>
               <tbody>
                 <tr>
                   <th scope="row">단지명</th>
-                  <td><span id="preview-title">-</span></td>
+                  <td><span id="preview-title">{{title}}</span></td>
                 </tr>
                 <tr>
                   <th scope="row">위치</th>
-                  <td><span id="preview-location">-</span></td>
+                  <td><span id="preview-location">{{location}}</span></td>
                 </tr>
                 <tr>
                   <th scope="row">내용</th>
-                  <td><span id="preview-description">-</span></td>
+                  <td><span id="preview-description">{{description}}</span></td>
                 </tr>
                 <tr>
                   <th scope="row">날짜</th>
-                  <td><span id="preview-date">-</span></td>
+                  <td><span id="preview-date">{{dateString}}</span></td>
                 </tr>
               </tbody>
             </table>
@@ -113,24 +131,32 @@
         </div>
       </div>
     </section>
-
-    <!-- ✅ 하단 액션 버튼 -->
     <section class="board-register-footer" aria-label="사진 등록 제출 버튼 영역">
-      <button type="submit" class="button primary-fill" disabled aria-disabled="true">
+      <button type="submit" class="button primary-fill" :disabled="!allFilled" aria-disabled="true">
         사진 보드판 저장
       </button>
-      <a href="boardEdit.html" >
-        <button class="button button--icon" aria-label="화살표 편집 페이지 이동">
-
-          <img src="@/assets/images/btn-arrow.svg" alt="화살표 아이콘">
-          <span class="btn-icon-title">화살표</span>
-        </button>
-      </a>
+      <button class="button button--icon" :disabled="!allFilled" aria-label="화살표 편집 페이지 이동" @click="router.push('/board/edit')">
+        <img v-if="allFilled" src="@/assets/images/btn-arrow.svg" alt="화살표 아이콘">
+        <img v-else src="@/assets/images/btn-arrow-disabled.svg" alt="화살표 아이콘">
+        <span class="btn-icon-title">화살표</span>
+      </button>
     </section>
   </main>
 </template>
 
-<style lang="scss" src="@/assets/scss/pages/_board.scss"></style>
+<style lang="scss">
+@use '@/assets/scss/pages/_board.scss' as *;
+</style>
+<style lang="scss" scoped>
+.clear-btn {
+  visibility: visible;
+  pointer-events: auto;
+  &[aria-hidden="true"] {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+</style>
 
 <!--<script>-->
 <!--    document.addEventListener("DOMContentLoaded", function () {-->

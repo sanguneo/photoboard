@@ -1,3 +1,17 @@
+<script setup lang="ts">
+definePageMeta({
+  header: {
+    type: 3,
+    title: '설정',
+    boardBtn: {
+      label: '설정 저장',
+      text: '저장',
+    },
+    back: true,
+  },
+});
+</script>
+
 <template>
   <!-- 📝 메인 콘텐츠 -->
   <main aria-label="사진 등록 메인 콘텐츠">
@@ -6,12 +20,12 @@
         <!-- 📁 파일명 설정 -->
         <li class="setting-list-item">
           <strong class="setting-title">파일 이름</strong>
-          <a href="./setting/bsFile.html" class="text-link" aria-label="파일이름 설정 페이지 이동">
+          <NuxtLink to="/setting/file" class="text-link" aria-label="파일이름 설정 페이지 이동">
             <span>날짜+내용</span>
             <span class="icon">
               <img src="@/assets/images/text-arrow.svg" alt="화살표 아이콘" >
             </span>
-          </a>
+          </NuxtLink>
           <p class="setting-list-item-info">파일 이름 형식을 선택해 주세요.</p>
         </li>
 
@@ -30,12 +44,12 @@
         <!-- 📤 Wi-Fi 전송 설정 -->
         <li class="setting-list-item">
           <strong class="setting-title">Xp문서함 사진 전송</strong>
-          <a href="./setting/bsWifi.html" class="text-link" aria-label="Xp문서함 전송 설정 페이지 이동">
+          <NuxtLink to="/setting/wifi" class="text-link" aria-label="Xp문서함 전송 설정 페이지 이동">
             <span>항상</span>
             <span class="icon">
               <img src="@/assets/images/text-arrow.svg" alt="화살표 아이콘" >
             </span>
-          </a>
+          </NuxtLink>
           <p class="setting-list-item-info">
             저장한 사진을 Xp문서함으로 자동 전송합니다.
           </p>
@@ -44,16 +58,18 @@
         <!-- 📍 노출 위치 설정 -->
         <li class="setting-list-item">
           <strong class="setting-title">보드판 노출 위치</strong>
-          <a href="./setting/bsPosition.html" class="text-link" aria-label="보드판 위치 설정 페이지 이동">
+          <NuxtLink to="/setting/position" class="text-link" aria-label="보드판 위치 설정 페이지 이동">
             <span>오른쪽 아래</span>
             <span class="icon">
               <img src="@/assets/images/text-arrow.svg" alt="화살표 아이콘" >
             </span>
-          </a>
+          </NuxtLink>
         </li>
       </ul>
     </section>
   </main>
 </template>
 
-<style lang="scss" src="@/assets/scss/pages/_boardSetting.scss"></style>
+<style lang="scss">
+@use '@/assets/scss/pages/_boardSetting.scss' as *;
+</style>

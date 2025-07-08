@@ -1,9 +1,15 @@
+<script setup lang="ts">
+definePageMeta({
+  header: {
+    type: 3,
+    title: '자주 묻는 질문',
+    back: true,
+  },
+});
+</script>
+
 <template>
   <main aria-label="메인 콘텐츠">
-
-    <!-- ================================
-             🔍 검색 영역
-             ================================ -->
     <section class="faq-header" aria-label="문서함 검색">
       <div class="faq-info">
         <h3>
@@ -22,10 +28,6 @@
         </div>
       </a>
     </section>
-
-    <!-- ================================
-             📂 문서함 컨텐츠 영역
-             ================================ -->
     <section class="faq-body" aria-label="Xp문서함 컨텐츠 영역">
       <!-- 정렬(필터) 버튼 영역 -->
       <nav aria-label="FAQ 분류 정렬" class="faq-tab-list">
@@ -44,8 +46,6 @@
           </li>
         </ul>
       </nav>
-
-      <!-- FAQ 리스트 (전체 예시) -->
       <ul class="faq-list">
         <li>
           <details>
@@ -234,10 +234,11 @@
             </div>
           </details>
         </li>
-
       </ul>
     </section>
   </main>
 </template>
 
-<style lang="scss" src="@/assets/scss/pages/_faq.scss"></style>
+<style lang="scss">
+@use '@/assets/scss/pages/_faq.scss' as *;
+</style>

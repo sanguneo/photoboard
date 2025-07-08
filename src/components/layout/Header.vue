@@ -1,13 +1,32 @@
 <script setup lang="ts">
-const type = ref<number>(2);
+interface IHeaderMeta {
+  type: 0|1|2|3;
+  title?: string;
+  boardBtn?: {
+    isEdit?: boolean;
+    label?: string;
+    text?: string;
+  };
+  back?: boolean;
+}
+
+const route = useRoute();
+const router = useRouter();
+
+const headerOptions = route.meta.header as IHeaderMeta;
+
+const isOnTop = ref<boolean>(true);
+onMounted(() => {
+  window.addEventListener('scroll', function () {
+    isOnTop.value = window.scrollY === 0;
+  });
+});
 </script>
 
 <template>
-  <!-- 사진보드판 초기화면 헤더 -->
-  <header v-if="type === 0" class="header" aria-label="앱 상단 헤더">
+  <header v-if="headerOptions.type === 0" class="header" :class="{shadow: !isOnTop}" aria-label="앱 상단 헤더">
     <h1 class="header-title">
       사진보드판
-      <!-- 🧾 문서 안내 툴팁 버튼 및 설명 (토글 노출) -->
       <div class="doc-head-btn" aria-hidden="false">
         <button type="button" class="doc-tip-btn" aria-label="문서 저장 경로 안내">
           <img src="@/assets/images/info-big.svg" alt="도움말 아이콘" class="icon icon-20">
@@ -19,46 +38,31 @@ const type = ref<number>(2);
         </div>
       </div>
     </h1>
-    <!-- -->
     <button type="button" class="icon-btn close-btn" aria-label="닫기">
       <img src="@/assets/images/close-btn.svg" alt="">
     </button>
   </header>
 
-  <!-- 보드판 사진등록 접근 시 노출 타입 헤더 -->
-  <header v-if="type === 1" class="header" aria-label="사진 등록 상단 헤더">
-    <a href="index.html" type="button" class="icon-btn" aria-label="뒤로가기">
+
+  <header v-else class="header" aria-label="앱 상단 헤더">
+    <a v-if="headerOptions.back" type="button" class="icon-btn" aria-label="뒤로가기" @click="router.back()">
       <img src="@/assets/images/back.svg" alt="뒤로가기 아이콘">
     </a>
-    <h2>사진 등록</h2>
 
-    <!-- 📌 설정 버튼 영역 -->
-    <div class="board-head-btn">
-      <button type="button" class="icon-btn" aria-label="카메라" aria-hidden="true">
+    <h2 v-if="headerOptions.title">{{ headerOptions.title }}</h2>
+
+    <div v-if="headerOptions.type === 1" class="board-head-btn">
+      <button v-if="headerOptions.boardBtn?.isEdit" type="button" class="icon-btn" aria-label="카메라" aria-hidden="true">
         <img src="@/assets/images/camera.svg" alt="카메라 아이콘">
       </button>
-      <a href="boardSetting.html" class="icon-btn" aria-label="사진 등록 설정" aria-hidden="true">
+      <NuxtLink v-if="headerOptions.boardBtn?.isEdit" to="/board/setting" class="icon-btn" aria-label="사진 등록 설정" aria-hidden="true">
         <img src="@/assets/images/setting.svg" alt="설정 아이콘">
-      </a>
-      <button type="button" class="button text-btn primary" aria-label="설정 저장">저장</button>
+      </NuxtLink>
+      <button
+        v-if="headerOptions.boardBtn" type="button" class="button text-btn primary"
+        :aria-label="headerOptions.boardBtn?.label">{{ headerOptions.boardBtn?.text }}</button>
     </div>
-  </header>
-
-
-  <!-- ================================
-        📌 헤더 영역 (뒤로가기 + 타이틀 + 툴팁)
-        ================================ -->
-  <header v-if="type === 2" class="header" aria-label="앱 상단 헤더">
-    <!-- 🔙 뒤로가기 버튼 -->
-    <a href="../../index.html" type="button" class="icon-btn" aria-label="뒤로가기">
-      <img src="@/assets/images/back.svg" alt="뒤로가기 아이콘">
-    </a>
-
-    <!-- 📄 타이틀 -->
-    <h2>Xp문서함</h2>
-
-    <!-- 🧾 문서 안내 툴팁 버튼 및 설명 (토글 노출) -->
-    <div class="doc-head-btn" aria-hidden="false">
+    <div v-else-if="headerOptions.type === 2" class="doc-head-btn" aria-hidden="false">
       <button type="button" class="doc-tip-btn" aria-label="문서 저장 경로 안내">
         <img src="@/assets/images/info.svg" alt="도움말 아이콘">
         저장위치

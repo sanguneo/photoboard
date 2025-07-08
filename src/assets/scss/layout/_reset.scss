@@ -3,7 +3,7 @@
   font-weight: 45 920;
   src:
     local("Pretendard"),
-    url("../fonts/PretendardVariable.woff2") format("woff2-variations");
+    url("../../fonts/PretendardVariable.woff2") format("woff2-variations");
 }
 
 * {
@@ -261,7 +261,7 @@ a {
   &:visited {
     text-decoration: none;
   }
-  
+
 }
 
 a, button, details, label {

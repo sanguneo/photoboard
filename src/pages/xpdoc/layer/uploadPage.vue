@@ -1,25 +1,15 @@
-<template>
-  <!--    <div class="modal-dim" id="uploadModal" aria-label="파일 전송 진행 팝업" aria-hidden="true" style="display: none;">-->
-  <!--        <div class="modal modal-bottom" role="dialog" aria-modal="true" aria-labelledby="upload-modal-title">-->
-  <!--            <h2 id="upload-modal-title" class="modal-title">파일 전송중</h2>-->
-  <!--            <div class="modal-text">-->
-  <!--                <p>-->
-  <!--                    파일 업로드가 완료되기 전에 화면을 닫거나,<br>-->
-  <!--                    앱을 종료하는 경우 업로드가 중단될 수 있습니다.-->
-  <!--                </p>-->
-  <!--            </div>-->
-  <!--            <div class="upload-progress">-->
-  <!--                <progress class="progressbar" value="20" max="100" aria-label="진행률"></progress>-->
-  <!--                <div class="upload-counting">-->
-  <!--                    <strong>175</strong>-->
-  <!--                    <span>/ 1,748개</span>-->
-  <!--                </div>-->
-  <!--            </div>-->
-  <!--        </div>-->
-  <!--    </div>-->
+<script setup lang="ts">
+definePageMeta({
+  header: {
+    type: 3,
+    title: '전송 대기 파일',
+    back: true,
+  },
+});
+</script>
 
+<template>
   <main aria-label="메인 콘텐츠">
-    <!-- 문서함 안내/상태 -->
     <section class="xpdoc-upload-infobox">
       <div class="upload-info">
         <p>
@@ -58,11 +48,9 @@
           </button>
         </div>
       </div>
-      <!-- 문서 리스트 -->
       <div class="xpdoc-contents" aria-label="Xp문서 리스트">
         <div class="xpdoc-list">
           <ul class="xpdoc-list-menu upload">
-
             <li class="xpdoc-list-item">
               <span class="xpdoc-icon">
                 <img src="@/assets/images/upload-waiting.svg" class="icon" alt="전송대기">
@@ -207,7 +195,6 @@
                 <button type="button" class="button button-small upload-btn" aria-label="전송">전송</button>
               </div>
             </li>
-
           </ul>
         </div>
       </div>
@@ -215,58 +202,6 @@
   </main>
 </template>
 
-      <style lang="scss" src="@/assets/scss/pages/_xpdoc.scss"></style>
-<!--<script>-->
-<!--document.addEventListener('DOMContentLoaded', function () {-->
-<!--    // 모달-->
-<!--    const uploadModal = document.getElementById('uploadModal');-->
-
-<!--    // 버튼-->
-<!--    const btnSendAll = document.getElementById('btnSendAll');-->
-<!--    const btnSortOpen = document.getElementById('btnSortOpen');-->
-<!--    const uploadBtns = document.querySelectorAll('.upload-btn');-->
-
-<!--    // 전체 전송 버튼 → 업로드 모달만 열기-->
-<!--    if (btnSendAll) {-->
-<!--        btnSendAll.addEventListener('click', function () {-->
-<!--            uploadModal.style.display = 'flex';-->
-<!--            uploadModal.setAttribute('aria-hidden', 'false');-->
-<!--        });-->
-<!--    }-->
-
-<!--    // 개별 전송 버튼들 → 업로드 모달만 열기-->
-<!--    uploadBtns.forEach(function (btn) {-->
-<!--        btn.addEventListener('click', function () {-->
-<!--            uploadModal.style.display = 'flex';-->
-<!--            uploadModal.setAttribute('aria-hidden', 'false');-->
-<!--        });-->
-<!--    });-->
-
-<!--    // 업로드 딤 클릭시 자기 모달만 닫기-->
-<!--    if (uploadModal) {-->
-<!--        uploadModal.addEventListener('click', function (e) {-->
-<!--            if (e.target === uploadModal) {-->
-<!--                uploadModal.style.display = 'none';-->
-<!--                uploadModal.setAttribute('aria-hidden', 'true');-->
-<!--            }-->
-<!--        });-->
-<!--    }-->
-
-<!--    // === Wi-Fi 토글 ===-->
-<!--    if (btnOff && btnOn) {-->
-<!--        btnOff.addEventListener('click', function () {-->
-<!--            btnOff.style.display = 'none';-->
-<!--            btnOn.style.display = '';-->
-<!--            btnOff.setAttribute('aria-hidden', 'true');-->
-<!--            btnOn.setAttribute('aria-hidden', 'false');-->
-<!--        });-->
-<!--        btnOn.addEventListener('click', function () {-->
-<!--            btnOn.style.display = 'none';-->
-<!--            btnOff.style.display = '';-->
-<!--            btnOn.setAttribute('aria-hidden', 'true');-->
-<!--            btnOff.setAttribute('aria-hidden', 'false');-->
-<!--        });-->
-<!--    }-->
-<!--});-->
-
-<!--</script>-->
+<style lang="scss">
+@use '@/assets/scss/pages/_xpdoc.scss' as *;
+</style>

@@ -1,29 +1,15 @@
+<script setup lang="ts">
+definePageMeta({
+  header: {
+    type: 2,
+    title: 'Xp문서함',
+    back: true,
+  },
+  container: 'preview',
+});
+</script>
+
 <template>
-  <!--    <div class="toast-container" aria-hidden="true">-->
-  <!--        <div class="toast-message">-->
-  <!--            <span class="icon">-->
-  <!--                <img src="@/assets/images/error.svg" alt="경고 아이콘">-->
-  <!--            </span>-->
-  <!--            <span>-->
-  <!--                2자 이상 작성해 주세요.-->
-  <!--            </span>-->
-  <!--        </div>-->
-  <!--    </div>-->
-  <!--    <div class="modal-dim" style="display: none">-->
-  <!--        <div class="modal modal-pop" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-label="보드판 사진선택">-->
-  <!--            <h2 class="modal-title">보드판 사진 선택</h2>-->
-  <!--            <div class="modal-list">-->
-  <!--                <ul class="modal-list-menu">-->
-  <!--                    <li class="modal-list-item">-->
-  <!--                        <button type="button" class="modal-list-btn">사진 촬영</button>-->
-  <!--                    </li>-->
-  <!--                    <li class="modal-list-item">-->
-  <!--                        <button type="button" class="modal-list-btn">갤러리에서 사진 선택</button>-->
-  <!--                    </li>-->
-  <!--                </ul>-->
-  <!--            </div>-->
-  <!--        </div>-->
-  <!--    </div>-->
   <main aria-label="메인 콘텐츠">
     <section class="xpdoc-header" aria-label="문서함 검색">
       <div class="xpdoc-search">
@@ -72,72 +58,72 @@
               <span class="xpdoc-icon">
                 <img src="@/assets/images/folder.svg" alt="폴더 아이콘">
               </span>
-              <a href="fileList.html" class="xpdoc-link">
+              <NuxtLink to="/xpdoc/fileList" class="xpdoc-link">
                 <span class="xpdoc-name">
                   2025.07
                 </span>
-              </a>
+              </NuxtLink>
             </li>
             <li class="xpdoc-list-item">
               <span class="xpdoc-icon">
                 <img src="@/assets/images/folder.svg" alt="폴더 아이콘">
               </span>
-              <a href="fileList.html" class="xpdoc-link">
+              <NuxtLink to="/xpdoc/fileList" class="xpdoc-link">
                 <span class="xpdoc-name">
                   2025.07
                 </span>
-              </a>
+              </NuxtLink>
             </li>
             <li class="xpdoc-list-item">
               <span class="xpdoc-icon">
                 <img src="@/assets/images/folder.svg" alt="폴더 아이콘">
               </span>
-              <a href="fileList.html" class="xpdoc-link">
+              <NuxtLink to="/xpdoc/fileList" class="xpdoc-link">
                 <span class="xpdoc-name">
                   2025.06
                 </span>
-              </a>
+              </NuxtLink>
             </li>
             <li class="xpdoc-list-item">
               <span class="xpdoc-icon">
                 <img src="@/assets/images/folder.svg" alt="폴더 아이콘">
               </span>
-              <a href="fileList.html" class="xpdoc-link">
+              <NuxtLink to="/xpdoc/fileList" class="xpdoc-link">
                 <span class="xpdoc-name">
                   2025.05
                 </span>
-              </a>
+              </NuxtLink>
             </li>
             <li class="xpdoc-list-item">
               <span class="xpdoc-icon">
                 <img src="@/assets/images/folder.svg" alt="폴더 아이콘">
               </span>
-              <a href="fileList.html" class="xpdoc-link">
+              <NuxtLink to="/xpdoc/fileList" class="xpdoc-link">
                 <span class="xpdoc-name">
                   2025.04
                 </span>
-              </a>
+              </NuxtLink>
             </li>
             <li class="xpdoc-list-item">
               <span class="xpdoc-icon">
                 <img src="@/assets/images/folder.svg" alt="폴더 아이콘">
               </span>
-              <a href="fileList.html" class="xpdoc-link">
+              <NuxtLink to="/xpdoc/fileList" class="xpdoc-link">
 
                 <span class="xpdoc-name">
                   2025.03
                 </span>
-              </a>
+              </NuxtLink>
             </li>
             <li class="xpdoc-list-item">
               <span class="xpdoc-icon">
                 <img src="@/assets/images/folder.svg" alt="폴더 아이콘">
               </span>
-              <a href="fileList.html" class="xpdoc-link">
+              <NuxtLink to="/xpdoc/fileList" class="xpdoc-link">
                 <span class="xpdoc-name">
                   2025.02
                 </span>
-              </a>
+              </NuxtLink>
             </li>
           </ul>
         </div>
@@ -145,4 +131,7 @@
     </section>
   </main>
 </template>
-<style lang="scss" src="@/assets/scss/pages/_xpdoc.scss"></style>
+
+<style lang="scss">
+@use '@/assets/scss/pages/_xpdoc.scss' as *;
+</style>
