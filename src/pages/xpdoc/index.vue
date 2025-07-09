@@ -126,7 +126,7 @@ definePageMeta({
               <span class="xpdoc-icon">
                 <img src="@/assets/images/folder.svg" alt="폴더 아이콘">
               </span>
-              <NuxtLink to="/xpdoc/noFile" class="xpdoc-link folder" aria-label="검색결과 없음">
+              <NuxtLink to="/xpdoc/nofile" class="xpdoc-link folder" aria-label="검색결과 없음">
                 <span class="xpdoc-name">파일없음</span>
               </NuxtLink>
             </li>
