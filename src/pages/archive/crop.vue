@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import KonvaCropper from '@/components/KonvaCropper.vue';
+import KonvaCropper from '@/components/archive/KonvaCropper.vue';
 
 const router = useRouter();
 const konvaStore = useKonvaStore();
