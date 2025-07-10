@@ -19,15 +19,15 @@ export interface IModal {
 /**
  * @description 모달 옵션
  * @shema title = 모달 타이틀
- * @shema subTitle = 모달 서브 타이틀
- * @shema width = 모달 너비
- * @shema hideCloseBtn = 닫기 버튼 숨기기 여부
+ * @shema isBottomSheet = 하단 시트 모달 여부
+ * @shema isTitleCenter = 타이틀 중앙 정렬 여부
+ * @shema closeOnClickDimmed = dimmed 클릭 시 모달 닫힘 여부
  */
 export interface IModalOption {
   title?: string;
-  subTitle?: string;
-  width?: string;
-  hideCloseBtn?: boolean;
+  isBottomSheet?: boolean;
+  isTitleCenter?: boolean;
+  closeOnClickDimmed?: boolean;
 }
 
 export type TModalResult = string | number | object | boolean | [];
