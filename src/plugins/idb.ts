@@ -3,7 +3,7 @@ import { openDB } from 'idb';
 export default defineNuxtPlugin(async () => {
   const idb = await openDB('aegis-dx', 1, {
     upgrade(db) {
-      const store = db.createObjectStore('aegis-dx', { keyPath: 'id' });
+      const store = db.createObjectStore('aegis-dx', { keyPath: 'key' });
       store.createIndex('created', 'created');
       store.createIndex('filename', 'filename');
     },
