@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import KonvaCanvas from '@/components/archive/KonvaCanvas.vue';
+
 const imageFile = ref<File | null>(null);
 const router = useRouter();
 const konvaStore = useKonvaStore();

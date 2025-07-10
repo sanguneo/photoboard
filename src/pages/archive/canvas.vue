@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Canvas from '@/components/archive/Canvas.vue';
+
 const imageSrc = ref<string>('');
 const texts = [
   { title: '단지명', content: '아파트아이' },

@@ -58,6 +58,9 @@ const routes: Record<string, IRoute> = {
 };
 
 export const getRouteInfo = (route: string) => {
+  if (route.startsWith('/archive')) {
+    return { route: '/xpdoc/search', header: { type: 3, title: '아카이브 - ' + route, back: true } };
+  }
   const routeEntries = Object.entries(routes);
   const target = routeEntries.find(item => item[1].route === (route.length > 1 ? route.replace(/\/$/, '') : route));
   if (!target) return null;

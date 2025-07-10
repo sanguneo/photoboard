@@ -66,6 +66,26 @@ definePageMeta({
             <span class="service-name">토스트 페이지</span>
           </NuxtLink>
         </li>
+        <li class="service-item">
+          <NuxtLink to="/archive/konva" aria-label="토스트 항목으로 이동">
+            <span class="service-name">콘바 캔버스 페이지</span>
+          </NuxtLink>
+        </li>
+        <li class="service-item">
+          <NuxtLink to="/archive/crop" aria-label="토스트 항목으로 이동">
+            <span class="service-name">콘바 크롭퍼 페이지</span>
+          </NuxtLink>
+        </li>
+        <li class="service-item">
+          <NuxtLink to="/archive/native">
+            <span class="service-name">네이티브 기능 페이지</span>
+          </NuxtLink>
+        </li>
+        <li class="service-item">
+          <NuxtLink to="/archive/idb">
+            <span class="service-name">IDB기능 페이지</span>
+          </NuxtLink>
+        </li>
       </ul>
     </section>
   </main>
