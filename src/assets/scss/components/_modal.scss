@@ -1,4 +1,4 @@
-@use "../util/predefined.scss" as *;
+@use '../util/predefined.scss' as *;
 
 // ==========================================
 // 📌 [모달] 전체 딤 처리 및 팝업 레이어 영역
@@ -12,7 +12,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   overflow: auto; // 극한 확대/접근성 환경에서 전체 스크롤 보장
   // aria-hidden으로 노출/숨김 제어
-  &[aria-hidden="false"] {
+  &[aria-hidden='false'] {
     display: flex;
   }
 }
@@ -59,7 +59,7 @@
       gap: size(24);
       margin: size(24) 0 size(35);
       .upload-counting {
-        text-align:  center;
+        text-align: center;
         strong {
           color: var(--primary);
           font-size: size(14);
@@ -76,8 +76,8 @@
     .progressbar {
       width: 100%;
       height: size(10);
-      background: #D8E4FF;
-      border-radius: size(10); 
+      background: #d8e4ff;
+      border-radius: size(10);
       overflow: hidden;
       appearance: none;
       vertical-align: middle;
@@ -99,7 +99,7 @@
       border-radius: 0 size(10) size(10) 0;
       transition: width 0.3s;
     }
-    .progressbar[value="100"]::-moz-progress-bar {
+    .progressbar[value='100']::-moz-progress-bar {
       border-radius: 0;
     }
     // IE 기본 progress 스타일
@@ -197,7 +197,7 @@
   }
 
   // ▷ 하단 버튼영역 (취소/확인)
-  &-foot {    
+  &-foot {
     display: flex;
     justify-content: flex-end;
     gap: size(8);
@@ -205,7 +205,7 @@
       flex: 1;
       height: size(48);
       font-size: size(16);
-      font-weight: 600; 
+      font-weight: 600;
       border-radius: size(8);
     }
   }
@@ -243,7 +243,7 @@
   padding: 4px 0;
   display: flex;
   flex-direction: column;
-  min-height: 2size(10);
+  min-height: 2size (10);
   ul {
     display: flex;
     flex-direction: column;
@@ -294,17 +294,23 @@
 .toast {
   &-container {
     position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
+    left: 50%;
     z-index: 1000;
     gap: size(8);
     flex-direction: column;
-    align-items: center;
-    width: 100%;
-    &:has(.toast-validation) {
-      top: auto;
-      left: auto;
-      bottom: size(76)
+    width: fit-content;
+
+    &.top {
+      top: size(76);
+      transform: translateX(-50%);
+    }
+    &.middle {
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &.bottom {
+      bottom: size(76);
+      transform: translateX(-50%);
     }
   }
 
@@ -370,7 +376,7 @@
         color: var(--state-error);
       }
       &:before {
-        content: "";
+        content: '';
         width: calc(100% + size(8));
         background: var(--divider-normal);
         height: 1px;

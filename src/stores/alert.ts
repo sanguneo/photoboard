@@ -1,9 +1,8 @@
+import { lockBodyScroll, unlockBodyScroll } from '@/shared/utils/scrollUtils';
 import type { IAlertOptions } from '@/types/alert.types.ts';
 
 const INIT_VALUE = {
-  title: '',
   content: '',
-  subContent: '',
   cancelText: '취소',
   confirmText: '확인',
 };
@@ -19,6 +18,7 @@ export const useAlertStore = defineStore('alert', () => {
     type.value = openType;
     activeElement.value = document.activeElement as HTMLElement;
     activeElement.value?.blur();
+    lockBodyScroll();
     return new Promise<boolean>((resolve) => {
       alertOptions.value = {
         ...alertOptions.value,
@@ -34,6 +34,7 @@ export const useAlertStore = defineStore('alert', () => {
     alertOptions.value = INIT_VALUE;
     result.value = null;
     activeElement.value?.focus();
+    unlockBodyScroll();
   };
 
   const openAlert = (alertOptions: IAlertOptions) => openHandler(alertOptions, 'alert');
