@@ -4,7 +4,7 @@ import * as yup from 'yup';
 
 definePageMeta({
   header: {
-    type: 1,
+    type: 'photo',
     title: '사진 등록',
     back: true,
   },
@@ -125,11 +125,9 @@ const onSubmit = async () => {
               현재는 사진선택버튼 누르면 프리뷰로, 프리뷰에서 보드판 패널 누르면 돌아옴. -->
       <div class="images-selector" :aria-hidden="view === 'preview'">
         <button type="button" class="images-selector-btn icon-btn" aria-label="사진 등록 및 갤러리 선택" @click="view = 'preview'">
-          <img src="@/assets/images/images-select.svg" alt="사진 선택 아이콘">
+          <img src="@/assets/images/images-select.svg" alt="사진 선택 아이콘" >
         </button>
-        <p class="images-selector-guide">
-          사진 촬영 또는 갤러리에서<br>사진을 선택해 주세요.
-        </p>
+        <p class="images-selector-guide">사진 촬영 또는 갤러리에서<br >사진을 선택해 주세요.</p>
       </div>
       <div class="board-preview" :aria-hidden="view === 'select'">
         <div class="board-preview-warp">
@@ -138,24 +136,32 @@ const onSubmit = async () => {
               <tbody>
                 <tr>
                   <th scope="row">단지명</th>
-                  <td><span id="preview-title">{{title}}</span></td>
+                  <td>
+                    <span id="preview-title">{{ title }}</span>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">위치</th>
-                  <td><span id="preview-location">{{location}}</span></td>
+                  <td>
+                    <span id="preview-location">{{ location }}</span>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">내용</th>
-                  <td><span id="preview-description">{{description}}</span></td>
+                  <td>
+                    <span id="preview-description">{{ description }}</span>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">날짜</th>
-                  <td><span id="preview-date">{{dateString}}</span></td>
+                  <td>
+                    <span id="preview-date">{{ dateString }}</span>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <img src="@/assets/images/test-img.png" alt="선택된 사진 미리보기">
+          <img src="@/assets/images/test-img.png" alt="선택된 사진 미리보기" >
         </div>
       </div>
     </section>
@@ -180,7 +186,7 @@ const onSubmit = async () => {
 .clear-btn {
   visibility: visible;
   pointer-events: auto;
-  &[aria-hidden="true"] {
+  &[aria-hidden='true'] {
     visibility: hidden;
     pointer-events: none;
   }

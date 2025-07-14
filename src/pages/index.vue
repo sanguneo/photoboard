@@ -1,11 +1,10 @@
 <script setup lang="ts">
 definePageMeta({
   header: {
-    type: 0,
+    type: 'main',
   },
   container: 'bg-main',
 });
-
 </script>
 
 <template>
@@ -13,16 +12,12 @@ definePageMeta({
     <!-- 상단 큰 버튼 2개 -->
     <section class="main-menu-box" aria-label="주요 기능 버튼 영역">
       <NuxtLink to="/board" class="main-menu-button regist" aria-label="보드판과 함께 사진 등록">
-        <strong>
-          보드판과 함께<br>사진 등록
-        </strong>
-        <img src="@/assets/images/picture.svg" alt="사진등록" class="icon icon-40">
+        <strong> 보드판과 함께<br >사진 등록 </strong>
+        <img src="@/assets/images/picture.svg" alt="사진등록" class="icon icon-40" >
       </NuxtLink>
       <NuxtLink to="/xpdoc" class="main-menu-button xpdoc" aria-label="Xp문서함에서 사진 보기">
-        <strong>
-          Xp문서함에서<br>사진 보기
-        </strong>
-        <img src="@/assets/images/main-folder.svg" alt="사진등록" class="icon icon-40">
+        <strong> Xp문서함에서<br >사진 보기 </strong>
+        <img src="@/assets/images/main-folder.svg" alt="사진등록" class="icon icon-40" >
       </NuxtLink>
     </section>
 
@@ -32,19 +27,19 @@ definePageMeta({
       <ul class="service-list" role="list">
         <li class="service-item">
           <NuxtLink to="/preview" aria-label="서비스 미리보기 항목으로 이동">
-            <img src="@/assets/images/preview.svg" alt="서비스 미리보기">
+            <img src="@/assets/images/preview.svg" alt="서비스 미리보기" >
             <span class="service-name">서비스 미리보기</span>
           </NuxtLink>
         </li>
         <li class="service-item">
           <NuxtLink to="/faq" aria-label="자주 묻는 질문 항목으로 이동">
-            <img src="@/assets/images/faq.svg" alt="자주 묻는 질문">
+            <img src="@/assets/images/faq.svg" alt="자주 묻는 질문" >
             <span class="service-name">자주 묻는 질문</span>
           </NuxtLink>
         </li>
         <li class="service-item">
           <a href="tel:0262817336">
-            <img src="@/assets/images/cs.svg" alt="고객센터">
+            <img src="@/assets/images/cs.svg" alt="고객센터" >
             <div class="service-wrap">
               <span class="service-name">고객센터</span>
               <span class="service-hours">09:00 - 17:00 주말 및 공휴일 제외</span>

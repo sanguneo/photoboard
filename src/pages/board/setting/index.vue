@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
   header: {
-    type: 3,
+    type: 'common',
     title: '설정',
     boardBtn: {
       label: '설정 저장',
@@ -20,7 +20,7 @@ definePageMeta({
         <!-- 📁 파일명 설정 -->
         <li class="setting-list-item">
           <strong class="setting-title">파일 이름</strong>
-          <NuxtLink to="/setting/file" class="text-link" aria-label="파일이름 설정 페이지 이동">
+          <NuxtLink to="/board/setting/file" class="text-link" aria-label="파일이름 설정 페이지 이동">
             <span>날짜+내용</span>
             <span class="icon">
               <img src="@/assets/images/text-arrow.svg" alt="화살표 아이콘" >
@@ -34,31 +34,27 @@ definePageMeta({
           <strong class="setting-title">보드판 큰 글씨</strong>
           <label class="switch">
             <input type="checkbox" class="switch-input" aria-label="스위치" >
-            <span class="switch-slider"/>
+            <span class="switch-slider" />
           </label>
-          <p class="setting-list-item-info">
-            큰 글씨로 설정하면 보드판 크기가 커집니다.
-          </p>
+          <p class="setting-list-item-info">큰 글씨로 설정하면 보드판 크기가 커집니다.</p>
         </li>
 
         <!-- 📤 Wi-Fi 전송 설정 -->
         <li class="setting-list-item">
           <strong class="setting-title">Xp문서함 사진 전송</strong>
-          <NuxtLink to="/setting/wifi" class="text-link" aria-label="Xp문서함 전송 설정 페이지 이동">
+          <NuxtLink to="/board/setting/wifi" class="text-link" aria-label="Xp문서함 전송 설정 페이지 이동">
             <span>항상</span>
             <span class="icon">
               <img src="@/assets/images/text-arrow.svg" alt="화살표 아이콘" >
             </span>
           </NuxtLink>
-          <p class="setting-list-item-info">
-            저장한 사진을 Xp문서함으로 자동 전송합니다.
-          </p>
+          <p class="setting-list-item-info">저장한 사진을 Xp문서함으로 자동 전송합니다.</p>
         </li>
 
         <!-- 📍 노출 위치 설정 -->
         <li class="setting-list-item">
           <strong class="setting-title">보드판 노출 위치</strong>
-          <NuxtLink to="/setting/position" class="text-link" aria-label="보드판 위치 설정 페이지 이동">
+          <NuxtLink to="/board/setting/position" class="text-link" aria-label="보드판 위치 설정 페이지 이동">
             <span>오른쪽 아래</span>
             <span class="icon">
               <img src="@/assets/images/text-arrow.svg" alt="화살표 아이콘" >

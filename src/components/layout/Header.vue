@@ -13,7 +13,7 @@ const activateTip = (e: Event) => {
 };
 
 onMounted(() => {
-  let scrollRaf:number = 0;
+  let scrollRaf: number = 0;
   const setIsOnTop = () => {
     isOnTop.value = window.scrollY === 0;
   };
@@ -27,7 +27,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <header v-if="options.type === 0" class="header" :class="{shadow: !isOnTop}" aria-label="앱 상단 헤더">
+  <header v-if="options.type === 'main'" class="header" :class="{ shadow: !isOnTop }" aria-label="앱 상단 헤더">
     <div class="header-title">
       <h1>사진보드판</h1>
       <div class="doc-head-btn" aria-hidden="false">
@@ -46,13 +46,12 @@ onMounted(() => {
     </button>
   </header>
 
-
   <header v-else class="header" :class="{shadow: !isOnTop}" aria-label="앱 상단 헤더">
     <a v-if="options.back" type="button" class="icon-btn" aria-label="뒤로가기" @click="router.back()">
       <img src="@/assets/images/back.svg" alt="뒤로가기 아이콘">
     </a>
     <h2 v-if="options.title">{{ options.title }}</h2>
-    <div v-if="options.type === 1" class="board-head-btn">
+    <div v-if="options.type === 'photo'" class="board-head-btn">
       <button type="button" class="icon-btn" aria-label="카메라" >
         <img src="@/assets/images/camera.svg" alt="카메라 아이콘">
       </button>
@@ -63,7 +62,7 @@ onMounted(() => {
         v-if="options.boardBtn" type="button" class="button text-btn primary"
         :aria-label="options.boardBtn?.label">{{ options.boardBtn?.text }}</button>
     </div>
-    <div v-else-if="options.type === 2" class="doc-head-btn" aria-hidden="false">
+    <div v-else-if="options.type === 'help'" class="doc-head-btn" aria-hidden="false">
       <button
         type="button" class="doc-tip-btn" aria-label="문서 저장 경로 안내" tabindex="1"
         @focus="activateTip" @blur="activateTip">
@@ -78,4 +77,3 @@ onMounted(() => {
     </div>
   </header>
 </template>
-
