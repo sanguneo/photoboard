@@ -6,6 +6,15 @@ export default defineNuxtPlugin(() => {
       required: '필수 입력 항목입니다.', // 필수 값
       oneOf: ({ values }) => `다음 값 중 하나여야 합니다: ${values}`, // 특정 값 중 하나여야 할 때
       notOneOf: ({ values }) => `다음 값 중 하나가 아니어야 합니다: ${values}`, // 특정 값 제외
+      notType: ({ type }) => {
+        if (type === 'number') {
+          return '숫자로 입력해주세요';
+        }
+        if (type === 'string') {
+          return '문자로 입력해주세요';
+        }
+        return '유효하지 않은 형식입니다';
+      },
     },
     string: {
       length: ({ length }) => `${length} 글자여야 합니다.`,

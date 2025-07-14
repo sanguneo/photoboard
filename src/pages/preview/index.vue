@@ -1,25 +1,18 @@
 <script setup lang="ts">
-definePageMeta({
-  header: {
-    type: 3,
-    title: '서비스 미리보기',
-    back: true,
-  },
-  container: 'preview',
-});
+const router = useRouter();
 
 const TOTAL_STEPS = 5;
 const currentStep = ref<number>(1);
-const percent = computed(()=>Math.round((currentStep.value / TOTAL_STEPS) * 100));
+const percent = computed(() => Math.round((currentStep.value / TOTAL_STEPS) * 100));
+const isLast = computed(() => currentStep.value === TOTAL_STEPS);
 
 const onClickPrevBtn = () => {
   if (currentStep.value > 1) currentStep.value -= 1;
 };
+
 const onClickNextBtn = () => {
+  if (isLast.value) return router.push('/');
   if (currentStep.value < TOTAL_STEPS) currentStep.value += 1;
-};
-const onClickCloseBtn = () => {
-  alert('온보딩 종료!');
 };
 
 </script>
@@ -89,13 +82,12 @@ const onClickCloseBtn = () => {
       </div>
     </div>
     <nav class="foot-button-box" aria-label="진행 버튼">
-      <button id="prevBtn" type="button" class="button button-large primary-line" :disabled="currentStep === 1" @click="onClickPrevBtn">이전</button>
-      <button v-show="currentStep !== TOTAL_STEPS" id="nextBtn" type="button" class="button button-large primary-fill" @click="onClickNextBtn">다음</button>
-      <button v-show="currentStep === TOTAL_STEPS" id="closeBtn" type="button" class="button button-large primary-fill" @click="onClickCloseBtn">닫기</button>
+      <Button size="large" variant="line" :disabled="currentStep === 1" @click="onClickPrevBtn">이전</Button>
+      <Button size="large" @click="onClickNextBtn">{{ isLast ? '닫기' : '다음' }}</Button>
     </nav>
   </main>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use '@/assets/scss/pages/_preview.scss' as *;
 </style>

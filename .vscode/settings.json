@@ -1,0 +1,105 @@
+{
+  "editor.formatOnSave": false,
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  "npm-intellisense.scanDevDependencies": true,
+  "npm-intellisense.recursivePackageJsonLookup": true,
+  "npm-intellisense.packageSubfoldersIntellisense": true,
+  "eslint.validate": ["html", "javascript", "vue", "typescript"],
+  "eslint.alwaysShowStatus": true,
+  "eslint.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.eol": "\n",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.suggest.autoImports": true,
+  "[scss]": {
+    "editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "todo-tree.general.tags": [
+    "DEV",
+    "PUB",
+    "TODO",
+    "NOTE",
+    "CHECKLIST",
+    "FIXME",
+    "[ ]",
+    "[x]"
+  ],
+  "todo-tree.highlights.customHighlight": {
+    "CHECKLIST": {
+      "background": "#20a904",
+      "foreground": "#ffffff",
+      "gutterIcon": true,
+      "icon": "check-circle-fill",
+      "iconColour": "#20a904",
+      "type": "line"
+    },
+    "NOTE": {
+      "background": "#ff92ce",
+      "foreground": "#ffffff",
+      "gutterIcon": true,
+      "icon": "star-fill",
+      "iconColour": "#ffc404",
+      "type": "line"
+    },
+    "TODO": {
+      "background": "#b782f9",
+      "foreground": "#ffffff",
+      "gutterIcon": true,
+      "icon": "pin",
+      "iconColour": "#b782f9",
+      "type": "line"
+    },
+    "FIXME": {
+      "background": "#0b0e9b",
+      "foreground": "#ffffff",
+      "gutterIcon": true,
+      "icon": "tools",
+      "iconColour": "#a9a9ef",
+      "type": "line"
+    },
+    "PUB": {
+      "background": "#ffc404",
+      "foreground": "#ffffff",
+      "gutterIcon": true,
+      "icon": "book",
+      "iconColour": "#ff9f04",
+      "type": "line"
+    },
+    "DEV": {
+      "background": "#959695c7",
+      "foreground": "#ffffff",
+      "gutterIcon": true,
+      "icon": "file",
+      "iconColour": "#959695c7",
+      "type": "line"
+    },
+    "[ ]": {
+      "background": "#f87364",
+      "foreground": "#ffffff",
+      "gutterIcon": true,
+      "icon": "x",
+      "iconColour": "#f87364",
+      "type": "text"
+    },
+    "[x]": {
+      "background": "#20a904",
+      "foreground": "#ffffff",
+      "gutterIcon": true,
+      "icon": "check",
+      "iconColour": "#20a904",
+      "type": "text"
+    }
+  },
+  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)"
+}
