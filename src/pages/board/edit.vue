@@ -1,16 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  header: {
-    type: 'photo',
-    boardBtn: {
-      isEdit: true,
-      label: '편집 완료 확인',
-      text: '확인',
-    },
-    back: true,
-  },
-  container: 'board-edit',
-});
 </script>
 
 <template>

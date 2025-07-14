@@ -1,12 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  header: {
-    type: 'help',
-    title: 'Xp문서함',
-    back: true,
-  },
-  container: 'preview',
-});
 </script>
 
 <template>
@@ -71,7 +63,7 @@ definePageMeta({
               <span class="xpdoc-icon">
                 <img src="@/assets/images/folder.svg" alt="폴더 아이콘" >
               </span>
-              <NuxtLink to="/xpdoc/fileList" class="xpdoc-link folder" aria-label="2025년 07월 폴더 열기">
+              <NuxtLink to="/xpdoc/filelist" class="xpdoc-link folder" aria-label="2025년 07월 폴더 열기">
                 <span class="xpdoc-name">2025.07</span>
               </NuxtLink>
             </li>
@@ -80,7 +72,7 @@ definePageMeta({
               <span class="xpdoc-icon">
                 <img src="@/assets/images/folder.svg" alt="폴더 아이콘" >
               </span>
-              <NuxtLink to="/xpdoc/fileList" class="xpdoc-link folder" aria-label="2025년 06월 폴더 열기">
+              <NuxtLink to="/xpdoc/filelist" class="xpdoc-link folder" aria-label="2025년 06월 폴더 열기">
                 <span class="xpdoc-name">2025.06</span>
               </NuxtLink>
             </li>
@@ -89,7 +81,7 @@ definePageMeta({
               <span class="xpdoc-icon">
                 <img src="@/assets/images/folder.svg" alt="폴더 아이콘" >
               </span>
-              <NuxtLink to="/xpdoc/fileList" class="xpdoc-link folder" aria-label="2025년 05월 폴더 열기">
+              <NuxtLink to="/xpdoc/filelist" class="xpdoc-link folder" aria-label="2025년 05월 폴더 열기">
                 <span class="xpdoc-name">2025.05</span>
               </NuxtLink>
             </li>
@@ -98,7 +90,7 @@ definePageMeta({
               <span class="xpdoc-icon">
                 <img src="@/assets/images/folder.svg" alt="폴더 아이콘" >
               </span>
-              <NuxtLink to="/xpdoc/fileList" class="xpdoc-link folder" aria-label="2025년 04월 폴더 열기">
+              <NuxtLink to="/xpdoc/filelist" class="xpdoc-link folder" aria-label="2025년 04월 폴더 열기">
                 <span class="xpdoc-name">2025.04</span>
               </NuxtLink>
             </li>
@@ -107,7 +99,7 @@ definePageMeta({
               <span class="xpdoc-icon">
                 <img src="@/assets/images/folder.svg" alt="폴더 아이콘" >
               </span>
-              <NuxtLink to="/xpdoc/fileList" class="xpdoc-link folder" aria-label="2025년 03월 폴더 열기">
+              <NuxtLink to="/xpdoc/filelist" class="xpdoc-link folder" aria-label="2025년 03월 폴더 열기">
                 <span class="xpdoc-name">2025.03</span>
               </NuxtLink>
             </li>
@@ -116,7 +108,7 @@ definePageMeta({
               <span class="xpdoc-icon">
                 <img src="@/assets/images/folder.svg" alt="폴더 아이콘" >
               </span>
-              <NuxtLink to="/xpdoc/fileList" class="xpdoc-link folder" aria-label="2025년 02월 폴더 열기">
+              <NuxtLink to="/xpdoc/filelist" class="xpdoc-link folder" aria-label="2025년 02월 폴더 열기">
                 <span class="xpdoc-name">2025.02</span>
               </NuxtLink>
             </li>

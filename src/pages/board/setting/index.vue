@@ -1,15 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  header: {
-    type: 'common',
-    title: '설정',
-    boardBtn: {
-      label: '설정 저장',
-      text: '저장',
-    },
-    back: true,
-  },
-});
 </script>
 
 <template>

@@ -1,11 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  header: {
-    type: 'common',
-    title: '전송 대기 파일',
-    back: true,
-  },
-});
 </script>
 
 <template>

@@ -1,10 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  header: {
-    type: 'main',
-  },
-  container: 'bg-main',
-});
 </script>
 
 <template>
@@ -12,11 +6,11 @@ definePageMeta({
     <!-- 상단 큰 버튼 2개 -->
     <section class="main-menu-box" aria-label="주요 기능 버튼 영역">
       <NuxtLink to="/board" class="main-menu-button regist" aria-label="보드판과 함께 사진 등록">
-        <strong> 보드판과 함께<br >사진 등록 </strong>
+        <strong>보드판과 함께<br >사진 등록</strong>
         <img src="@/assets/images/picture.svg" alt="사진등록" class="icon icon-40" >
       </NuxtLink>
       <NuxtLink to="/xpdoc" class="main-menu-button xpdoc" aria-label="Xp문서함에서 사진 보기">
-        <strong> Xp문서함에서<br >사진 보기 </strong>
+        <strong>Xp문서함에서<br >사진 보기</strong>
         <img src="@/assets/images/main-folder.svg" alt="사진등록" class="icon icon-40" >
       </NuxtLink>
     </section>

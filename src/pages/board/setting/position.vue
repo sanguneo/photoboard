@@ -1,11 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  header: {
-    type: 'common',
-    title: '보드판 노출 위치',
-    back: true,
-  },
-});
 type TPosition = 'rightBottom' | 'leftBottom' | 'leftTop' | 'rightTop';
 const position = ref<TPosition>('rightBottom');
 </script>

@@ -1,11 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  header: {
-    type: 'common',
-    title: '<span class="selected-count mr4" style="display: none"></span>파일선택',
-    back: true,
-  },
-});
 </script>
 
 <template>

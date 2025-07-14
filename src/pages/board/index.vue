@@ -2,15 +2,6 @@
 import dayjs from 'dayjs';
 import * as yup from 'yup';
 
-definePageMeta({
-  header: {
-    type: 'photo',
-    title: '사진 등록',
-    back: true,
-  },
-  container: 'bg-content regist-type',
-});
-
 const router = useRouter();
 
 const schema = yup.object().shape({

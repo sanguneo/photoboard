@@ -1,12 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  header: {
-    type: 'help',
-    title: 'Xp문서함',
-    back: true,
-  },
-  container: 'preview',
-});
 </script>
 
 <template>

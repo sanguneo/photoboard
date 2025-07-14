@@ -16,7 +16,7 @@ const modals = computed(() => modalStore.modalComponentObjects);
       <div v-if="isVisible" class="modal-dim" :style="{'z-index' : modals.length > 0 ? 11 : 10}">
         <div class="confirm">
           <div class="confirm__header">
-            <h3> {{ alertOptions.title }} </h3>
+            <h3>{{ alertOptions.title }}</h3>
           </div>
           <div class="confirm__contents">
             <p class="content">

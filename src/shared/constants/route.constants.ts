@@ -33,7 +33,7 @@ const PREVIEW_PAGE: IRoute = { route: '/preview', header: { type: 'common', titl
 
 const XPDOC_PAGE: IRoute = { route: '/xpdoc', header: { type: 'help', title: 'Xp문서함', back: true } };
 const XPDOC_EDITGALLERY_PAGE: IRoute = { route: '/xpdoc/editgallery', header: { type: 'common', title: '파일선택', back: true } };
-const XPDOC_FILELIST_PAGE: IRoute = { route: '/xpdoc/fileList', header: { type: 'common', title: '', back: true } };
+const XPDOC_FILELIST_PAGE: IRoute = { route: '/xpdoc/filelist', header: { type: 'common', title: '', back: true } };
 const XPDOC_SEARCH_PAGE: IRoute = { route: '/xpdoc/search', header: { type: 'help', title: 'Xp문서함', back: true } };
 
 const routes: Record<string, IRoute> = {
@@ -54,7 +54,10 @@ const routes: Record<string, IRoute> = {
 
 export const getRouteInfo = (route: string) => {
   if (route.startsWith('/archive')) {
-    return { route: '/xpdoc/search', header: { type: 'common', title: '아카이브 - ' + route, back: true } };
+    return { route, header: { type: 'common', title: '아카이브 - ' + route, back: true } };
+  }
+  if (route.startsWith('/xpdoc/layer')) {
+    return { ...XPDOC_EDITGALLERY_PAGE, route };
   }
   const routeEntries = Object.entries(routes);
   const target = routeEntries.find((item) => item[1].route === (route.length > 1 ? route.replace(/\/$/, '') : route));

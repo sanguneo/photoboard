@@ -1,11 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  header: {
-    type: 'common',
-    title: '파일선택',
-    back: true,
-  },
-});
 </script>
 
 <template>

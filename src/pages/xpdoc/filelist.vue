@@ -1,12 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  header: {
-    type: 'common',
-    title: '2025.07',
-    back: true,
-  },
-});
-
 const isFileType = ref(true);
 </script>
 

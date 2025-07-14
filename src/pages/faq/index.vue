@@ -18,12 +18,12 @@ const onClickCategory = (category: 'ALL' | faqCategory) => {
     <section class="faq-header" aria-label="문서함 검색">
       <div class="faq-info">
         <h3>고객센터</h3>
-        <span> 월 - 금요일 | 09:00 - 17:00 </span>
+        <span>월 - 금요일 | 09:00 - 17:00</span>
       </div>
       <a href="tel:0262817336">
         <div class="faq-callnum">
           <img src="@/assets/images/call.svg" alt="전화기" class="icon icon-16" >
-          <strong> 02-6281-7336 </strong>
+          <strong>02-6281-7336</strong>
         </div>
       </a>
     </section>

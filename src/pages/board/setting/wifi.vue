@@ -1,11 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  header: {
-    type: 'common',
-    title: 'Xp문서함 사진 전송',
-    back: true,
-  },
-});
 </script>
 
 <template>

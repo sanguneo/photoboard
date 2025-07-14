@@ -1,11 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  header: {
-    type: 'common',
-    title: '키즈존 여자화장실 세면대 수리',
-    back: true,
-  },
-});
 </script>
 
 <template>
