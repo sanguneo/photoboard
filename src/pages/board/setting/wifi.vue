@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import { CONNECTION } from '@/shared/constants/setting.constants.ts';
+
+const settingStore = useSettingStore();
+const { useCellular } = storeToRefs(settingStore);
+
 </script>
 
 <template>
@@ -13,19 +18,19 @@
       <ul class="setting-list" role="radiogroup" aria-label="설정 항목 선택">
         <li class="setting-list-item">
           <div class="radio-box">
-            <input id="radio2" type="radio" class="radio-box_btn" name="radio" aria-labelledby="label2" checked >
-            <label id="label2" class="radio-box_name" for="radio2">
+            <input id="radio_true" v-model="useCellular" type="radio" class="radio-box_btn" name="radio" aria-labelledby="label_true" :value="true" >
+            <label id="label_true" class="radio-box_name" for="radio_true">
               <span class="r_circle" />
-              항상
+              {{ CONNECTION(true) }}
             </label>
           </div>
         </li>
         <li class="setting-list-item">
           <div class="radio-box">
-            <input id="radio1" type="radio" class="radio-box_btn" name="radio" aria-labelledby="label1" >
-            <label id="label1" class="radio-box_name" for="radio1">
+            <input id="radio_false" v-model="useCellular" type="radio" class="radio-box_btn" name="radio" aria-labelledby="label_false" :value="false" >
+            <label id="label_false" class="radio-box_name" for="radio_false">
               <span class="r_circle" />
-              Wi-Fi에서만 전송
+              {{ CONNECTION(false) }}
             </label>
           </div>
         </li>

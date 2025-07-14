@@ -1,6 +1,9 @@
 <script setup lang="ts">
-type TPosition = 'rightBottom' | 'leftBottom' | 'leftTop' | 'rightTop';
-const position = ref<TPosition>('rightBottom');
+import { BOARD_POSITIONS } from '@/shared/constants/setting.constants.ts';
+
+const settingStore = useSettingStore();
+const { boardPosition } = storeToRefs(settingStore);
+
 </script>
 
 <template>
@@ -8,43 +11,16 @@ const position = ref<TPosition>('rightBottom');
     <section class="setting-box" aria-label="사진 등록 작성 영역">
       <div class="setting-info">
         <div class="board-preview-position">
-          <img id="imgPosition" :class="position" src="@/assets/images/board-position-img.svg" alt="보드판 위치 안내 이미지" >
+          <img id="imgPosition" :class="boardPosition" src="@/assets/images/board-position-img.svg" alt="보드판 위치 안내 이미지" >
         </div>
       </div>
       <ul class="setting-list" role="radiogroup" aria-label="설정 항목 선택">
-        <li class="setting-list-item">
+        <li v-for="(item, key) of BOARD_POSITIONS" :key="key" class="setting-list-item">
           <div class="radio-box">
-            <input id="radio1" v-model="position" type="radio" class="radio-box_btn" name="radio" aria-labelledby="rightBottom" value="rightBottom" >
-            <label id="label1" class="radio-box_name" for="radio1">
+            <input :id="`radio_${key}`" v-model="boardPosition" type="radio" class="radio-box_btn" name="radio" :aria-labelledby="`label_${key}`" :value="key" >
+            <label :id="`label_${key}`" class="radio-box_name" :for="`radio_${key}`">
               <span class="r_circle" />
-              오른쪽 아래
-            </label>
-          </div>
-        </li>
-        <li class="setting-list-item">
-          <div class="radio-box">
-            <input id="radio2" v-model="position" type="radio" class="radio-box_btn" name="radio" aria-labelledby="leftBottom" value="leftBottom" >
-            <label id="label2" class="radio-box_name" for="radio2">
-              <span class="r_circle" />
-              왼쪽 아래
-            </label>
-          </div>
-        </li>
-        <li class="setting-list-item">
-          <div class="radio-box">
-            <input id="radio3" v-model="position" type="radio" class="radio-box_btn" name="radio" aria-labelledby="leftTop" value="leftTop" >
-            <label id="label3" class="radio-box_name" for="radio3">
-              <span class="r_circle" />
-              왼쪽 위
-            </label>
-          </div>
-        </li>
-        <li class="setting-list-item">
-          <div class="radio-box">
-            <input id="radio4" v-model="position" type="radio" class="radio-box_btn" name="radio" aria-labelledby="rightTop" value="rightTop" >
-            <label id="label4" class="radio-box_name" for="radio4">
-              <span class="r_circle" />
-              오른쪽 위
+              {{ item }}
             </label>
           </div>
         </li>
