@@ -1,4 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const emit = defineEmits(['closeModal']);
+
+</script>
 
 <template>
   <div class="modal-text-box">
@@ -6,6 +9,6 @@
   </div>
   <div class="modal-foot">
     <button type="button" class="button primary-line" aria-label="추가 촬영">추가 촬영</button>
-    <button type="button" class="button primary-fill" aria-label="확인">확인</button>
+    <button type="button" class="button primary-fill" aria-label="확인" @click="emit('closeModal')">확인</button>
   </div>
 </template>

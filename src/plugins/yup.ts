@@ -18,8 +18,8 @@ export default defineNuxtPlugin(() => {
     },
     string: {
       length: ({ length }) => `${length} 글자여야 합니다.`,
-      min: ({ min }) => `최소 ${min} 글자 이상이어야 합니다.`,
-      max: ({ max }) => `최대 ${max} 글자 이하여야 합니다.`,
+      min: ({ min }) => `${min}자 이상 작성해 주세요.`,
+      max: ({ max }) => `${max}자 이하로 작성해 주세요.`,
       matches: ({ regex }) => `"${regex}" 패턴과 일치해야 합니다.`,
       email: '유효한 이메일 형식이어야 합니다.',
       url: '유효한 URL 형식이어야 합니다.',

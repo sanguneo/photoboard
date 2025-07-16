@@ -5,6 +5,7 @@ export const REGEX = {
   CONTACT: /^\d+$/,
   ENG_KOR_NUMBER: /^[a-zA-Z0-9가-힣ㄱ-ㅎ]+$/,
   ENG: /^[A-Z]+$/,
+  NOT_ALLOWED_SPECIAL: /^[^:/\*\?<>|]+$/,
 } as const;
 
 /**

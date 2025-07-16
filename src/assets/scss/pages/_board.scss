@@ -97,8 +97,12 @@
   &-panel {
     position: absolute;
     z-index: 1;
-    right: size(10);
-    bottom: size(10);
+    // right: size(10); bottom: size(10);
+
+    &.leftTop{left: size(10); top: size(10);}
+    &.rightTop{right: size(10); top: size(10);}
+    &.leftBottom{left: size(10); bottom: size(10);}
+    &.rightBottom{right: size(10); bottom: size(10); }
 
     table {
       background: #fff;
@@ -157,6 +161,22 @@
             border-bottom: 0;
             padding-bottom: size(6);
             height: size(20);
+          }
+        }
+      }
+      &.large{
+        width: 200px;
+        tbody {
+          th{
+            font-size: size(13);
+            width: 46px;
+            height: size(28);
+          }
+          td {
+            height: size(28);
+            span{
+              font-size: size(13);
+            }
           }
         }
       }
