@@ -6,11 +6,14 @@ export const useSettingStore = defineStore('setting', () => {
   const useCellular = ref<boolean>(true);
   const boardPosition = ref<keyof typeof BOARD_POSITIONS>('rightBottom');
 
+  const connection = ref<'wifi'|'cellular'|null>(null);
+
   return {
     filenameTemplate,
     useLargeFont,
     useCellular,
     boardPosition,
+    connection,
   };
 
 }, {
@@ -18,6 +21,7 @@ export const useSettingStore = defineStore('setting', () => {
     {
       key: 'photoboard-settings',
       storage: localStorage,
+      pick: ['filenameTemplate', 'useLargeFont', 'useCellular', 'boardPosition'],
     },
   ],
 });

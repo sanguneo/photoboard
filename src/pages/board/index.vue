@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import dayjs from 'dayjs';
+import heic2any from 'heic2any';
 import * as yup from 'yup';
+
 import { REGEX } from '@/shared/constants/regex.constant.ts';
 import { ALERT_CONTENT } from '@/shared/constants/alert.constant.ts';
 
@@ -8,6 +10,7 @@ const { openToast } = useToastStore();
 const { openAlert, openConfirm } = useAlertStore();
 const { useLargeFont, useCellular, boardPosition } = storeToRefs(useSettingStore());
 
+const { checkWifiAsBoolean } = useNative();
 const { openUploadCompleteModal, openUploadWaitModal } = useOpenModal();
 const { file, previewUrl, clear } = useFile();
 
@@ -66,11 +69,20 @@ const validateForm = async () => {
   return false;
 };
 
+const onClickSelectImage = () => {
+  const boardFileInput = document.getElementById('boardFileInput');
+  boardFileInput?.click();
+};
+
 const onFileChange = async (event: Event) => {
   const input = event.target as HTMLInputElement;
-  const selected = input.files?.[0];
+  let selected = input.files?.[0];
   if (selected) {
+    if (selected.name.includes('.heic') || selected.name.includes('.heif')) {
+      selected = (await heic2any({ blob: selected, toType: 'image/jpeg', quality: 1 })) as File;
+    }
     file.value = selected;
+    input.value = '';
   }
 };
 
@@ -82,8 +94,11 @@ const onFileChange = async (event: Event) => {
  * 2-1. 성공일경우 저장 완료 알림팝업 후 종료
  * 2-2. 실패일경우 실패 알림 팝업 - *그중 필수 확인 > 저장 용량 초과시 초과 알림팝업
  */
-const sendPhotoBoard = () => {
+const sendPhotoBoard = async () => {
   console.log('후에 fetch함수 전송');
+
+  const wifiStatus = await checkWifiAsBoolean();
+  alert(wifiStatus ? 'Wifi' : '셀룰러');
 
   if (!useCellular.value){
     // TODO 1. 전송 대기 목록 저장 (IDB) 추후에 로직 연결
@@ -167,14 +182,15 @@ onMounted(() => {
     </section>
     <section class="board-register-body" aria-label="사진 미리보기 및 선택">
       <input
-        ref="fileInput"
+        id="boardFileInput"
         type="file"
         :aria-hidden="true"
-        accept="image/*"
+        accept="image/png, image/jpeg, image/gif, image/svg+xml, image/bmp, image/webp, image/avif, image/heif, image/heic"
+        capture="environment"
         @change="onFileChange"
       >
       <div v-if="!previewUrl" class="images-selector" :aria-hidden="Boolean(previewUrl) !== false">
-        <button type="button" class="images-selector-btn icon-btn" aria-label="사진 등록 및 갤러리 선택" @click="($refs.fileInput as HTMLInputElement).click()">
+        <button type="button" class="images-selector-btn icon-btn" aria-label="사진 등록 및 갤러리 선택" @click="onClickSelectImage">
           <img src="@/assets/images/images-select.svg" alt="사진 선택 아이콘" >
         </button>
         <p class="images-selector-guide">사진 촬영 또는 갤러리에서<br >사진을 선택해 주세요.</p>

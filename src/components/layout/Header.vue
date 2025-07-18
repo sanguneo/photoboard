@@ -2,14 +2,23 @@
 import type { IHeaderMeta } from '@/shared/constants/route.constants.ts';
 
 const router = useRouter();
+const { checkWifiAsBoolean } = useNative();
 
 const { options } = defineProps<{ options: IHeaderMeta }>();
+
+const settingStore = useSettingStore();
+const { connection } = storeToRefs(settingStore);
 
 const isOnTop = ref<boolean>(true);
 const isTipActive = ref<boolean>(false);
 
 const activateTip = (e: Event) => {
   isTipActive.value = e.type === 'focus';
+};
+
+const onClickSelectImage = () => {
+  const boardFileInput = document.getElementById('boardFileInput');
+  boardFileInput?.click();
 };
 
 onMounted(() => {
@@ -23,10 +32,15 @@ onMounted(() => {
   };
   setIsOnTop();
   window.addEventListener('scroll', onScroll);
+
+  setInterval(async () => {
+    connection.value = await checkWifiAsBoolean().then(res => res ? 'wifi' : 'cellular').catch(() => null);
+  }, 3000);
 });
 </script>
 
 <template>
+  <div style="position: absolute;z-index: 10;top: 100px;right: 20px;width: 50px;height: 40px;background-color: white;">{{connection}}</div>
   <header v-if="options.type === 'main'" class="header" :class="{ shadow: !isOnTop }" aria-label="앱 상단 헤더">
     <div class="header-title">
       <h1>사진보드판</h1>
@@ -52,7 +66,7 @@ onMounted(() => {
     </a>
     <h2 v-if="options.title">{{ options.title }}</h2>
     <div v-if="options.type === 'photo'" class="board-head-btn">
-      <button type="button" class="icon-btn" aria-label="카메라" >
+      <button type="button" class="icon-btn" aria-label="카메라" @click="onClickSelectImage">
         <img src="@/assets/images/camera.svg" alt="카메라 아이콘">
       </button>
       <NuxtLink to="/board/setting" class="icon-btn" aria-label="사진 등록 설정" >
